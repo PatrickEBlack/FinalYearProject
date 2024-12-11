@@ -1,20 +1,32 @@
-<ion-header [translucent]="true">
+<!-- src/app/home/home.page.html -->
+<!-- <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="container">
+    <div class="welcome">
+      <h1>Welcome to Farmland Tracker</h1>
+      <h3>
+        Take control of your livelihood with the Farmland Tracker app.<br> 
+        Whether you want to 
+        <ul>
+          <li>Track Livestock</li>
+          <li>Manage your Pastures</li>
+          <li>Check the Weather</li>
+        </ul>
+        You’ve come to the right place. Log in or Sign up<br> 
+        to make your life a whole lot easier
+      </h3>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="login">
+      <h2>Already a User?</h2>
+      <ion-button class="main-buttons-home" (click)="navigateToLogin()">Login</ion-button>
+      <h2>Dont have an account?</h2>
+      <ion-button class="main-buttons-home" (click)="navigateToLogin()">Sign Up</ion-button>
+    </div>
   </div>
 </ion-content>
