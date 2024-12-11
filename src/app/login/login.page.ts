@@ -19,6 +19,7 @@ import { addIcons } from 'ionicons';
   selector: 'app-login',
   templateUrl: './login.page.html',
   standalone: true,
+  styleUrls: ['./login.page.scss'],
   imports: [
     CommonModule,
     ReactiveFormsModule,

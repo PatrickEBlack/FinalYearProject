@@ -17,6 +17,6 @@ export class HomePage {
   
   // This method will be contacted through the home.page.html page
   navigateToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['tabs/login']);
   }
 }

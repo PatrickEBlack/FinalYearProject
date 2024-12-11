@@ -12,6 +12,10 @@ import { AuthService } from '../services/auth.service';
 export class ContactPage {
   constructor(private authService: AuthService, private router: Router) {}
 
+  //Redirects the user to Login / Sign Up Page
+  goToLogin() {
+    this.router.navigate(['/tabs/login'])
+  }
   // logout() {
   //   this.authService.logout();
   //   this.router.navigate(['/tabs/home']);
