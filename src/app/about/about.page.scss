@@ -19,6 +19,17 @@
     height: 100vh;
     padding-bottom: 20vh;
 }
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5vh;
+}
+
+h1{
+    font-size: 50px;
+    font-weight: bolder;
+}
   
   
 

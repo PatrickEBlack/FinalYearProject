@@ -12,8 +12,8 @@ import { AuthService } from '../services/auth.service';
 export class ContactPage {
   constructor(private authService: AuthService, private router: Router) {}
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/tabs/home']);
-  }
+  // logout() {
+  //   this.authService.logout();
+  //   this.router.navigate(['/tabs/home']);
+  // }
 }

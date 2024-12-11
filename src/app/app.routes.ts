@@ -20,7 +20,7 @@ export const routes: Routes = [
       {
         path: 'contact',
         loadComponent: () => import('./contact/contact.page').then(m => m.ContactPage),
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
       },
       {
         path: 'login',
