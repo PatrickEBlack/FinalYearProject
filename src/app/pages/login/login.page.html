@@ -1,0 +1,30 @@
+<!-- <ion-content>
+  <ion-button (click)="login()">Log In</ion-button> 
+</ion-content> -->
+<!-- <ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <div class="container">
+    <h1>Log In or Register</h1>
+    <form [formGroup]="userAuthForm">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input formControlName="password" [type]="isPasswordVisible ? 'text' : 'password'" required></ion-input>
+        <ion-icon slot="end" [name]="isPasswordVisible ? 'eye-off-outline' : 'eye-outline'" (click)="isPasswordVisible = !isPasswordVisible"></ion-icon>
+      </ion-item>
+
+      <ion-button expand="block" (click)="handleAuthentication()" class="LogRegButtons" [disabled]="!userAuthForm.valid">Log In</ion-button>
+      <ion-button expand="block" (click)="handleRegistration()" class="LogRegButtons" [disabled]="!userAuthForm.valid">Register</ion-button>
+      <ion-button expand="block" fill="clear" (click)="handlePasswordReset()">Forgot Password?</ion-button>
+    </form>
+  </div>
+</ion-content> 

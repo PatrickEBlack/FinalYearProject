@@ -9,26 +9,53 @@ export const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        //lazyloading home page
         path: 'home',
-        loadComponent: () => import('./home/home.page').then(m => m.HomePage),
+        loadComponent: () => import('./pages/home/home.page').then(m => m.HomePage),
       },
       {
         path: 'about',
-        loadComponent: () => import('./about/about.page').then(m => m.AboutPage),
+        loadComponent: () => import('./pages/about/about.page').then(m => m.AboutPage),
       },
       {
         path: 'contact',
-        loadComponent: () => import('./contact/contact.page').then(m => m.ContactPage),
+        loadComponent: () => import('./pages/contact/contact.page').then(m => m.ContactPage),
         //canActivate: [AuthGuard],
       },
       {
         path: 'login',
-        loadComponent: () => import('./login/login.page').then(m => m.LoginPage),
-      },
+        loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+      },  
       {
         path: 'livestock',
-        loadComponent: () => import('./livestock/livestock.page').then( m => m.LivestockPage)
+        loadComponent: () => import('./pages/livestock/livestock.page').then( m => m.LivestockPage)
+      },
+      {
+        path: 'manage-livestock',
+        loadComponent: () => import('./pages/manage-livestock/manage-livestock.page').then( m => m.ManageLivestockPage)
+      },
+      {
+        path: 'view-livestock',
+        loadComponent: () => import('./pages/view-livestock/view-livestock.page').then( m => m.ViewLivestockPage)
+      },
+      {
+        path: 'add-livestock',
+        loadComponent: () => import('./pages/add-livestock/add-livestock.page').then( m => m.AddLivestockPage)
+      },
+      {
+        path: 'remove-livestock',
+        loadComponent: () => import('./pages/remove-livestock/remove-livestock.page').then( m => m.RemoveLivestockPage)
+      },
+      {
+        path: 'view-pasture',
+        loadComponent: () => import('./pages/view-pasture/view-pasture.page').then( m => m.ViewPasturePage)
+      },
+      {
+        path: 'add-to-pasture',
+        loadComponent: () => import('./pages/add-to-pasture/add-to-pasture.page').then( m => m.AddToPasturePage)
+      },
+      {
+        path: 'modify-pasture',
+        loadComponent: () => import('./pages/modify-pasture/modify-pasture.page').then( m => m.ModifyPasturePage)
       },
       {
         //if the path is empty, redirect to home
@@ -40,9 +67,5 @@ export const routes: Routes = [
   },
   //ensure the app always starts with the 'tabs' view
   { path: '', redirectTo: '/tabs', pathMatch: 'full' },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
-  },
 
 ];
