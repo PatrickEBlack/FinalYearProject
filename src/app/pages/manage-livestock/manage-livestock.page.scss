@@ -1,0 +1,124 @@
+// Banner Styles
+.banner-container {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%; /* Moves the image down to prevent sheep's head from being cut */
+  }
+  
+  .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    padding-left: 50px;
+  }
+  
+  .center-text {
+    display: flex;
+    align-items: center; /* Vertical centering */
+    height: 70%; /* Take up most of the height for vertical centering */
+  }
+  
+  .banner-overlay h1 {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: left; /* Left align the text */
+    margin: 0; /* Remove top margin for proper vertical centering */
+  }
+  
+  // Full background application
+  ion-content {
+    --background: #FEFAE0;
+    --padding-bottom: 20px;
+  }
+  
+  // Content Sections
+  .content-section {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #FEFAE0; /* Consistent with ion-content background */
+  }
+  
+  h2 {
+    font-size: 32px; /* Slightly larger */
+    font-weight: 700; /* Bolder for better contrast */
+    margin-bottom: 25px;
+    color: #333; /* Darker text for better readability */
+    text-align: center; /* Center the headings */
+  }
+  
+  // Action Buttons - Bigger for accessibility
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .action-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 32%; /* Slightly wider */
+    margin-bottom: 25px; /* More spacing */
+    cursor: pointer;
+  }
+  
+  .icon-circle {
+    width: 85px; /* Larger circle */
+    height: 85px; /* Larger circle */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+  }
+  
+  .icon-circle ion-icon {
+    font-size: 34px; /* Larger icon */
+    color: white;
+  }
+  
+  .action-button p {
+    text-align: center;
+    font-size: 16px; /* Larger text */
+    font-weight: 500; /* Slightly bolder */
+    margin: 0;
+    color: #333; /* Darker text color for better contrast */
+  }
+  
+  // Circle Colors
+  .add {
+    background-color: #4caf50; // Green
+  }
+  
+  .view {
+    background-color: #42a5f5; // Blue
+  }
+  
+  .remove {
+    background-color: #f44336; // Red
+  }
+  
+  .view-pasture {
+    background-color: #ff7043; // Orange
+  }
+  
+  .modify {
+    background-color: #ffca28; // Yellow
+  }

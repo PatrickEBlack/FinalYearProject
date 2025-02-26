@@ -1,11 +1,81 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- Remove Titles. -->
-    <ion-title>manageLivestock</ion-title>
+    <ion-title>LivestockPastures</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-</ion-content>
+  <!-- Banner Image with Text Overlay -->
+  <div class="banner-container">
+    <img src="../../../assets/images/fieldSheep.jpg" alt="Livestock Banner" class="banner-image">
+    <div class="banner-overlay">
+      <div class="center-text">
+        <h1>Livestock & Pastures</h1>
+      </div>
+    </div>
+  </div>
 
+  <!-- Livestock Section -->
+  <div class="content-section">
+    <h2>Livestock</h2>
+    
+    <div class="action-buttons">
+      <!-- Add Livestock -->
+      <div class="action-button" routerLink="/tabs/add-livestock">
+        <div class="icon-circle add">
+          <ion-icon name="add"></ion-icon>
+        </div>
+        <p>Add Livestock</p>
+      </div>
+      
+      <!-- View Livestock -->
+      <div class="action-button" routerLink="/tabs/view-livestock">
+        <div class="icon-circle view">
+          <ion-icon name="search"></ion-icon>
+        </div>
+        <p>View Livestock</p>
+      </div>
+      
+      <!-- Remove Livestock -->
+      <div class="action-button" routerLink="/tabs/remove-livestock">
+        <div class="icon-circle remove">
+          <ion-icon name="remove"></ion-icon>
+        </div>
+        <p>Remove Livestock</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pasture Section -->
+  <div class="content-section">
+    <h2>
+      Pasture
+    </h2>
+    
+    <div class="action-buttons">
+      <!-- View Pasture -->
+      <div class="action-button" routerLink="/tabs/view-pasture">
+        <div class="icon-circle view-pasture">
+          <ion-icon name="eye"></ion-icon>
+        </div>
+        <p>View Pasture</p>
+      </div>
+      
+      <!-- Add To Pasture -->
+      <div class="action-button" routerLink="/tabs/add-to-pasture">
+        <div class="icon-circle add">
+          <ion-icon name="add"></ion-icon>
+        </div>
+        <p>Add To Pasture</p>
+      </div>
+      
+      <!-- Modify Details -->
+      <div class="action-button" routerLink="/tabs/modify-pasture">
+        <div class="icon-circle modify">
+          <ion-icon name="create"></ion-icon>
+        </div>
+        <p>Modify Details</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
