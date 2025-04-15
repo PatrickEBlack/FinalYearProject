@@ -39,8 +39,8 @@ A comprehensive farm management application built with Angular and Ionic for the
 
 ### Clone the repository
 ```bash
-git clone https://github.com/yourusername/farm-management.git
-cd farm-management
+git clone https://github.com/PatrickEBlack/FinalYearProject.git
+cd FinalYearProject
 ```
 
 ### Install dependencies
@@ -55,6 +55,21 @@ cd ..
 ```
 
 ### Environment setup
+
+#### Option 1: Automated Setup (Recommended)
+
+Run the setup script which will guide you through the process:
+
+```bash
+npm run setup
+```
+
+This interactive script will:
+- Create all necessary environment files
+- Prompt you for API keys and MongoDB credentials
+- Configure both frontend and backend environments in one step
+
+#### Option 2: Manual Setup
 
 1. Create environment files for Angular:
    - Copy `src/environments/environment.example.ts` to `src/environments/environment.ts`

@@ -13,7 +13,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "server:install": "cd server && npm install",
-    "postinstall": "npm run server:install"
+    "postinstall": "npm run server:install",
+    "setup": "node setup.js"
   },
   "private": true,
   "dependencies": {
