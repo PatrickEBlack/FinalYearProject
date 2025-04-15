@@ -65,7 +65,8 @@ npm run setup
 ```
 
 This interactive script will:
-- Create all necessary environment files
+- Create all necessary environment files (even if example files don't exist)
+- Create required directories if they don't exist
 - Prompt you for API keys and MongoDB credentials
 - Configure both frontend and backend environments in one step
 
