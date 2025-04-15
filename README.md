@@ -39,7 +39,7 @@ A comprehensive farm management application built with Angular and Ionic for the
 
 ### Clone the repository
 ```bash
-git clone https://github.com/yourusername/farm-management.git
+git clone https://github.com/PatrickEBlack/FinalYearProject.git
 cd farm-management
 ```
 
