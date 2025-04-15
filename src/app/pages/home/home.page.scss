@@ -1,0 +1,132 @@
+// Main content
+ion-content {
+  --padding-bottom: 30px;
+}
+
+// Transparent toolbar
+.transparent-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+// Welcome section
+.welcome-section {
+  padding: 24px 16px 16px;
+  text-align: center;
+}
+
+.welcome-section h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+}
+
+.date {
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+  font-size: 16px;
+}
+
+// Main menu squares
+.main-menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 200px);
+}
+
+.menu-square {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background-color: var(--ion-background-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  ion-icon, .square-label {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.menu-square:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.menu-square ion-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.square-label {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  margin-top: 8px;
+}
+
+// Square backgrounds and overlays
+.livestock-square {
+  background-image: url('/assets/images/ls.jpg');
+  background-size: cover;
+  background-position: center;
+  
+  .primary-overlay {
+    background-color: rgba(var(--ion-color-primary-rgb), 0.6);
+  }
+}
+
+.weather-square {
+  background-image: url('/assets/images/weather.jpg');
+  background-size: cover;
+  background-position: center;
+  
+  .tertiary-overlay {
+    background-color: rgba(0, 105, 205, 0.6); /* Blue shade with less yellow tint */
+  }
+}
+
+.tasks-square {
+  background-image: url('/assets/images/tasks.jpg');
+  background-size: cover;
+  background-position: center;
+  
+  .warning-overlay {
+    background-color: rgba(var(--ion-color-warning-rgb), 0.6);
+  }
+}
+
+.ai-helper-square {
+  background-image: url('/assets/images/ai.png');
+  background-size: cover;
+  background-position: center 35%; /* Moved down on Y axis */
+  
+  .success-overlay {
+    background-color: rgba(var(--ion-color-success-rgb), 0.6);
+  }
+}

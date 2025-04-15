@@ -1,0 +1,94 @@
+.profile-icon {
+  font-size: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.logout-button {
+  margin-top: 24px;
+}
+
+ion-item {
+  --padding-start: 8px;
+}
+
+ion-icon {
+  margin-right: 8px;
+}
+
+ion-card {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+ion-card-header {
+  padding-bottom: 8px;
+}
+
+ion-card-content {
+  padding-top: 0;
+}
+
+/* Password change form styling */
+.password-input {
+  margin-top: 8px;
+  border-radius: 8px;
+}
+
+.password-toggle-button {
+  --padding-start: 0;
+  --padding-end: 0;
+  height: 20px;
+  margin: 0;
+}
+
+/* Verification styling */
+.verification-alert {
+  --min-width: 300px;
+}
+
+/* Email display */
+ion-item.email-item {
+  --background: #f7f7f7;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+/* Menu items styling */
+ion-item.security-item,
+ion-item.settings-item {
+  --background: #f7f7f7;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  
+  h2 {
+    font-weight: 500;
+  }
+  
+  p {
+    font-size: 12px;
+    color: var(--ion-color-medium);
+  }
+}
+
+ion-item.security-item ion-icon[slot="start"] {
+  color: var(--ion-color-primary);
+}
+
+ion-item.settings-item ion-icon[slot="start"] {
+  color: var(--ion-color-tertiary);
+}
+
+/* Buttons */
+ion-button.change-password-button {
+  margin-top: 16px;
+}
+
+/* Show the user email clearly */
+p.email-display {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ion-color-dark);
+  margin-top: 4px;
+}

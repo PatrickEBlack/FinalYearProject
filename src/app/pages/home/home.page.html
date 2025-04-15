@@ -1,0 +1,34 @@
+<ion-content [fullscreen]="true">
+  <!-- Welcome section -->
+  <div class="welcome-section">
+    <h1>Farmland Manager</h1>
+    <p class="date">{{ currentDate | date:'EEEE, MMMM d' }}</p>
+  </div>
+
+  <!-- Main Menu Squares -->
+  <div class="main-menu">
+    <div class="menu-square livestock-square" (click)="navigateToLivestock()">
+      <div class="overlay primary-overlay"></div>
+      <ion-icon name="paw-outline"></ion-icon>
+      <div class="square-label">Livestock</div>
+    </div>
+    
+    <div class="menu-square weather-square" routerLink="/tabs/weather">
+      <div class="overlay tertiary-overlay"></div>
+      <ion-icon name="cloudy-outline"></ion-icon>
+      <div class="square-label">Weather</div>
+    </div>
+    
+    <div class="menu-square tasks-square" routerLink="/tabs/tasks">
+      <div class="overlay warning-overlay"></div>
+      <ion-icon name="clipboard-outline"></ion-icon>
+      <div class="square-label">Tasks</div>
+    </div>
+    
+    <div class="menu-square ai-helper-square" routerLink="/tabs/ai-helper">
+      <div class="overlay success-overlay"></div>
+      <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+      <div class="square-label">AI Helper</div>
+    </div>
+  </div>
+</ion-content>

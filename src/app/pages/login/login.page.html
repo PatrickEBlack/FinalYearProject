@@ -1,0 +1,68 @@
+<!-- <ion-content>
+  <ion-button (click)="login()">Log In</ion-button> 
+</ion-content> -->
+<!-- <ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <div class="container">
+    <h1>{{ isRegistrationMode ? 'Create Account' : 'Log In' }}</h1>
+    <form [formGroup]="userAuthForm">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input formControlName="password" [type]="isPasswordVisible ? 'text' : 'password'" required></ion-input>
+        <ion-icon slot="end" [name]="isPasswordVisible ? 'eye-off-outline' : 'eye-outline'" (click)="isPasswordVisible = !isPasswordVisible"></ion-icon>
+      </ion-item>
+
+      <!-- Confirm Password (Registration Only) -->
+      <ion-item *ngIf="isRegistrationMode">
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input formControlName="confirmPassword" [type]="isConfirmPasswordVisible ? 'text' : 'password'" required></ion-input>
+        <ion-icon slot="end" [name]="isConfirmPasswordVisible ? 'eye-off-outline' : 'eye-outline'" (click)="isConfirmPasswordVisible = !isConfirmPasswordVisible"></ion-icon>
+      </ion-item>
+      
+      <!-- Validation error for password match -->
+      <div *ngIf="isRegistrationMode && userAuthForm.hasError('passwordMismatch') && userAuthForm.get('confirmPassword')?.touched" class="error-message">
+        Passwords do not match
+      </div>
+
+      <!-- Registration Instructions -->
+      <div *ngIf="isRegistrationMode" class="verification-instructions">
+        <p>After registration, a verification email will be sent to your address.</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <ng-container *ngIf="!isRegistrationMode">
+        <ion-button expand="block" (click)="handleAuthentication()" class="LogRegButtons" [disabled]="!userAuthForm.valid">
+          Log In
+        </ion-button>
+        <ion-button expand="block" fill="outline" (click)="toggleRegistrationMode()" class="LogRegButtons">
+          Create New Account
+        </ion-button>
+      </ng-container>
+      
+      <ng-container *ngIf="isRegistrationMode">
+        <ion-button expand="block" (click)="handleRegistration()" class="LogRegButtons" 
+          [disabled]="!userAuthForm.valid">
+          Register
+        </ion-button>
+        <ion-button expand="block" fill="outline" (click)="toggleRegistrationMode()" class="LogRegButtons">
+          Back to Login
+        </ion-button>
+      </ng-container>
+      
+      <!-- Password Reset (Only visible on login mode) -->
+      <ion-button *ngIf="!isRegistrationMode" expand="block" fill="clear" (click)="handlePasswordReset()">
+        Forgot Password?
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

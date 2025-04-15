@@ -1,0 +1,25 @@
+.back-button {
+  position: fixed;
+  top: 10px; /* Aligned with menu button */
+  left: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--ion-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.back-button:active {
+  transform: scale(0.95);
+}
+
+.back-icon {
+  font-size: 20px;
+  color: var(--ion-color-primary);
+}

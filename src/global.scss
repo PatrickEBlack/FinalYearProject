@@ -1,0 +1,589 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Application-wide styles for text size accessibility */
+html {
+  /* Base font size that will be adjusted by the TextSizeService */
+  font-size: 100%;
+}
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Light Mode Only
+ * -----------------------------------------------------
+ * Dark mode has been removed from this application
+ */
+
+/**
+ * Farm Manager Custom Theme
+ * -----------------------------------------------------
+ * Custom color variables for the Farm Manager app
+ */
+
+:root {
+  /* Primary farm/nature colors - Stronger, more vibrant green */
+  --ion-color-primary: #2DA84E;
+  --ion-color-primary-rgb: 45, 168, 78;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #279645;
+  --ion-color-primary-tint: #42b160;
+
+  /* Secondary earthy color - More vibrant for better contrast */
+  --ion-color-secondary: #7CB342;
+  --ion-color-secondary-rgb: 124, 179, 66;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #6d9e3a;
+  --ion-color-secondary-tint: #89bb55;
+
+  /* Tertiary - warmer shade with better visibility */
+  --ion-color-tertiary: #FFA000;
+  --ion-color-tertiary-rgb: 255, 160, 0;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #e08d00;
+  --ion-color-tertiary-tint: #ffaa1a;
+
+  /* Success color - Stronger for better visibility */
+  --ion-color-success: #1B8A3D;
+  --ion-color-success-rgb: 27, 138, 61;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #187936;
+  --ion-color-success-tint: #329650;
+
+  /* Warning color - Strong amber */
+  --ion-color-warning: #FF8F00;
+  --ion-color-warning-rgb: 255, 143, 0;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e07e00;
+  --ion-color-warning-tint: #ff9a1a;
+
+  /* Danger color - Stronger red for better visibility */
+  --ion-color-danger: #E53935;
+  --ion-color-danger-rgb: 229, 57, 53;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #ca322f;
+  --ion-color-danger-tint: #e84d49;
+
+  /* Medium shade - Darker for better contrast in both modes */
+  --ion-color-medium: #757575;
+  --ion-color-medium-rgb: 117, 117, 117;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #676767;
+  --ion-color-medium-tint: #838383;
+
+  /* Light shade - Less pure white for eyes */
+  --ion-color-light: #ECEFF1;
+  --ion-color-light-rgb: 236, 239, 241;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d0d4d6;
+  --ion-color-light-tint: #eef1f3;
+
+  /* Solid UI styling - Move away from iOS glass look */
+  --ion-background-color: #EEEEEE;
+  --ion-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  
+  /* Varying shades of white for light mode contrast */
+  --ion-card-background: #FFFFFF;
+  --ion-item-background: #F8F8F8;
+  --ion-toolbar-background: #F2F2F2;
+  --ion-tab-bar-background: #F5F5F5;
+  
+  /* Custom farm theme colors */
+  --farm-button-primary: #CCFF00;
+  --farm-button-secondary: #CCFF00;
+  --farm-button-tertiary: #CCFF00;
+  
+  /* Smaller border radius for a more solid look */
+  --ion-border-radius: 6px;
+  
+  /* Text colors */
+  --ion-text-color: #212121;
+  --ion-text-color-rgb: 33, 33, 33;
+}
+
+/* Dark mode has been removed */
+
+/* Mobile-friendly solid design - Consistent styling across all pages */
+
+/* Headings for a solid look */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--ion-text-color);
+  margin-top: 0;
+}
+
+/* Cards simplified for a more solid look */
+ion-card {
+  box-shadow: none;
+  border-radius: var(--ion-border-radius);
+  margin: 12px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode removed */
+
+/* Button styling - Based on hierarchy */
+ion-button {
+  --border-radius: 4px;
+  font-weight: 500;
+  text-transform: none;
+  height: 44px; /* Better touch target */
+  font-size: 16px;
+  --box-shadow: none;
+}
+
+/* Primary buttons */
+ion-button {
+  --background: #CCFF00;
+  --color: #000000;
+}
+
+/* Secondary buttons */
+ion-button[fill="outline"] {
+  --background: transparent;
+  --color: #000000;
+  --border-color: #CCFF00;
+}
+
+/* Tertiary buttons */
+ion-button[fill="clear"] {
+  --background: transparent;
+  --color: #000000;
+  --ripple-color: #CCFF00;
+  text-decoration: underline;
+  text-decoration-color: #CCFF00;
+  text-decoration-thickness: 3px;
+}
+
+/* Dark mode removed */
+
+/* Solid tab bar */
+ion-tab-bar {
+  --background: #FFFFFF;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  height: 56px; /* Taller for better touch targets */
+}
+
+/* Dark mode removed */
+
+ion-tab-button {
+  --color: var(--ion-color-medium);
+  --color-selected: var(--ion-color-primary);
+}
+
+/* Form inputs with solid design */
+ion-input, ion-textarea, ion-select {
+  --background: #FFFFFF;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --border-radius: 4px;
+  margin: 8px 0;
+  --placeholder-color: var(--ion-color-medium);
+  font-size: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode removed */
+
+/* Content cards with solid styling */
+.content-card {
+  background-color: #FFFFFF;
+  border-radius: var(--ion-border-radius);
+  margin: 12px 8px;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode removed */
+
+/* Section headers */
+.section-header {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 16px 8px 8px 8px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.section-header ion-icon {
+  margin-right: 8px;
+  font-size: 20px;
+  color: var(--ion-color-primary);
+}
+
+/* List items with solid design */
+ion-item {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --min-height: 50px;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode removed */
+
+/* Toolbars with solid design */
+ion-toolbar {
+  --background: #FFFFFF;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --color: var(--ion-text-color);
+  position: relative; /* Ensure proper positioning context */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark mode removed */
+
+/* Position ion-buttons to not overlap with centered title */
+ion-toolbar ion-buttons[slot="start"] {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+ion-toolbar ion-buttons[slot="end"] {
+  position: absolute;
+  right: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+ion-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  padding-left: 48px; /* Add left padding to account for the menu button */
+  padding-right: 48px; /* Balance with right padding for symmetry */
+  width: 100%;
+}
+
+/* Content */
+ion-content {
+  --padding-bottom: 20px;
+  --padding-top: 20px; /* Reduced padding as header now contains title */
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --background: #EEEEEE;
+}
+
+/* Dark mode removed */
+
+/* Action buttons - simplified design */
+.action-button {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: var(--ion-border-radius);
+  padding: 12px;
+  margin: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode removed */
+
+.action-button ion-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  color: var(--ion-color-primary);
+}
+
+.action-button-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ion-text-color);
+}
+
+/* Status indicators */
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.status-good {
+  background-color: var(--ion-color-success);
+}
+
+.status-warning {
+  background-color: var(--ion-color-warning);
+}
+
+.status-danger {
+  background-color: var(--ion-color-danger);
+}
+
+/* Dark mode has been removed */
+
+/* Mobile optimization */
+@media (max-width: 576px) {
+  h1 {
+    font-size: 22px;
+  }
+  
+  h2 {
+    font-size: 18px;
+  }
+  
+  .section-header {
+    font-size: 16px;
+  }
+  
+  ion-title {
+    font-size: 16px;
+  }
+}
+
+/* Custom iOS-Style Alert Dialog */
+.ios-alert {
+  --backdrop-opacity: 0.4;
+}
+
+.ios-alert .alert-wrapper {
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+}
+
+.ios-alert .alert-head {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.ios-alert .alert-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ios-alert .alert-message {
+  padding: 0 16px;
+  text-align: center;
+}
+
+.ios-alert .alert-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background-color: rgba(var(--ion-color-danger-rgb), 0.1);
+}
+
+.ios-alert .alert-icon ion-icon {
+  font-size: 30px;
+  color: var(--ion-color-danger);
+}
+
+.ios-alert .alert-detail {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin-top: 8px;
+}
+
+.ios-alert .alert-input-group {
+  padding: 8px 24px;
+}
+
+.ios-alert .alert-input {
+  margin: 10px 0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background-color: var(--ion-background-color);
+  border: 1px solid var(--ion-border-color);
+  font-size: 16px;
+}
+
+.ios-alert .alert-button-group {
+  padding: 8px;
+}
+
+.ios-alert .alert-button,
+.add-animal-alert .alert-button {
+  border-radius: 10px;
+  font-size: 16px;
+  margin: 4px;
+}
+
+/* Add Animal Alert Styling */
+.add-animal-alert .alert-wrapper {
+  --max-width: 320px;
+  --width: 90%;
+  border-radius: 16px;
+}
+
+.add-animal-alert .alert-head {
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.add-animal-alert .alert-message {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.add-animal-alert .alert-radio-group,
+.add-animal-alert .alert-checkbox-group,
+.add-animal-alert .alert-input-group {
+  padding: 8px 0;
+}
+
+.add-animal-alert .alert-input {
+  margin: 10px 0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background-color: var(--ion-background-color);
+  border: 1px solid var(--ion-border-color);
+}
+
+.add-animal-alert .alert-radio-label {
+  white-space: normal !important;
+  padding-right: 52px;
+}
+
+/* Check Animal Alert Styling */
+.check-animal-alert .alert-wrapper {
+  --max-width: 340px;
+  --width: 95%;
+  border-radius: 16px;
+}
+
+.check-animal-alert .alert-head {
+  padding-bottom: 15px;
+  text-align: center;
+  border-bottom: 1px solid var(--ion-border-color);
+}
+
+.check-animal-alert .alert-message {
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.check-animal-alert .alert-input-group {
+  padding: 0;
+}
+
+.check-animal-alert .alert-radio-group {
+  border-top: 1px solid rgba(var(--ion-border-color-rgb), 0.3);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.check-animal-alert .alert-radio-label {
+  white-space: normal !important;
+  font-size: 14px;
+}
+
+.check-animal-alert .alert-tappable {
+  position: relative;
+}
+
+/* Custom alert styling for checkboxes */
+.check-animal-alert ion-item {
+  --background: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  --min-height: 36px;
+}
+
+.check-animal-alert ion-checkbox {
+  --size: 18px;
+  --background-checked: var(--ion-color-primary);
+  --border-color-checked: var(--ion-color-primary);
+  margin-right: 10px;
+}
+
+.check-animal-alert ion-label {
+  font-size: 14px !important;
+  margin: 0;
+  padding: 0;
+}
+
+.check-animal-alert textarea {
+  border: 1px solid rgba(var(--ion-border-color-rgb), 0.3);
+  border-radius: 8px;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.alert-select-interface.sc-ion-alert-md .alert-select.alert-checkbox-label {
+  white-space: normal !important;
+}
+
+.ios-alert .cancel-button {
+  color: var(--ion-color-primary);
+}
+
+.ios-alert .delete-alert-button {
+  color: var(--ion-color-danger);
+  font-weight: 600;
+}
+
+.ios-alert strong {
+  font-weight: 600;
+}
+
+/* Check Animal Modal Styling */
+.check-animal-modal {
+  --width: 90%;
+  --max-width: 400px;
+  --height: auto;
+  --border-radius: 16px;
+  --backdrop-opacity: 0.4;
+  --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.check-animal-modal .ion-page {
+  position: relative;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  max-height: 80vh;
+}
+
+.check-animal-modal ion-content {
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+}

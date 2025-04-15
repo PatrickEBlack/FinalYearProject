@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Check: {{ animal?.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="animal-header">
+    <div class="animal-info">
+      <div class="animal-type">{{ animal?.type || 'Livestock' }}: <strong>{{ animal?.name }}</strong></div>
+      <div class="animal-details">
+        <div class="detail-item">
+          <span class="detail-label">Breed:</span>
+          <span class="detail-value">{{ animal?.breed || 'Unknown' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Tag/ID:</span>
+          <span class="detail-value">{{ animal?.tag || 'N/A' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Herd Number:</span>
+          <span class="detail-value">{{ animal?.herdNumber || 'N/A' }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="status-container">
+      <div id="status-trigger" class="status-badge" [ngClass]="'status-' + selectedStatus" (click)="isPopoverOpen = true">
+        <ion-icon [name]="getStatusIcon(selectedStatus)"></ion-icon>
+        <div class="status-dropdown">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="status-label">
+        {{ getStatusName(selectedStatus) }}
+        <span>(tap to change)</span>
+      </div>
+      <ion-popover [isOpen]="isPopoverOpen" (didDismiss)="isPopoverOpen = false" [arrow]="true" 
+                   side="bottom" alignment="center" trigger="status-trigger">
+        <ng-template>
+          <div class="status-popover">
+            <div class="status-option" 
+                *ngFor="let status of statusOptions" 
+                [ngClass]="'status-option-' + status.id"
+                (click)="changeStatus(status.id)">
+              <ion-icon [name]="status.icon"></ion-icon>
+              <span>{{ status.name }}</span>
+            </div>
+          </div>
+        </ng-template>
+      </ion-popover>
+    </div>
+  </div>
+  
+  <div class="info-panel">
+    <div class="info-row">
+      <div class="info-item">
+        <ion-icon name="thermometer-outline"></ion-icon>
+        <span>{{ animal?.temperature || '38.5°C' }}</span>
+      </div>
+      <div class="info-item">
+        <ion-icon name="scale-outline"></ion-icon>
+        <span>{{ animal?.weight || 'N/A' }}</span>
+      </div>
+      <div class="info-item">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>Until: {{ animal?.monitorUntil | date:'dd/MM/yy' }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="reason-container">
+    <h4 class="section-title">Reason for Monitoring</h4>
+    <div class="reason-text">{{ animal?.reasonForMonitoring || 'General health monitoring' }}</div>
+  </div>
+  
+  <div class="section-container">
+    <h4 class="section-title">Observations</h4>
+    <ion-textarea 
+      [(ngModel)]="observations"
+      placeholder="Record temperature, symptoms, behavior, etc."
+      rows="3"
+      class="observations-field">
+    </ion-textarea>
+  </div>
+  
+  <div class="section-container" *ngIf="animal?.monitoringTasks?.length">
+    <h4 class="section-title">Health Checklist</h4>
+    <div class="checklist-container">
+      <div class="checklist-item" *ngFor="let task of animal.monitoringTasks">
+        <ion-checkbox [(ngModel)]="task.checked"></ion-checkbox>
+        <div class="task-label" (click)="toggleCheckbox(task)">{{ task.task }}</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="button-container">
+    <ion-button expand="block" (click)="cancel()" fill="outline" color="medium">
+      CANCEL
+    </ion-button>
+    <ion-button expand="block" (click)="save()" color="primary">
+      SAVE
+    </ion-button>
+  </div>
+</ion-content>

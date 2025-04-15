@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/manage-livestock"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Livestock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="livestockForm">
+      <!-- Livestock Type -->
+      <div class="form-group">
+        <ion-label class="form-label">Type of Livestock <span class="required">*</span></ion-label>
+        <ion-select formControlName="type" placeholder="Select type" interface="popover" class="form-control">
+          <ion-select-option value="cattle">Cattle</ion-select-option>
+          <ion-select-option value="sheep">Sheep</ion-select-option>
+          <ion-select-option value="chicken">Chicken</ion-select-option>
+          <ion-select-option value="pig">Pig</ion-select-option>
+          <ion-select-option value="horse">Horse</ion-select-option>
+          <ion-select-option value="other">Other</ion-select-option>
+        </ion-select>
+      </div>
+      
+      <!-- Quantity -->
+      <div class="form-group">
+        <ion-label class="form-label">Quantity <span class="required">*</span></ion-label>
+        <ion-input type="number" formControlName="quantity" min="1" placeholder="Enter number of animals" class="form-control"></ion-input>
+      </div>
+      
+      <!-- Breed -->
+      <div class="form-group">
+        <ion-label class="form-label">Breed</ion-label>
+        <ion-input type="text" formControlName="breed" placeholder="Enter breed (optional)" class="form-control"></ion-input>
+      </div>
+      
+      <!-- Birth Date (Calendar) -->
+      <div class="form-group">
+        <ion-label class="form-label">Birth Date</ion-label>
+        <div class="calendar-input">
+          <ion-input readonly formControlName="birthDate" placeholder="Select date (optional)" class="form-control" (click)="toggleCalendar()"></ion-input>
+          <ion-icon name="calendar-outline" (click)="toggleCalendar()" slot="end"></ion-icon>
+        </div>
+        
+        <ion-card *ngIf="calendarVisible" class="calendar-card">
+          <ion-datetime 
+            presentation="date" 
+            [max]="maxDate"
+            (ionChange)="onDateChange($event)">
+          </ion-datetime>
+        </ion-card>
+      </div>
+      
+      <!-- Herd Number -->
+      <div class="form-group">
+        <ion-label class="form-label">Herd Number</ion-label>
+        <ion-input type="text" formControlName="herdNumber" placeholder="Enter herd number (optional)" class="form-control"></ion-input>
+      </div>
+      
+      <!-- Tag Number -->
+      <div class="form-group">
+        <ion-label class="form-label">Tag Number</ion-label>
+        <ion-input type="text" formControlName="tagNumber" placeholder="Enter tag number (optional)" class="form-control"></ion-input>
+      </div>
+      
+      <!-- Pasture Assignment -->
+      <div class="form-group">
+        <ion-label class="form-label">Assign to Pasture</ion-label>
+        <ion-select formControlName="pasture" placeholder="Select pasture (optional)" interface="popover" class="form-control">
+          <ion-select-option value="north">North Pasture</ion-select-option>
+          <ion-select-option value="south">South Pasture</ion-select-option>
+          <ion-select-option value="none">No Pasture</ion-select-option>
+        </ion-select>
+      </div>
+      
+      <!-- Vaccination Records -->
+      <div class="form-group vaccination-group">
+        <ion-label class="form-label">Vaccination Records</ion-label>
+        <div formArrayName="vaccinations">
+          <div *ngFor="let vaccination of vaccinationsArray.controls; let i = index" class="vaccination-item">
+            <div [formGroupName]="i">
+              <ion-input type="text" formControlName="name" placeholder="Vaccination name" class="form-control"></ion-input>
+              
+              <div class="date-inputs">
+                <div class="calendar-input">
+                  <ion-input readonly formControlName="date" placeholder="Date administered" class="form-control" (click)="toggleVaccinationCalendar(i, 'date')"></ion-input>
+                  <ion-icon name="calendar-outline" (click)="toggleVaccinationCalendar(i, 'date')" slot="end"></ion-icon>
+                </div>
+                
+                <div class="calendar-input">
+                  <ion-input readonly formControlName="nextDue" placeholder="Next due (optional)" class="form-control" (click)="toggleVaccinationCalendar(i, 'nextDue')"></ion-input>
+                  <ion-icon name="calendar-outline" (click)="toggleVaccinationCalendar(i, 'nextDue')" slot="end"></ion-icon>
+                </div>
+              </div>
+              
+              <!-- Date picker for vaccination dates -->
+              <ion-card *ngIf="vaccinationCalendarIndex === i && vaccinationCalendarField !== ''" class="calendar-card">
+                <ion-datetime 
+                  presentation="date" 
+                  [max]="vaccinationCalendarField === 'date' ? maxDate : ''" 
+                  (ionChange)="onVaccinationDateChange($event, i, vaccinationCalendarField)">
+                </ion-datetime>
+              </ion-card>
+              
+              <ion-textarea formControlName="notes" placeholder="Notes (optional)" class="form-control"></ion-textarea>
+              
+              <ion-button fill="clear" color="danger" size="small" (click)="removeVaccination(i)" class="remove-button">
+                <ion-icon name="trash-outline"></ion-icon>
+                Remove
+              </ion-button>
+            </div>
+          </div>
+          
+          <ion-button expand="block" fill="outline" (click)="addVaccination()" class="add-vaccination-button">
+            <ion-icon name="add-outline"></ion-icon>
+            Add Vaccination Record
+          </ion-button>
+        </div>
+      </div>
+      
+      
+      <!-- Submit Button -->
+      <ion-button expand="block" type="submit" [disabled]="!livestockForm.valid">
+        Add Livestock
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

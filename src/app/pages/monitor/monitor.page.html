@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="transparent-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/manage-livestock"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Monitor Livestock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-container">
+    <div class="section-header">
+      <h2>Livestock Monitoring</h2>
+      <p class="subtitle">Track animals that need special attention</p>
+    </div>
+
+    <div class="monitoring-list">
+      <div class="list-header">
+        <h3>Animals Being Monitored</h3>
+        <ion-button size="small" fill="clear" color="primary" (click)="showAddAnimalDialog()">+ Add Animal</ion-button>
+      </div>
+
+      <!-- List of monitored animals -->
+      <div class="animal-card" *ngFor="let animal of monitoredLivestock">
+        <div class="animal-status" [ngClass]="'status-' + animal.status">
+          <ion-icon [name]="getStatusIcon(animal.status)"></ion-icon>
+        </div>
+        <div class="animal-details">
+          <div class="animal-name">{{ animal.name }}</div>
+          <div class="animal-notes">{{ animal.notes }}</div>
+          <div class="animal-info">
+            <div class="animal-reason">{{ animal.reasonForMonitoring }}</div>
+            <div class="animal-lastchecked">Last checked: {{ animal.lastChecked }}</div>
+            <div class="animal-until">Monitor until: {{ animal.monitorUntil | date:'MMM d, y' }}</div>
+          </div>
+        </div>
+        <div class="animal-actions">
+          <ion-button fill="clear" color="primary" (click)="checkAnimal(animal.id)">
+            <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+            Check
+          </ion-button>
+        </div>
+      </div>
+
+      <!-- Empty state if no animals are being monitored -->
+      <div class="empty-state" *ngIf="monitoredLivestock.length === 0">
+        <ion-icon name="warning-outline" class="empty-icon"></ion-icon>
+        <h4>No Animals Being Monitored</h4>
+        <p>Add animals that need special attention or monitoring</p>
+        <ion-button expand="block" (click)="showAddAnimalDialog()">Add Animal to Monitor</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

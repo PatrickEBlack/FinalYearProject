@@ -1,0 +1,375 @@
+// Transparent toolbar
+.transparent-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+// Main content styling with centered content
+ion-content {
+  --padding-bottom: 30px;
+  --padding-top: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --background: var(--ion-background-color);
+}
+
+// Container for all content - centered layout
+ion-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+// Search container - Mobile optimized
+.search-container {
+  padding: 12px;
+  margin: 0 0 12px 0;
+  background-color: var(--ion-card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// iOS searchbar styling
+.ios-searchbar {
+  --border-radius: 8px;
+  --box-shadow: none;
+  --background: var(--ion-background-color);
+  --placeholder-opacity: 0.7;
+  --placeholder-color: var(--ion-color-medium);
+  margin: 0;
+  font-size: 16px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
+
+// Saved locations container
+.saved-locations-container {
+  padding: 10px 12px;
+  margin: 0 0 12px 0;
+  background-color: var(--ion-card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.saved-locations-scroll {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
+
+.location-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  margin-right: 10px;
+  border-radius: 8px;
+  background-color: rgba(var(--ion-color-primary-rgb), 0.1);
+  color: var(--ion-color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  height: 32px;
+  
+  &:last-child {
+    margin-right: 0;
+  }
+  
+  &:active {
+    background-color: rgba(var(--ion-color-primary-rgb), 0.2);
+    transform: scale(0.96);
+  }
+}
+
+.add-btn {
+  background-color: rgba(var(--ion-color-primary-rgb), 0.1);
+  color: var(--ion-color-primary);
+  padding: 8px;
+  min-width: 32px;
+  
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+// Dark mode removed
+
+// Weather Card - Mobile optimized
+.weather-card {
+  padding: 16px;
+  margin: 12px 0;
+  background-color: var(--ion-card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-location {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.location-icon {
+  font-size: 20px;
+  color: var(--ion-color-primary);
+  margin-right: 8px;
+}
+
+.weather-location h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ion-color-dark);
+}
+
+// Weather main section - Mobile optimized
+.weather-main {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.weather-icon-temp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather-icon-large {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 4px;
+}
+
+// Add styling for image-based weather icons
+img.weather-icon-large {
+  object-fit: contain;
+}
+
+.temperature {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.condition {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ion-color-dark);
+  margin-bottom: 4px;
+}
+
+.feels-like {
+  font-size: 16px;
+  color: var(--ion-color-medium);
+  margin-bottom: 4px;
+}
+
+.high-low {
+  font-size: 16px;
+  color: var(--ion-color-medium);
+  margin-bottom: 4px;
+}
+
+.high {
+  color: var(--ion-color-danger);
+  margin-right: 12px;
+}
+
+.low {
+  color: var(--ion-color-primary);
+}
+
+// Weather stats - Mobile optimized with better contrast
+.weather-stats {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--ion-border-color);
+  padding-top: 16px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+}
+
+.stat-icon {
+  font-size: 24px;
+  color: var(--ion-color-primary);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin-bottom: 2px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--ion-color-medium);
+}
+
+// Forecast section
+.forecast-section {
+  padding: 20px;
+  margin: 16px 0;
+  background-color: var(--ion-card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--ion-color-dark);
+}
+
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ion-border-color);
+}
+
+.forecast-item:last-child {
+  border-bottom: none;
+}
+
+.forecast-day {
+  width: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+.forecast-icon {
+  font-size: 24px;
+  color: var(--ion-color-warning);
+  margin: 0 16px;
+}
+
+.forecast-temp {
+  flex: 1;
+  font-size: 16px;
+}
+
+.forecast-temp .high {
+  font-weight: 600;
+}
+
+.forecast-temp .low {
+  margin-left: 12px;
+  opacity: 0.7;
+}
+
+.precip {
+  font-size: 14px;
+  color: var(--ion-color-primary);
+  margin-left: 16px;
+}
+
+// Farm tips section
+.tips-section {
+  padding: 20px;
+  margin: 16px 0;
+  background-color: var(--ion-card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--ion-border-color);
+}
+
+.tip-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.tip-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  margin-top: 2px;
+}
+
+.tip-icon.warning {
+  color: var(--ion-color-warning);
+}
+
+.tip-icon.info {
+  color: var(--ion-color-primary);
+}
+
+.tip-icon.success {
+  color: var(--ion-color-success);
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin-bottom: 4px;
+}
+
+.tip-text {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin: 0;
+  line-height: 1.4;
+}
+
+// Small screen optimizations
+@media (max-width: 360px) {
+  .weather-icon-large {
+    font-size: 56px;
+  }
+  
+  .temperature {
+    font-size: 32px;
+  }
+  
+  .condition {
+    font-size: 18px;
+  }
+}
+
+// Dark mode removed

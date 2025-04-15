@@ -1,0 +1,39 @@
+<div class="menu-toggle" (click)="toggleMenu($event)" id="menu-toggle">
+  <ion-icon [name]="menuOpen ? 'close-outline' : 'menu-outline'" class="menu-icon" [class.open]="menuOpen"></ion-icon>
+</div>
+
+<div class="menu-overlay" [class.open]="menuOpen" (click)="closeMenu()"></div>
+
+<div class="side-menu" [class.open]="menuOpen" id="side-menu">
+  <div class="menu-items">
+    <div class="menu-item" (click)="navigateTo('/tabs/home')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Home</span>
+    </div>
+    
+    <div class="menu-item" (click)="navigateTo('/tabs/manage-livestock')">
+      <ion-icon name="paw-outline"></ion-icon>
+      <span>Livestock</span>
+    </div>
+    
+    <div class="menu-item" (click)="navigateTo('/tabs/tasks')">
+      <ion-icon name="clipboard-outline"></ion-icon>
+      <span>Tasks</span>
+    </div>
+    
+    <div class="menu-item" (click)="navigateTo('/tabs/ai-helper')">
+      <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+      <span>AI Helper</span>
+    </div>
+    
+    <div class="menu-item" (click)="navigateTo('/tabs/settings')">
+      <ion-icon name="settings-outline"></ion-icon>
+      <span>Settings</span>
+    </div>
+    
+    <div class="menu-item" (click)="navigateTo('/tabs/profile')">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>My Profile</span>
+    </div>
+  </div>
+</div>

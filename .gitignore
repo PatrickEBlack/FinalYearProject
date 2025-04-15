@@ -1,0 +1,68 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+# Dependencies
+node_modules/
+/node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Compiled output
+/www/
+/dist/
+/platforms/
+/.angular/
+/.ionic/
+/.sass-cache/
+/.sourcemaps/
+/.versions/
+/tmp/
+/out-tsc/
+/bazel-out/
+
+# Environment and sensitive files
+.env
+environment.ts
+environment.prod.ts
+environment.*.ts
+/src/environments/*.ts
+
+# Claude/AI related files
+/Claude_Files/
+/src/app/filesForClaude/
+/src/app/forClaude.txt
+CLAUDE.md
+
+# IDE
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+*.log
+*.tmp
+*.tmp.*
+desktop.ini
+
+# Misc
+/.sass-cache
+/connect.lock
+/coverage
+/test-results/
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+/.firebase
+.firebaserc
+
+# System Files
+.directory
+*.swp

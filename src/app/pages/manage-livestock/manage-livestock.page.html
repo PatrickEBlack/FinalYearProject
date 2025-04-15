@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Your Livestock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Livestock Summary Card -->
+  <div class="livestock-summary-card">
+    <div class="summary-header">
+      <div class="total-count">
+        <span class="count-number">{{livestockCount}}</span>
+        <span class="count-label">Animals</span>
+      </div>
+    </div>
+    
+    <!-- Type distribution -->
+    <div class="type-distribution">
+      <div *ngIf="livestockTypes.length === 0" class="no-livestock-message">
+        <p>No livestock added yet. Click 'Add Livestock' to get started.</p>
+      </div>
+      <div class="type-item" *ngFor="let type of livestockTypes; let i = index">
+        <div class="type-icon" [ngClass]="'type-' + (i+1)">
+          <ion-icon name="paw"></ion-icon>
+        </div>
+        <div class="type-details">
+          <div class="type-name">{{type.type}}</div>
+          <div class="type-count">{{type.count}} Animals</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Main Action Buttons -->
+  <div class="action-buttons">
+    <div class="primary-action" routerLink="/tabs/add-livestock">
+      <ion-icon name="add-circle"></ion-icon>
+      <span>Add Livestock</span>
+    </div>
+    
+    <div class="primary-action" routerLink="/tabs/view-livestock">
+      <ion-icon name="list"></ion-icon>
+      <span>View All</span>
+    </div>
+  </div>
+  
+  <!-- Quick Actions -->
+  <div class="quick-actions-container">
+    <h3 class="actions-title">Quick Actions</h3>
+    
+    <div class="quick-actions">
+      <div class="quick-action-button" routerLink="/tabs/view-livestock">
+        <ion-icon name="search"></ion-icon>
+        <span>Search</span>
+      </div>
+      
+      <div class="quick-action-button" routerLink="/tabs/quick-log">
+        <ion-icon name="document-text"></ion-icon>
+        <span>Quick Log</span>
+      </div>
+      
+      <div class="quick-action-button" routerLink="/tabs/monitor">
+        <ion-icon name="warning"></ion-icon>
+        <span>Monitor</span>
+      </div>
+      
+      <div class="quick-action-button" routerLink="/tabs/add-livestock">
+        <ion-icon name="medical"></ion-icon>
+        <span>Vaccinations</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

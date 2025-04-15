@@ -1,0 +1,94 @@
+<!-- Header removed -->
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshTasks($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div class="page-container">
+    <div class="section-header">
+      <h1>Task Log</h1>
+      <p>View and manage your logged activities</p>
+    </div>
+    
+    <!-- Add Task Button -->
+    <div class="add-task-container">
+      <ion-button expand="block" color="primary" (click)="navigateToQuickLog()" class="add-task-button">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Add New Task
+      </ion-button>
+    </div>
+    
+    <!-- Search -->
+    <div class="search-container">
+      <ion-searchbar [(ngModel)]="searchText" placeholder="Search tasks" animated="true"></ion-searchbar>
+    </div>
+    
+    <!-- Tasks List -->
+    <div class="tasks-list" *ngIf="filteredTasks.length > 0">
+      <ion-list class="custom-list">
+        <ion-item-sliding *ngFor="let task of filteredTasks">
+          <ion-item class="task-item" (click)="toggleTaskDetails(task.id)" [class.expanded]="showingTaskDetails === task.id">
+            <div class="task-card">
+              <div class="task-header">
+                <div class="task-icon">
+                  <ion-icon [name]="task.icon" [style.color]="task.color"></ion-icon>
+                </div>
+                <div class="task-info">
+                  <div class="task-name">{{ task.name }}</div>
+                  <div class="task-date">{{ getFormattedDate(task.date) }}</div>
+                </div>
+                <div class="task-chevron">
+                  <ion-icon name="chevron-down-outline" [class.rotated]="showingTaskDetails === task.id"></ion-icon>
+                </div>
+              </div>
+              
+              <div class="task-details" *ngIf="showingTaskDetails === task.id">
+                <div class="detail-row" *ngIf="task.animalType">
+                  <ion-icon name="paw-outline"></ion-icon>
+                  <span>{{ task.animalType }}</span>
+                </div>
+                <div class="detail-row" *ngIf="task.note">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ task.note }}</span>
+                </div>
+                
+                <!-- Task Actions -->
+                <div class="task-actions">
+                  <button class="action-button edit-button" (click)="$event.stopPropagation(); editTaskNote(task)">
+                    <ion-icon name="create-outline"></ion-icon>
+                    Edit Note
+                  </button>
+                  <button class="action-button delete-button" (click)="$event.stopPropagation(); confirmDeleteTask(task.id)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    Delete Task
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ion-item>
+          
+          <ion-item-options side="end">
+            <ion-item-option color="primary" (click)="editTaskNote(task)">
+              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="danger" (click)="confirmDeleteTask(task.id)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="filteredTasks.length === 0">
+      <ion-icon name="clipboard-outline"></ion-icon>
+      <h3>No Tasks Found</h3>
+      <p>When you log activities, they will appear here</p>
+      <ion-button (click)="navigateToQuickLog()" expand="block">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Log a New Task
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

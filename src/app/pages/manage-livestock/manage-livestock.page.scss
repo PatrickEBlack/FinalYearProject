@@ -1,0 +1,233 @@
+/* Toolbar */
+.transparent-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+/* Main content */
+ion-content {
+  --background: var(--ion-background-color);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 32px;
+}
+
+/* Livestock Summary Card */
+.livestock-summary-card {
+  background-color: var(--ion-background-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.summary-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+  margin: 0;
+}
+
+.total-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.count-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  line-height: 1;
+}
+
+.count-label {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+}
+
+/* Livestock Type Distribution */
+.type-distribution {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.no-livestock-message {
+  text-align: center;
+  padding: 20px;
+  color: var(--ion-color-medium);
+  font-style: italic;
+  
+  p {
+    margin: 0;
+  }
+}
+
+.type-item {
+  display: flex;
+  align-items: center;
+  background-color: rgba(var(--ion-color-light-rgb), 0.7);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.type-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.type-icon ion-icon {
+  font-size: 24px;
+  color: white;
+}
+
+.type-1 {
+  background-color: var(--ion-color-primary);
+}
+
+.type-2 {
+  background-color: var(--ion-color-tertiary);
+}
+
+.type-3 {
+  background-color: var(--ion-color-secondary);
+}
+
+.type-details {
+  flex: 1;
+}
+
+.type-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin-bottom: 2px;
+}
+
+.type-count {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+}
+
+/* Main Action Buttons */
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.primary-action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ion-background-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+  height: 130px;
+  border: 3px solid var(--ion-color-primary);
+  transition: transform 0.2s;
+}
+
+.primary-action:active {
+  transform: scale(0.97);
+}
+
+.primary-action ion-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  color: var(--ion-color-primary);
+}
+
+.primary-action span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+/* Quick Actions */
+.quick-actions-container {
+  background-color: var(--ion-background-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+.actions-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin: 0 0 16px 0;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.quick-action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--ion-color-light-rgb), 0.7);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.quick-action-button:active {
+  background-color: rgba(var(--ion-color-light-rgb), 1);
+}
+
+.quick-action-button ion-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--ion-color-primary);
+}
+
+.quick-action-button span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ion-color-dark);
+}
+
+/* Mobile optimization */
+@media (max-width: 340px) {
+  .primary-action {
+    height: 110px;
+    padding: 16px;
+  }
+  
+  .primary-action ion-icon {
+    font-size: 32px;
+  }
+  
+  .primary-action span {
+    font-size: 14px;
+  }
+  
+  .quick-action-button span {
+    font-size: 12px;
+  }
+}

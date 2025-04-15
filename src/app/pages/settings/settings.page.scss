@@ -1,0 +1,115 @@
+// Main content
+ion-content {
+  --padding-bottom: 30px;
+}
+
+.settings-container {
+  padding: 16px;
+}
+
+// iOS-style settings list
+.settings-list {
+  margin-bottom: 20px;
+  background-color: var(--ion-card-background);
+  border-radius: 16px;
+}
+
+ion-list-header {
+  padding-bottom: 8px;
+}
+
+ion-list-header ion-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+ion-item {
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+}
+
+ion-item:last-child {
+  --border-width: 0;
+}
+
+ion-item ion-icon {
+  font-size: 22px;
+  margin-right: 16px;
+}
+
+ion-item ion-label {
+  font-size: 16px;
+}
+
+ion-item ion-note {
+  font-size: 14px;
+}
+
+ion-toggle {
+  --track-background: rgba(var(--ion-color-primary-rgb), 0.3);
+  --track-background-checked: rgba(var(--ion-color-primary-rgb), 0.6);
+}
+
+// Logout button
+.logout-button {
+  margin: 20px 0;
+  --border-radius: 10px;
+  height: 48px;
+  font-weight: 500;
+}
+
+// Text size slider styling
+.text-size-item {
+  --inner-padding-end: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.text-size-slider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.size-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ion-color-medium);
+  
+  &.small {
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  
+  &.large {
+    font-size: 24px;
+    margin-left: 8px;
+  }
+}
+
+ion-range {
+  --bar-background: rgba(var(--ion-color-medium-rgb), 0.3);
+  --bar-background-active: var(--ion-color-primary);
+  --knob-background: var(--ion-color-primary);
+  --pin-background: var(--ion-color-primary);
+  --pin-color: var(--ion-color-primary-contrast);
+  width: 100%;
+}
+
+// App version
+.app-version {
+  display: flex;
+  justify-content: center;
+  color: var(--ion-color-medium);
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+// Make toolbar transparent
+ion-toolbar {
+  --background: transparent;
+  --border-width: 0;
+}

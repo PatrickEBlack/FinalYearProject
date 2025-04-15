@@ -1,0 +1,157 @@
+<!-- Removed header as requested -->
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshWeather($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Location Search -->
+  <div class="search-container ios-card">
+    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Search location" (keyup.enter)="search()" class="ios-searchbar"></ion-searchbar>
+  </div>
+  
+  <!-- Saved Locations -->
+  <div class="saved-locations-container ios-card">
+    <div class="saved-locations-scroll">
+      <div class="location-btn add-btn" (click)="showAddLocationPrompt()">
+        <ion-icon name="add-outline"></ion-icon>
+      </div>
+      
+      <div class="location-btn" *ngFor="let location of savedLocations" (click)="selectSavedLocation(location)">
+        {{location.displayName}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Weather Card - Simplified for Farmers -->
+  <div class="weather-card ios-card" *ngIf="weatherData && !isLoading">
+    <div class="current-weather">
+      <div class="weather-location">
+        <ion-icon name="location-outline" class="location-icon"></ion-icon>
+        <h2>{{weatherData.location.name}}, {{weatherData.location.region}}</h2>
+      </div>
+      
+      <div class="weather-main">
+        <div class="weather-icon-temp">
+          <img [src]="weatherData.current.condition.icon" class="weather-icon-large" alt="Weather icon">
+          <div class="temperature">{{weatherData.current.temp_c | number:'1.0-0'}}°</div>
+        </div>
+        <div class="weather-details">
+          <div class="condition">{{weatherData.current.condition.text}}</div>
+          <div class="feels-like">Feels like {{weatherData.current.feelslike_c | number:'1.0-0'}}°</div>
+        </div>
+      </div>
+      
+      <div class="weather-stats">
+        <div class="stat-item">
+          <ion-icon name="rainy-outline" class="stat-icon"></ion-icon>
+          <div class="stat-value">{{weatherData.current.precip_mm}} mm</div>
+          <div class="stat-label">Rainfall</div>
+        </div>
+        
+        <div class="stat-item">
+          <ion-icon name="speedometer-outline" class="stat-icon"></ion-icon>
+          <div class="stat-value">{{weatherData.current.wind_kph | number:'1.0-0'}} km/h</div>
+          <div class="stat-label">{{weatherData.current.wind_dir}} Wind</div>
+        </div>
+        
+        <div class="stat-item">
+          <ion-icon name="time-outline" class="stat-icon"></ion-icon>
+          <div class="stat-value">{{formatDate(weatherData.location.localtime)}}</div>
+          <div class="stat-label">Local time</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Skeleton -->
+  <div class="weather-card ios-card" *ngIf="isLoading">
+    <div class="current-weather">
+      <div class="weather-location">
+        <ion-skeleton-text animated style="width: 80%; height: 24px;"></ion-skeleton-text>
+      </div>
+      
+      <div class="weather-main">
+        <div class="weather-icon-temp">
+          <ion-skeleton-text animated style="width: 60px; height: 60px; border-radius: 6px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 60px; height: 40px;"></ion-skeleton-text>
+        </div>
+        <div class="weather-details">
+          <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 70%; height: 20px;"></ion-skeleton-text>
+        </div>
+      </div>
+      
+      <div class="weather-stats">
+        <div class="stat-item" *ngFor="let i of [1,2,3]">
+          <ion-skeleton-text animated style="width: 30px; height: 30px; border-radius: 50%;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 80%; height: 16px;"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forecast Section -->
+  <div class="forecast-section ios-card" *ngIf="forecast.length > 0 && !isLoading">
+    <h3 class="section-title">7-Day Forecast</h3>
+    
+    <div class="forecast-list">
+      <div class="forecast-item" *ngFor="let day of forecast">
+        <div class="forecast-day">{{day.day}}</div>
+        <ion-icon [name]="day.icon" class="forecast-icon"></ion-icon>
+        <div class="forecast-temp">
+          <span class="high">{{day.high}}°</span>
+          <span class="low">{{day.low}}°</span>
+        </div>
+        <div class="precip" *ngIf="day.precipChance > 0">
+          {{day.precipChance}}%
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Forecast Loading Skeleton -->
+  <div class="forecast-section ios-card" *ngIf="isLoading">
+    <ion-skeleton-text animated style="width: 40%; height: 24px; margin-bottom: 20px;"></ion-skeleton-text>
+    
+    <div class="forecast-list">
+      <div class="forecast-item" *ngFor="let i of [1,2,3,4,5]">
+        <ion-skeleton-text animated style="width: 40px; height: 20px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 30px; height: 30px; border-radius: 50%;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60px; height: 20px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 30px; height: 16px;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Farm Weather Tips -->
+  <div class="tips-section ios-card" *ngIf="farmingAdvice.length > 0 && !isLoading">
+    <h3 class="section-title">Farm Weather Advice</h3>
+    
+    <div class="tip-item" *ngFor="let advice of farmingAdvice">
+      <ion-icon [name]="advice.includes('alert') ? 'thermometer-outline' : 
+                    (advice.includes('wind') ? 'speedometer-outline' : 
+                    (advice.includes('rain') || advice.includes('precipitation') ? 'rainy-outline' : 'checkmark-circle-outline'))" 
+                class="tip-icon" 
+                [ngClass]="advice.includes('alert') || advice.includes('Heavy') ? 'warning' : 
+                         (advice.includes('Good') || advice.includes('favorable') ? 'success' : 'info')"></ion-icon>
+      <div class="tip-content">
+        <p class="tip-text">{{advice}}</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tips Loading Skeleton -->
+  <div class="tips-section ios-card" *ngIf="isLoading">
+    <ion-skeleton-text animated style="width: 50%; height: 24px; margin-bottom: 20px;"></ion-skeleton-text>
+    
+    <div class="tip-item" *ngFor="let i of [1,2]">
+      <ion-skeleton-text animated style="width: 30px; height: 30px; border-radius: 50%;"></ion-skeleton-text>
+      <div class="tip-content" style="width: 100%;">
+        <ion-skeleton-text animated style="width: 90%; height: 16px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 80%; height: 16px;"></ion-skeleton-text>
+      </div>
+    </div>
+  </div>
+</ion-content>

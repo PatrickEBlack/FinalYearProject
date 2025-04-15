@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+
+  h1 {
+    font-size: 40px;
+    font-weight: bolder;
+    margin-bottom: 40px;
+  }
+
+  form {
+    width: 100%;
+    max-width: 400px;
+    padding-bottom: 15%;
+  }
+}
+
+.LogRegButtons {
+  --color: rgb(255, 255, 255);
+  --background: transparent;
+  background-color: rgb(3, 193, 53);
+  margin-top: 10px;
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+  font-size: 14px;
+  margin: 5px 0 10px 15px;
+}
+
+.verification-instructions {
+  background-color: rgba(3, 193, 53, 0.1);
+  border-left: 3px solid rgb(3, 193, 53);
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ion-color-dark);
+  }
+}
+
+ion-item {
+  margin-bottom: 10px;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --background: rgba(255, 255, 255, 0.8);
+  --border-radius: 8px;
+  
+  &.ion-invalid.ion-touched {
+    --border-color: var(--ion-color-danger);
+  }
+}
+
+ion-button[fill="outline"] {
+  --border-color: rgb(3, 193, 53);
+  --color: rgb(3, 193, 53);
+}

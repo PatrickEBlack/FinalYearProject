@@ -1,0 +1,182 @@
+// iOS-inspired styling for the AI helper page
+ion-header {
+  ion-toolbar {
+    --background: var(--ion-color-primary);
+    --color: white;
+    
+    ion-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      ion-icon {
+        margin-right: 8px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+// Chat container
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+}
+
+// Message containers
+.message-container {
+  display: flex;
+  margin-bottom: 16px;
+  animation: fadeIn 0.3s ease-in-out;
+  
+  &.user-message {
+    justify-content: flex-end;
+    
+    .message-bubble {
+      background-color: var(--ion-color-primary);
+      color: white;
+      border-radius: 18px 18px 4px 18px;
+      margin-left: 20%;
+    }
+    
+    .message-timestamp {
+      text-align: right;
+    }
+  }
+  
+  &.assistant-message {
+    justify-content: flex-start;
+    
+    .message-bubble {
+      background-color: var(--ion-color-light);
+      color: var(--ion-color-dark);
+      border-radius: 18px 18px 18px 4px;
+      margin-right: 20%;
+    }
+  }
+}
+
+// Message bubbles
+.message-bubble {
+  padding: 12px 16px;
+  max-width: 80%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+  .message-content {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  
+  .message-timestamp {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+}
+
+// Loading animation
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  
+  ion-spinner {
+    --color: var(--ion-color-primary);
+  }
+}
+
+// Input area
+.input-container {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--ion-color-light);
+  padding: 8px 16px;
+  background-color: white;
+  
+  .chat-input {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --background: var(--ion-color-light);
+    --border-radius: 20px;
+    font-size: 16px;
+  }
+  
+  .send-button {
+    margin-left: 8px;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    height: 40px;
+    width: 40px;
+    
+    ion-icon {
+      font-size: 20px;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+// Footer actions
+.footer-actions {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 8px;
+  background-color: white;
+  
+  .clear-button {
+    font-size: 12px;
+    --color: var(--ion-color-medium);
+    
+    ion-icon {
+      font-size: 16px;
+    }
+  }
+}
+
+// Suggestions
+.suggestions-container {
+  margin: 16px 0 24px;
+  animation: fadeIn 0.5s ease-in-out;
+  
+  h3 {
+    text-align: center;
+    color: var(--ion-color-dark);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    
+    .suggestion-button {
+      --border-color: var(--ion-color-primary);
+      --color: var(--ion-color-primary);
+      --background: transparent;
+      --border-width: 1px;
+      --border-radius: 16px;
+      --padding-start: 12px;
+      --padding-end: 12px;
+      height: 32px;
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

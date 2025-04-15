@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/manage-livestock"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Livestock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Filter options -->
+  <div class="filter-section content-card">
+    <div class="filter-header">
+      <h3>Filter by Type</h3>
+      <ion-button fill="clear" size="small" (click)="clearFilters()" *ngIf="selectedType">Clear</ion-button>
+    </div>
+    <div class="filter-options">
+      <ion-chip 
+        *ngFor="let type of livestockTypes" 
+        [color]="selectedType === type ? 'primary' : 'medium'"
+        (click)="filterByType(type)"
+        outline="true">
+        {{ type }}
+      </ion-chip>
+    </div>
+  </div>
+  
+  <!-- Livestock list -->
+  <div class="list-container">
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="filteredLivestock.length === 0">
+      <ion-icon name="paw-outline"></ion-icon>
+      <h3>No livestock found</h3>
+      <p *ngIf="selectedType">No {{ selectedType }} in your inventory</p>
+      <p *ngIf="!selectedType">Add some livestock to get started</p>
+      <ion-button expand="block" routerLink="/tabs/add-livestock">
+        Add Livestock
+      </ion-button>
+    </div>
+    
+    <!-- List with items -->
+    <div class="content-card" *ngIf="filteredLivestock.length > 0">
+      <ion-list lines="full">
+        <ion-item *ngFor="let item of filteredLivestock" (click)="showDetails(item)">
+          <ion-label>
+            <h3>{{ item.quantity }} {{ item.type }}</h3>
+            <p *ngIf="item.breed">{{ item.breed }}</p>
+            <p *ngIf="item.tagNumber"><strong>Tag:</strong> {{ item.tagNumber }}</p>
+            <p *ngIf="item.age">Age: {{ item.age }} {{ item.ageUnit }}</p>
+            <p *ngIf="item.birthDate">Born: {{ formatBirthDate(item.birthDate) }}</p>
+          </ion-label>
+          <div slot="end" class="pasture-tag" *ngIf="item.pasture && item.pasture !== 'none'">
+            {{ getPastureName(item.pasture) }}
+          </div>
+          <ion-icon name="chevron-forward-outline" slot="end" color="medium"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <!-- Livestock details modal -->
+  <ion-modal [isOpen]="selectedLivestock !== null" (didDismiss)="closeDetails()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Livestock Details</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeDetails()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content *ngIf="selectedLivestock">
+        <div class="detail-content">
+          <div class="detail-header">
+            <h2>{{ selectedLivestock.quantity }} {{ selectedLivestock.type }}</h2>
+            <div class="detail-date">
+              Added on {{ formatDate(selectedLivestock.dateAdded) }}
+            </div>
+          </div>
+          
+          <ion-list lines="full">
+            <ion-item *ngIf="selectedLivestock.breed">
+              <ion-label>
+                <h3>Breed</h3>
+                <p>{{ selectedLivestock.breed }}</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item *ngIf="selectedLivestock.age">
+              <ion-label>
+                <h3>Age</h3>
+                <p>{{ selectedLivestock.age }} {{ selectedLivestock.ageUnit }}</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item *ngIf="selectedLivestock.birthDate">
+              <ion-label>
+                <h3>Birth Date</h3>
+                <p>{{ formatBirthDate(selectedLivestock.birthDate) }}</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item *ngIf="selectedLivestock.herdNumber">
+              <ion-label>
+                <h3>Herd Number</h3>
+                <p>{{ selectedLivestock.herdNumber }}</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item *ngIf="selectedLivestock.tagNumber">
+              <ion-label>
+                <h3>Tag Number</h3>
+                <p>{{ selectedLivestock.tagNumber }}</p>
+              </ion-label>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label>
+                <h3>Pasture</h3>
+                <p>{{ selectedLivestock.pasture === 'none' ? 'Not assigned' : getPastureName(selectedLivestock.pasture) }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          
+          <!-- Vaccination Records Section -->
+          <div class="vaccination-section" *ngIf="selectedLivestock.vaccinations && selectedLivestock.vaccinations.length > 0">
+            <h3 class="section-title">Vaccination Records</h3>
+            
+            <ion-list lines="full">
+              <ion-item *ngFor="let vaccination of selectedLivestock.vaccinations">
+                <ion-label>
+                  <h3>{{ vaccination.name }}</h3>
+                  <p>Administered: {{ formatDate(vaccination.date) }}</p>
+                  <p *ngIf="vaccination.nextDue">Next due: {{ formatDate(vaccination.nextDue) }}</p>
+                  <p *ngIf="vaccination.notes" class="vaccination-notes">{{ vaccination.notes }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+          
+          <div class="no-vaccinations" *ngIf="!selectedLivestock.vaccinations || selectedLivestock.vaccinations.length === 0">
+            <p>No vaccination records available</p>
+          </div>
+          
+          <div class="detail-actions">
+            <ion-button expand="block" color="danger" (click)="confirmDelete(selectedLivestock)">
+              Remove Livestock
+            </ion-button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="person-outline" class="profile-icon"></ion-icon>
+        User Profile
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none" class="email-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h2>Email</h2>
+          <p class="email-display">{{ userEmail }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-item button (click)="goToSettings()" class="settings-item">
+      <ion-icon name="settings-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h2>App Settings</h2>
+        <p>Configure app preferences</p>
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+    
+    <ion-item button (click)="openChangePasswordModal()" class="security-item">
+      <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h2>Change Password</h2>
+        <p>Update with two-factor verification</p>
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="danger" (click)="logout()" class="logout-button">
+    <ion-icon name="log-out-outline" slot="start"></ion-icon>
+    Logout
+  </ion-button>
+</ion-content>
