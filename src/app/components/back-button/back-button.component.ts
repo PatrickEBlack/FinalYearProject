@@ -40,7 +40,7 @@ export class BackButtonComponent {
   
   isRootPage(url: string): boolean {
     // Don't show back button on these pages
-    const rootPages = ['/tabs/home', '/login', '/'];
+    const rootPages = ['/tabs/home', '/login', '/', '/tabs/view-livestock'];
     return rootPages.some(path => url === path);
   }
   
