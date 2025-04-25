@@ -28,17 +28,6 @@ environment.prod.ts
 environment.*.ts
 /src/environments/*.ts
 
-# Claude/AI related files
-/Claude_Files/
-/src/app/filesForClaude/
-/src/app/forClaude.txt
-CLAUDE.md
-
-# Generated directories not for repository
-/backup/
-/help/
-/datasets/
-
 # Scripts for analysis
 symptom_extractor.js
 
