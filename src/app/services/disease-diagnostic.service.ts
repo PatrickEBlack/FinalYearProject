@@ -194,7 +194,7 @@ export class DiseaseDiagnosticService {
     ];
     
     // Vaccination status adjustment
-    if (animalInfo.vaccinations && animalInfo.vaccinations.length > 0 && disease.vaccinations) {
+    if (animalInfo.vaccinations && animalInfo.vaccinations.length > 0 && disease.vaccinations && disease.vaccinations.length > 0) {
       // For each vaccination the animal has received
       animalInfo.vaccinations.forEach(vaccination => {
         // Normalize the vaccination name for better matching

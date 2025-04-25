@@ -4,7 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 // HttpClient is provided in main.ts, don't need to import module here
-import { DiseaseDiagnosticService, DiagnosticResult } from '../../services/disease-diagnostic.service';
+import { 
+  DiseaseDiagnosticService, 
+  DiagnosticResult, 
+  DiseaseData 
+} from '../../services/disease-diagnostic.service';
 import { 
   IonContent, 
   IonHeader, 
