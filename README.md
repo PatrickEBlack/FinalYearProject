@@ -72,15 +72,44 @@ This interactive script will:
 
 #### Option 2: Manual Setup
 
-1. Create environment files for Angular:
-   - Copy `src/environments/environment.example.ts` to `src/environments/environment.ts`
-   - Copy `src/environments/environment.prod.example.ts` to `src/environments/environment.prod.ts`
-   - Update the API keys in both files
+1. Create a `.env` file in the root directory with the following content:
 
-2. Create .env file for the backend:
-   - Copy `.env.example` to `.env`
-   - Update the MongoDB connection URI with your credentials
-   - Set other environment variables as needed
+```
+MONGODB_URI=your_mongodb_connection_string
+MONGODB_USER=your_mongodb_username
+MONGODB_PASSWORD=your_mongodb_password
+MONGODB_DB=your_database_name
+PORT=3000
+
+# API Keys
+OPEN_WEATHER_API_KEY=your_openweather_api_key
+WEATHER_API_KEY=your_weatherapi_key
+
+# Firebase Configuration
+FIREBASE_PROJECT_ID=your_firebase_project_id
+FIREBASE_APP_ID=your_firebase_app_id
+FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+FIREBASE_API_KEY=your_firebase_api_key
+FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+```
+
+2. The application is designed to fetch API keys securely from the server, so you don't need to modify the frontend environment files directly
+
+#### Security Note
+
+For security reasons, API keys and database credentials are loaded from environment variables and served to the frontend via a secure endpoint. This approach prevents exposing sensitive keys in your GitHub repository or client-side code.
+
+If deploying to Heroku or another cloud service, make sure to set the following environment variables:
+- `MONGODB_URI` (or the individual components: `MONGODB_USER`, `MONGODB_PASSWORD`, `MONGODB_DB`)
+- `OPEN_WEATHER_API_KEY`
+- `WEATHER_API_KEY`
+- All the Firebase configuration variables (`FIREBASE_PROJECT_ID`, `FIREBASE_API_KEY`, etc.)
+
+You can set these on Heroku using the following command:
+```bash
+heroku config:set OPEN_WEATHER_API_KEY=your_key WEATHER_API_KEY=your_other_key
+```
 
 ## Running the application
 

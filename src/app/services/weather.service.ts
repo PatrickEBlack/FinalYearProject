@@ -4,6 +4,7 @@ import { delay, catchError, map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from './storage.service';
 import { environment } from '../../environments/environment';
+import { ConfigService } from './config.service';
 
 export interface WeatherData {
   location: string;
@@ -32,7 +33,6 @@ export interface ForecastDay {
   providedIn: 'root'
 })
 export class WeatherService {
-  private readonly API_KEY = environment.openWeatherApiKey || '0ff1aa92a6ff5efafcc218d4f9a14f67';
   private readonly API_URL = 'https://api.openweathermap.org/data/2.5/';
   
   private currentLocation = new BehaviorSubject<string>('County Meath, Ireland');
@@ -43,10 +43,15 @@ export class WeatherService {
   
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private configService: ConfigService
   ) {
     // Load saved location from storage
     this.loadSavedData();
+  }
+  
+  private get API_KEY(): string {
+    return this.configService.getOpenWeatherApiKey() || environment.openWeatherApiKey || '';
   }
   
   private loadSavedData() {

@@ -6,6 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
 import { TextSizeService } from './services/text-size.service';
+import { ConfigService } from './services/config.service';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,19 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private textSizeService: TextSizeService
+    private textSizeService: TextSizeService,
+    private configService: ConfigService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    // Load API keys from server
+    try {
+      await this.configService.loadConfig();
+      console.log('API configuration loaded successfully');
+    } catch (error) {
+      console.error('Failed to load API configuration', error);
+    }
+    
     // Initialise auth state early
     this.authService.getAuthState().subscribe(user => {
       console.log('App component detected auth state change:', user ? 'logged in' : 'logged out');

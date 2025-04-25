@@ -23,11 +23,11 @@ package-lock.json
 
 # Environment and sensitive files
 .env
-# Temporarily comment out environment files for Heroku deployment
-# environment.ts
-# environment.prod.ts
-# environment.*.ts
-# /src/environments/*.ts
+.env.*
+.env.local
+.env.development
+.env.test
+.env.production
 
 # Project documentation and working files
 /docs/

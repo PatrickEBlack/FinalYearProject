@@ -8,6 +8,7 @@ const config = require('./config');
 // Routes
 const livestockRoutes = require('./routes/livestock.routes');
 const vaccinationRoutes = require('./routes/vaccination.routes');
+const settingsRoutes = require('./routes/settings.routes');
 
 // Create Express app
 const app = express();
@@ -161,6 +162,7 @@ mongoose.connect(config.MONGODB_URI, {
 // API Routes
 app.use('/api/livestock', livestockRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Serve static files from the Angular app build directory
 app.use(express.static(path.join(__dirname, '../dist')));

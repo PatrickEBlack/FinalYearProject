@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { StorageService } from './storage.service';
+import { ConfigService } from './config.service';
 
 export interface WeatherLocation {
   name: string;
@@ -53,7 +54,6 @@ export interface WeatherResponse {
   providedIn: 'root'
 })
 export class WeatherApiService {
-  private readonly API_KEY = environment.weatherApiKey || '7a8e434a4a9b4200b64183519252702';
   private readonly API_URL = 'http://api.weatherapi.com/v1';
   
   private currentLocation = new BehaviorSubject<string>('Kells, Meath, Ireland');
@@ -61,10 +61,15 @@ export class WeatherApiService {
   
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private configService: ConfigService
   ) {
     // Load saved location from storage
     this.loadSavedLocation();
+  }
+  
+  private get API_KEY(): string {
+    return this.configService.getWeatherApiKey() || environment.weatherApiKey || '';
   }
   
   private loadSavedLocation() {
