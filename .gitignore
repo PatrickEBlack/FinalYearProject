@@ -23,12 +23,22 @@ package-lock.json
 
 # Environment and sensitive files
 .env
-environment.ts
-environment.prod.ts
-environment.*.ts
-/src/environments/*.ts
+# Temporarily comment out environment files for Heroku deployment
+# environment.ts
+# environment.prod.ts
+# environment.*.ts
+# /src/environments/*.ts
 
-# Scripts for analysis
+# Project documentation and working files
+/docs/
+*.md
+!README.md
+!server/README.md
+!LICENSE.md
+/backup/
+/help/
+/datasets/
+/scripts/
 symptom_extractor.js
 
 # IDE

@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-require('dotenv').config();
+const path = require('path');
+const config = require('./config');
 
 // Routes
 const livestockRoutes = require('./routes/livestock.routes');
@@ -21,16 +22,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB Connection
-// Load credentials from .env file
-const MONGODB_USER = process.env.MONGODB_USER || 'colonelfn';
-const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD || 'Qwertyasdf1';
-const MONGODB_DB = process.env.MONGODB_DB || 'farm-management';
-
-// Build the connection string
-const MONGODB_URI = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@cluster0.8mae022.mongodb.net/${MONGODB_DB}?retryWrites=true&w=majority`;
-
 // Hide sensitive credentials in logs
-const redactedURI = MONGODB_URI.replace(/\/\/[^:]+:([^@]+)@/, '//***:***@');
+const redactedURI = config.MONGODB_URI.replace(/\/\/[^:]+:([^@]+)@/, '//***:***@');
 console.log('Attempting to connect to MongoDB with URI:', redactedURI);
 
 // Connection options for Mongoose
@@ -70,7 +63,7 @@ console.log('Attempting MongoDB connection with options:', {
 });
 
 // Attempt connection
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(config.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 20000, // 20 second timeout
@@ -165,12 +158,15 @@ mongoose.connect(MONGODB_URI, {
   console.error('- https://cloud.mongodb.com/ to verify connection settings');
 });
 
-// Routes
+// API Routes
 app.use('/api/livestock', livestockRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
 
-// Health check routes
-app.get('/', (req, res) => {
+// Serve static files from the Angular app build directory
+app.use(express.static(path.join(__dirname, '../dist')));
+
+// Health check routes for API
+app.get('/api', (req, res) => {
   res.send('Farm Management API is running');
 });
 
@@ -219,8 +215,12 @@ app.get('/health', async (req, res) => {
   });
 });
 
+// All other routes should be handled by the Angular app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
 // Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(config.PORT, () => {
+  console.log(`Server running on port ${config.PORT}`);
 });
