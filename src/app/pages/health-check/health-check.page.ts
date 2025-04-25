@@ -387,15 +387,19 @@ export class HealthCheckPage implements OnInit {
   
   // Check if the animal is vaccinated against a specific disease
   isAnimalVaccinatedAgainstDisease(disease: DiseaseData): boolean {
-    if (!disease.vaccinations || disease.vaccinations.length === 0 || 
-        !this.vaccinations || this.vaccinations.length === 0) {
+    // Get vaccinations or empty array if undefined
+    const animalVaccinations = this.vaccinations?.value || [];
+    const diseaseVaccinations = disease.vaccinations || [];
+    
+    // If either list is empty, return false
+    if (animalVaccinations.length === 0 || diseaseVaccinations.length === 0) {
       return false;
     }
     
     // Check each vaccination the animal has
-    for (const animalVaccination of this.vaccinations.value) {
+    for (const animalVaccination of animalVaccinations) {
       // Compare with disease vaccinations
-      for (const diseaseVaccination of disease.vaccinations) {
+      for (const diseaseVaccination of diseaseVaccinations) {
         // Normalize both for comparison
         const normalizedAnimalVaccine = animalVaccination.toLowerCase().trim();
         const normalizedDiseaseVaccine = diseaseVaccination.toLowerCase().trim();

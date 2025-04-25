@@ -194,25 +194,31 @@ export class DiseaseDiagnosticService {
     ];
     
     // Vaccination status adjustment
-    if (animalInfo.vaccinations && animalInfo.vaccinations.length > 0 && disease.vaccinations && disease.vaccinations.length > 0) {
-      // For each vaccination the animal has received
-      animalInfo.vaccinations.forEach(vaccination => {
-        // Normalize the vaccination name for better matching
-        const normalizedVaccination = this.normaliseSymptom(vaccination);
-        
-        // Check if this vaccination covers the current disease
-        const vaccinationMatch = disease.vaccinations.some(diseaseVaccine => {
-          const normalizedDiseaseVaccine = this.normaliseSymptom(diseaseVaccine);
-          // Check for direct matches or if the vaccine is mentioned in the disease vaccine
-          return normalizedDiseaseVaccine.includes(normalizedVaccination) || 
-                 normalizedVaccination.includes(normalizedDiseaseVaccine);
+    if (animalInfo.vaccinations && animalInfo.vaccinations.length > 0) {
+      // Check if the disease has vaccinations defined
+      const diseaseVaccinations = disease.vaccinations || [];
+      
+      // Only proceed if there are disease vaccinations to check against
+      if (diseaseVaccinations.length > 0) {
+        // For each vaccination the animal has received
+        animalInfo.vaccinations.forEach(vaccination => {
+          // Normalize the vaccination name for better matching
+          const normalizedVaccination = this.normaliseSymptom(vaccination);
+          
+          // Check if this vaccination covers the current disease
+          const vaccinationMatch = diseaseVaccinations.some(diseaseVaccine => {
+            const normalizedDiseaseVaccine = this.normaliseSymptom(diseaseVaccine);
+            // Check for direct matches or if the vaccine is mentioned in the disease vaccine
+            return normalizedDiseaseVaccine.includes(normalizedVaccination) || 
+                   normalizedVaccination.includes(normalizedDiseaseVaccine);
+          });
+          
+          // If the animal is vaccinated against this disease, significantly reduce the score
+          if (vaccinationMatch) {
+            adjustedScore *= 0.25; // 75% reduction for diseases the animal is vaccinated against
+          }
         });
-        
-        // If the animal is vaccinated against this disease, significantly reduce the score
-        if (vaccinationMatch) {
-          adjustedScore *= 0.25; // 75% reduction for diseases the animal is vaccinated against
-        }
-      });
+      }
     }
     
     // Age-based adjustments
