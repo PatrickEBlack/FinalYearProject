@@ -98,6 +98,7 @@ ion-datetime {
   --padding-end: 8px;
   height: 32px;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .add-vaccination-button {
@@ -105,6 +106,7 @@ ion-datetime {
   margin-bottom: 16px;
   --background: transparent;
   color: var(--ion-color-primary);
+  cursor: pointer;
 }
 
 /* Toggle for additional details */
@@ -200,6 +202,19 @@ ion-button {
   --border-radius: 4px;
   font-weight: 500;
   height: 44px;
+  cursor: pointer;
+}
+
+.add-livestock-submit-btn {
+  margin-top: 24px;
+  height: 50px;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: none;
+  --background: #c0eb75;
+  --color: #000000;
+  --border-radius: 4px;
+  --box-shadow: none;
 }
 .dark .form-control {
   border-color: #333333;

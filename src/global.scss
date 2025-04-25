@@ -18,6 +18,27 @@ html {
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
+/* Custom styles for consistent UI elements */
+ion-back-button {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --background: var(--ion-background-color);
+  --background-hover: rgba(var(--ion-color-primary-rgb), 0.1);
+  --background-focused: rgba(var(--ion-color-primary-rgb), 0.2);
+  --border-radius: 50%;
+  --color: var(--ion-color-primary);
+  --icon-font-size: 30px;
+  --icon-margin-end: 0;
+  --icon-margin-start: 0;
+  --icon-padding-end: 0;
+  --icon-padding-start: 0;
+  --min-height: 54px;
+  --min-width: 54px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -586,4 +607,61 @@ ion-content {
   --padding-bottom: 20px;
   --padding-start: 20px;
   --padding-end: 20px;
+}
+
+/* Custom Animal Selection Alert Styling */
+.select-animal-custom-alert {
+  --width: 90%;
+  --max-width: 320px;
+}
+
+.select-animal-custom-alert .alert-wrapper {
+  max-width: 320px;
+  width: 90%;
+}
+
+.select-animal-custom-alert .alert-head {
+  padding-bottom: 15px;
+}
+
+.select-animal-custom-alert .alert-radio-group {
+  max-height: 60vh;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+}
+
+.select-animal-custom-alert .alert-radio-label {
+  white-space: normal !important;
+  padding-right: 52px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.select-animal-custom-alert .alert-radio-item {
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+  --background: #f5f5f5;
+  padding: 0;
+}
+
+.select-animal-custom-alert .alert-radio {
+  margin: 0;
+  top: calc(50% - 13px);
+}
+
+.select-animal-custom-alert .alert-button-group {
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.select-animal-custom-alert .alert-button.sc-ion-alert-md {
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: var(--ion-color-primary);
+}
+
+/* Style for the animal option */
+.alert-radio-label[class*="sc-ion-alert"] {
+  white-space: normal !important;
 }

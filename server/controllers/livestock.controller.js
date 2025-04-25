@@ -63,7 +63,7 @@ exports.create = async (req, res) => {
       quantity: req.body.quantity,
       breed: req.body.breed,
       birthDate: req.body.birthDate,
-      pasture: req.body.pasture,
+      // pasture field removed
       dateAdded: req.body.dateAdded || new Date(),
       herdNumber: req.body.herdNumber,
       tagNumber: req.body.tagNumber,

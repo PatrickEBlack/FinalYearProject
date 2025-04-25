@@ -10,6 +10,7 @@ import { Livestock, Vaccination } from './livestock.service';
 })
 export class MongodbService {
   private apiUrl = environment.apiUrl || 'http://localhost:3000/api';
+  // Note: Pasture routes were removed
 
   constructor(private http: HttpClient) { }
 

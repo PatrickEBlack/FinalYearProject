@@ -47,11 +47,6 @@ export class HomePage implements OnInit {
   currentDate = new Date();
   weatherCondition = 'Sunny';
   currentTemp = 95;
-  tasks = [
-    { title: 'Move cattle to East pasture', due: 'Today', priority: 'high' },
-    { title: 'Order feed supplies', due: 'Tomorrow', priority: 'medium' },
-    { title: 'Vet appointment for ewes', due: 'Feb 28', priority: 'normal' }
-  ];
   
   constructor(
     private router: Router,

@@ -52,6 +52,16 @@
         </ion-card>
       </div>
       
+      <!-- Gender Selection -->
+      <div class="form-group">
+        <ion-label class="form-label">Gender</ion-label>
+        <ion-select formControlName="gender" placeholder="Select gender (optional)" interface="popover" class="form-control">
+          <ion-select-option value="male">Male</ion-select-option>
+          <ion-select-option value="female">Female</ion-select-option>
+          <ion-select-option value="unknown">Unknown</ion-select-option>
+        </ion-select>
+      </div>
+      
       <!-- Herd Number -->
       <div class="form-group">
         <ion-label class="form-label">Herd Number</ion-label>
@@ -64,15 +74,7 @@
         <ion-input type="text" formControlName="tagNumber" placeholder="Enter tag number (optional)" class="form-control"></ion-input>
       </div>
       
-      <!-- Pasture Assignment -->
-      <div class="form-group">
-        <ion-label class="form-label">Assign to Pasture</ion-label>
-        <ion-select formControlName="pasture" placeholder="Select pasture (optional)" interface="popover" class="form-control">
-          <ion-select-option value="north">North Pasture</ion-select-option>
-          <ion-select-option value="south">South Pasture</ion-select-option>
-          <ion-select-option value="none">No Pasture</ion-select-option>
-        </ion-select>
-      </div>
+      <!-- Pasture Assignment Removed -->
       
       <!-- Vaccination Records -->
       <div class="form-group vaccination-group">
@@ -121,7 +123,7 @@
       
       
       <!-- Submit Button -->
-      <ion-button expand="block" type="submit" [disabled]="!livestockForm.valid">
+      <ion-button expand="block" type="submit" [disabled]="!livestockForm.valid" color="success" class="add-livestock-submit-btn">
         Add Livestock
       </ion-button>
     </form>

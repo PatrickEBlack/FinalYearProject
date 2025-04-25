@@ -11,13 +11,15 @@
   <div class="page-container">
     <div class="section-header">
       <h2>Livestock Monitoring</h2>
-      <p class="subtitle">Track animals that need special attention</p>
     </div>
 
     <div class="monitoring-list">
       <div class="list-header">
         <h3>Animals Being Monitored</h3>
-        <ion-button size="small" fill="clear" color="primary" (click)="showAddAnimalDialog()">+ Add Animal</ion-button>
+        <ion-button size="small" fill="solid" color="primary" (click)="showAnimalSelector()">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+          Add Animal
+        </ion-button>
       </div>
 
       <!-- List of monitored animals -->
@@ -35,9 +37,9 @@
           </div>
         </div>
         <div class="animal-actions">
-          <ion-button fill="clear" color="primary" (click)="checkAnimal(animal.id)">
-            <ion-icon name="clipboard-outline" slot="start"></ion-icon>
-            Check
+          <ion-button fill="clear" color="primary" (click)="editMonitoring(animal.id)">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Edit
           </ion-button>
         </div>
       </div>
@@ -47,7 +49,131 @@
         <ion-icon name="warning-outline" class="empty-icon"></ion-icon>
         <h4>No Animals Being Monitored</h4>
         <p>Add animals that need special attention or monitoring</p>
-        <ion-button expand="block" (click)="showAddAnimalDialog()">Add Animal to Monitor</ion-button>
+        <ion-button expand="block" (click)="showAnimalSelector()" color="primary" class="add-animal-btn">
+          <ion-icon name="add-outline" slot="start"></ion-icon>
+          Add Animal to Monitor
+        </ion-button>
+      </div>
+      
+      <!-- Animal selection overlay (hidden by default) -->
+      <div class="animal-selector-overlay" [class.visible]="showingAnimalSelector">
+        <div class="animal-selector-container">
+          <div class="selector-header">
+            <h3>Select Animal to Monitor</h3>
+            <ion-button fill="clear" (click)="hideAnimalSelector()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </div>
+          
+          <div class="selector-content">
+            <p class="selector-instructions">Choose an animal to monitor:</p>
+            
+            <!-- Animal items -->
+            <div class="animal-item" *ngFor="let animal of availableLivestock" (click)="selectAnimal(animal)">
+              <div class="animal-name">{{ animal.quantity || 1 }} {{ animal.type || 'Unknown' }}</div>
+              <div class="animal-breed">{{ animal.breed || 'Unknown breed' }}</div>
+              <div class="animal-details">
+                <span class="animal-tag">Tag: {{ animal.tagNumber || 'N/A' }}</span>
+                <span class="animal-birth">Born: {{ formatBirthDate(animal.birthDate) || 'Unknown' }}</span>
+              </div>
+            </div>
+            
+            <!-- No animals available message -->
+            <div class="no-animals-message" *ngIf="availableLivestock && availableLivestock.length === 0">
+              <p>All animals are already being monitored.</p>
+            </div>
+            
+            <!-- Loading spinner -->
+            <div class="loading-spinner" *ngIf="loadingLivestock">
+              <ion-spinner></ion-spinner>
+              <p>Loading livestock data...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Monitoring details overlay (hidden by default) -->
+      <div class="animal-selector-overlay monitoring-details-overlay" [class.visible]="showingMonitoringDetails">
+        <div class="animal-selector-container monitoring-details-container">
+          <div class="selector-header">
+            <h3>{{ editMode ? 'Edit Monitoring' : 'Monitoring Details' }}</h3>
+            <ion-button fill="clear" (click)="hideMonitoringDetails()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </div>
+          
+          <div class="selector-content monitoring-details-content">
+            <!-- Selected animal details summary -->
+            <div class="selected-animal-summary" *ngIf="selectedAnimal">
+              <div class="animal-name">{{ selectedAnimal.quantity || 1 }} {{ selectedAnimal.type || 'Unknown' }}</div>
+              <div class="animal-breed">{{ selectedAnimal.breed || 'Unknown breed' }}</div>
+              <div class="animal-details">
+                <span class="animal-tag">Tag: {{ selectedAnimal.tagNumber || 'N/A' }}</span>
+                <span class="animal-birth">Born: {{ formatBirthDate(selectedAnimal.birthDate) || 'Unknown' }}</span>
+              </div>
+            </div>
+            
+            <!-- Monitoring details form -->
+            <div class="monitoring-form">
+              <h4 class="form-section-title">Monitoring Information</h4>
+              
+              <div class="form-group">
+                <label>Status</label>
+                <div class="status-options">
+                  <div 
+                    *ngFor="let status of monitoringStatuses" 
+                    class="status-option" 
+                    [class.selected]="newMonitor.status === status.id"
+                    (click)="newMonitor.status = status.id">
+                    <div class="status-icon" [ngClass]="'status-' + status.id">
+                      <ion-icon [name]="status.icon"></ion-icon>
+                    </div>
+                    <div class="status-label">{{ status.name }}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Reason for Monitoring</label>
+                <ion-textarea 
+                  placeholder="Enter reason (e.g., Limping, Recent vaccination, New to herd...)" 
+                  [(ngModel)]="newMonitor.reasonForMonitoring"
+                  rows="2"
+                  class="monitoring-textarea">
+                </ion-textarea>
+              </div>
+              
+              <div class="form-group">
+                <label>Monitoring Checks</label>
+                <ion-textarea 
+                  placeholder="Enter monitoring checks (e.g., Check eating, Check movement, Monitor temperature...)" 
+                  [(ngModel)]="newMonitor.monitoringChecks"
+                  rows="3"
+                  class="monitoring-textarea">
+                </ion-textarea>
+              </div>
+              
+              <div class="form-group">
+                <label>Monitor Until</label>
+                <ion-input 
+                  type="date" 
+                  [(ngModel)]="newMonitor.monitorUntil" 
+                  min="{{ currentDate | date: 'yyyy-MM-dd' }}"
+                  class="date-input">
+                </ion-input>
+              </div>
+              
+              <div class="form-actions">
+                <ion-button *ngIf="!editMode" expand="block" color="primary" (click)="addAnimalToMonitoring()" [disabled]="!newMonitor.reasonForMonitoring">
+                  Start Monitoring
+                </ion-button>
+                <ion-button *ngIf="editMode" expand="block" color="primary" (click)="updateMonitoring()" [disabled]="!newMonitor.reasonForMonitoring">
+                  Update Monitoring
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

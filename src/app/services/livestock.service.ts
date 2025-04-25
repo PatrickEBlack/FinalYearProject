@@ -9,7 +9,7 @@ export interface Livestock {
   quantity: number;
   breed?: string;
   birthDate?: string;
-  pasture?: string;
+  gender?: string; // Added gender field
   dateAdded: Date;
   herdNumber?: string;
   tagNumber?: string;
@@ -60,7 +60,7 @@ export class LivestockService {
   }
 
   // Backward compatibility methods with localStorage
-  // These methods can be used during migration or as fallback
+  // These methods can be used during migration or as fall-back
   
   getLivestockFromLocal(): any[] {
     return this.storageService.get('livestock') || [];

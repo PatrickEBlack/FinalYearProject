@@ -1,0 +1,552 @@
+/* Toolbar */
+.transparent-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+/* Main content */
+ion-content {
+  --background: var(--ion-background-color);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 32px;
+}
+
+.page-container {
+  padding-bottom: 24px;
+}
+
+.section-header {
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+  margin: 0 0 8px 0;
+}
+
+/* Card Styling */
+.health-info-card, .health-stats-card, .diagnostic-tool-card {
+  background-color: var(--ion-background-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.card-header {
+  margin-bottom: 16px;
+}
+
+.card-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+.card-content {
+  font-size: 15px;
+  color: var(--ion-color-dark);
+  
+  p {
+    margin-top: 0;
+  }
+  
+  ul {
+    padding-left: 20px;
+    
+    li {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.action-button {
+  margin-top: 20px;
+  
+  ion-button {
+    margin: 0;
+    cursor: pointer;
+  }
+}
+
+.card-actions {
+  margin-top: 16px;
+}
+
+/* Monitored Stats */
+.monitored-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 8px;
+  border-radius: 12px;
+  
+  &.critical {
+    background-color: rgba(var(--ion-color-danger-rgb), 0.1);
+    
+    .stat-number {
+      color: var(--ion-color-danger);
+    }
+  }
+  
+  &.warning {
+    background-color: rgba(var(--ion-color-warning-rgb), 0.1);
+    
+    .stat-number {
+      color: var(--ion-color-warning-shade);
+    }
+  }
+  
+  &.stable {
+    background-color: rgba(var(--ion-color-success-rgb), 0.1);
+    
+    .stat-number {
+      color: var(--ion-color-success);
+    }
+  }
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: 48px;
+    color: var(--ion-color-medium);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin-bottom: 16px;
+  }
+}
+
+/* Diagnostic Tool Styles */
+.diagnostic-form-section {
+  background-color: var(--ion-background-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 16px 0;
+  }
+  
+  h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ion-color-dark);
+    margin: 16px 0 8px 0;
+  }
+}
+
+/* Symptoms Section */
+.symptoms-section {
+  margin-bottom: 24px;
+  
+  .selected-symptoms {
+    margin-bottom: 16px;
+    
+    .symptom-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      
+      ion-chip {
+        --background: rgba(var(--ion-color-warning-rgb), 0.15);
+        --color: var(--ion-color-warning-shade);
+        font-weight: 500;
+        
+        ion-icon {
+          color: var(--ion-color-warning);
+        }
+      }
+    }
+  }
+  
+  .common-symptoms {
+    .search-box {
+      margin-bottom: 12px;
+      
+      ion-input {
+        --padding-start: 12px;
+        --padding-end: 12px;
+        --border-radius: 8px;
+        --background: #f4f5f8;
+        --placeholder-color: var(--ion-color-medium);
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+    }
+    
+    .symptom-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 8px;
+      
+      /* Custom scrollbar styling */
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(var(--ion-color-warning-rgb), 0.1);
+        border-radius: 10px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: var(--ion-color-warning);
+        border-radius: 10px;
+      }
+      
+      &::-webkit-scrollbar-thumb:hover {
+        background: var(--ion-color-warning-shade);
+      }
+      
+      /* Firefox scrollbar styling */
+      scrollbar-width: thin;
+      scrollbar-color: var(--ion-color-warning) rgba(var(--ion-color-warning-rgb), 0.1);
+      
+      .symptom-button {
+        min-width: calc(50% - 8px);
+        max-width: 100%;
+        height: auto;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 12px;
+        --padding-end: 12px;
+        margin: 2px 0;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        
+        @media (min-width: 768px) {
+          min-width: calc(33.333% - 8px);
+        }
+      }
+      
+      ion-button {
+        margin: 2px;
+        --border-radius: 16px;
+        transition: all 0.2s ease;
+        
+        &[color="warning"] {
+          --box-shadow: 0 2px 4px rgba(var(--ion-color-warning-rgb), 0.3);
+          font-weight: 500;
+          transform: scale(1.05);
+          animation: selectPulse 0.3s ease-in-out;
+        }
+        
+        @keyframes selectPulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+          100% { transform: scale(1.05); }
+        }
+      }
+    }
+  }
+  
+  .custom-symptom {
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      
+      .custom-symptom-input {
+        flex-grow: 1;
+        --padding-start: 12px;
+        --padding-end: 12px;
+        --border-radius: 8px;
+        --background: #f4f5f8;
+      }
+    }
+  }
+}
+
+/* Animal Info Section */
+.animal-info-section {
+  margin-bottom: 24px;
+  
+  .form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    
+    ion-item {
+      flex: 1;
+      --padding-start: 0;
+      --border-color: #ddd;
+      --background: transparent;
+    }
+    
+    .custom-field {
+      flex: 1;
+      --padding-start: 0;
+      --border-color: #ddd;
+      --background: transparent;
+      
+      ion-label {
+        margin-bottom: 4px;
+        color: var(--ion-color-medium);
+        margin-left: 0;
+      }
+      
+      ion-select, ion-input {
+        --padding-top: 8px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  margin: 24px 0;
+  
+  .centered-text {
+    text-align: center; // CSS property kept as "center" as this is the correct CSS value regardless of language
+    margin-top: 12px;
+    color: var(--ion-color-medium);
+  }
+}
+
+/* Results Section */
+.diagnostic-results {
+  margin-top: 32px;
+  
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 16px 0;
+  }
+  
+  .results-note {
+    color: var(--ion-color-medium);
+    font-size: 14px;
+    margin: 0 0 16px 0;
+  }
+  
+  ion-list {
+    margin-bottom: 24px;
+    
+    ion-item {
+      --padding-start: 0;
+      
+      h2 {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      
+      p {
+        margin: 0;
+        color: var(--ion-color-medium);
+      }
+    }
+  }
+  
+  .confidence-badge {
+    font-weight: 500;
+    padding: 6px 10px;
+  }
+}
+
+/* Disease Details View */
+.disease-details {
+  margin-top: 32px;
+  
+  .details-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      flex-grow: 1;
+      color: var(--ion-color-dark);
+    }
+    
+    .confidence-badge {
+      font-weight: 500;
+      padding: 6px 10px;
+    }
+  }
+  
+  .details-content {
+    ion-card {
+      margin-bottom: 16px;
+      
+      ion-card-header {
+        padding-bottom: 8px;
+      }
+      
+      ion-card-title {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      
+      ion-card-content {
+        padding-top: 0;
+        
+        ul {
+          padding-left: 20px;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          
+          li {
+            margin-bottom: 8px;
+          }
+        }
+        
+        p {
+          margin: 8px 0;
+        }
+      }
+    }
+  }
+}
+
+/* Confidence Colors */
+.high-confidence {
+  --background: var(--ion-color-success);
+}
+
+.medium-confidence {
+  --background: var(--ion-color-warning);
+  --color: var(--ion-color-dark);
+}
+
+.low-confidence {
+  --background: var(--ion-color-medium);
+}
+
+/* Disclaimer */
+.disclaimer {
+  margin-top: 24px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: rgba(var(--ion-color-warning-rgb), 0.1);
+  
+  .disclaimer-text {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ion-color-medium-shade);
+    display: flex;
+    align-items: center;
+    
+    ion-icon {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+  }
+}
+
+/* Symptoms Lists */
+.matched-symptoms-list,
+.unmatched-symptoms-list,
+.differential-symptoms-list {
+  padding-left: 20px;
+  
+  li {
+    margin-bottom: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    
+    ion-icon {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+  }
+}
+
+.matched-symptoms-list li {
+  color: var(--ion-color-success-shade);
+}
+
+.unmatched-symptoms-list li {
+  color: var(--ion-color-danger-shade);
+}
+
+.differential-symptoms-list li {
+  color: var(--ion-color-tertiary-shade);
+}
+
+.differential-note {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.differential-hint {
+  color: var(--ion-color-tertiary);
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  margin-top: 4px;
+  
+  ion-icon {
+    margin-right: 6px;
+    font-size: 16px;
+  }
+}

@@ -35,9 +35,10 @@ const livestockSchema = new Schema({
   birthDate: { 
     type: Date 
   },
-  pasture: { 
-    type: String 
+  gender: {
+    type: String
   },
+  // pasture field removed
   dateAdded: { 
     type: Date, 
     default: Date.now 

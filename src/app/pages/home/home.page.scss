@@ -130,3 +130,13 @@ ion-content {
     background-color: rgba(var(--ion-color-success-rgb), 0.6);
   }
 }
+
+.health-square {
+  background-image: url('/assets/images/tasks.jpg');
+  background-size: cover;
+  background-position: center;
+  
+  .success-overlay {
+    background-color: rgba(189, 114, 0, 0.668); /* Green shade */
+  }
+}

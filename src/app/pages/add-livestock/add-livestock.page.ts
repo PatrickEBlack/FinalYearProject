@@ -57,7 +57,7 @@ interface LocalLivestock {
   quantity: number;
   breed?: string;
   birthDate?: string;
-  pasture?: string;
+  gender?: string; // Added gender field
   dateAdded: Date;
   herdNumber?: string;
   tagNumber?: string;
@@ -166,7 +166,7 @@ export class AddLivestockPage implements OnInit {
       quantity: [1, [Validators.required, Validators.min(1)]],
       breed: [''],
       birthDate: [''],
-      pasture: ['none'],
+      gender: [''], // Add gender field
       herdNumber: ['', Validators.pattern(this.herdNumberPattern)],
       tagNumber: [''],
       vaccinations: this.fb.array([])

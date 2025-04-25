@@ -22,7 +22,10 @@ import {
   ModalController,
   LoadingController,
   IonInput,
-  ToastController
+  ToastController,
+  IonRange,
+  IonItemDivider,
+  IonNote
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -35,9 +38,12 @@ import {
   chevronForwardOutline,
   shieldCheckmarkOutline,
   eyeOutline,
-  eyeOffOutline
+  eyeOffOutline,
+  textOutline,
+  accessibilityOutline
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+import { TextSizeService } from '../../services/text-size.service';
 
 @Component({
   selector: 'app-profile',
@@ -63,7 +69,10 @@ import { AuthService } from '../../services/auth.service';
     IonList,
     IonBackButton,
     IonButtons,
-    IonInput
+    IonInput,
+    IonRange,
+    IonItemDivider,
+    IonNote
   ]
 })
 export class ProfilePage implements OnInit {
@@ -73,9 +82,15 @@ export class ProfilePage implements OnInit {
   private formBuilder = inject(FormBuilder);
   private loadingController = inject(LoadingController);
   private toastController = inject(ToastController);
+  private textSizeService = inject(TextSizeService);
   
   user: any = null;
   userEmail: string = '';
+  
+  // Text size settings
+  textSize: number = 100;
+  minTextSize: number = 80;
+  maxTextSize: number = 150;
   
   // Password change form
   passwordForm: FormGroup;
@@ -101,7 +116,9 @@ export class ProfilePage implements OnInit {
       'chevron-forward-outline': chevronForwardOutline,
       'shield-checkmark-outline': shieldCheckmarkOutline,
       'eye-outline': eyeOutline,
-      'eye-off-outline': eyeOffOutline
+      'eye-off-outline': eyeOffOutline,
+      'text-outline': textOutline,
+      'accessibility-outline': accessibilityOutline
     });
     
     // Initialize forms
@@ -118,6 +135,11 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.loadUserData();
+    
+    // Initialize text size from service
+    this.textSize = this.textSizeService.getTextSize();
+    this.minTextSize = this.textSizeService.getMinSize();
+    this.maxTextSize = this.textSizeService.getMaxSize();
   }
 
   loadUserData() {
@@ -468,8 +490,10 @@ export class ProfilePage implements OnInit {
     await alert.present();
   }
 
-  goToSettings() {
-    this.router.navigateByUrl('/tabs/settings');
+  onTextSizeChange(event: Event) {
+    const ionRange = event.target as HTMLIonRangeElement;
+    const newSize = ionRange.value as number;
+    this.textSizeService.setTextSize(newSize);
   }
 
   async resetPassword() {

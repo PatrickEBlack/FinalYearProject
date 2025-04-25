@@ -28,12 +28,8 @@ ion-content {
   margin: 0 0 8px 0;
 }
 
-.section-header p.subtitle {
-  font-size: 16px;
-  color: var(--ion-color-medium);
-  margin: 0;
-  display: block;
-  font-weight: 400;
+.section-header {
+  margin-bottom: 24px;
 }
 
 /* Monitoring List */
@@ -69,6 +65,7 @@ ion-content {
   position: relative;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
   
   &:active {
     transform: scale(0.98);
@@ -209,15 +206,21 @@ ion-content {
 .animal-actions {
   display: flex;
   align-items: center;
+  gap: 5px;
   
   ion-button {
     --padding-start: 12px;
     --padding-end: 12px;
     font-weight: 500;
     height: 36px;
+    cursor: pointer;
     
     &:active {
       opacity: 0.8;
+    }
+    
+    &:last-child {
+      margin-right: 0;
     }
   }
 }
@@ -249,4 +252,306 @@ ion-content {
   font-size: 14px;
   color: var(--ion-color-medium);
   margin: 0 0 24px 0;
+}
+
+.add-animal-btn {
+  --box-shadow: 0 4px 10px rgba(var(--ion-color-primary-rgb), 0.3);
+  margin: 0 auto;
+  max-width: 280px;
+  font-weight: 500;
+  height: 48px;
+  margin-top: 10px;
+  cursor: pointer;
+  
+  &:active {
+    --box-shadow: 0 1px 6px rgba(var(--ion-color-primary-rgb), 0.2);
+    transform: translateY(1px);
+  }
+}
+
+/* Animal Selector Overlay */
+.animal-selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.animal-selector-container {
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.selector-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  
+  h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    height: 36px;
+    cursor: pointer;
+    
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+}
+
+.selector-content {
+  padding: 16px;
+  overflow-y: auto;
+  max-height: calc(80vh - 70px);
+}
+
+.selector-instructions {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--ion-color-medium);
+  font-size: 15px;
+}
+
+.animal-item {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  
+  &:hover, &:active {
+    background: #f0f0f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .animal-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+  }
+  
+  .animal-breed {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 6px;
+  }
+  
+  .animal-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    
+    .animal-tag, .animal-birth {
+      flex: 1;
+    }
+  }
+}
+
+.no-animals-message {
+  text-align: center;
+  padding: 20px;
+  color: var(--ion-color-medium);
+  
+  p {
+    margin: 0;
+    font-size: 15px;
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  
+  ion-spinner {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+/* Monitoring Details Overlay */
+.monitoring-details-overlay {
+  z-index: 1100; /* Higher than animal selector */
+}
+
+.monitoring-details-container {
+  max-height: 85vh;
+}
+
+.monitoring-details-content {
+  max-height: calc(85vh - 70px);
+}
+
+.selected-animal-summary {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+  
+  .animal-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+  }
+  
+  .animal-breed {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 6px;
+  }
+  
+  .animal-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    
+    .animal-tag, .animal-birth {
+      flex: 1;
+    }
+  }
+}
+
+.monitoring-form {
+  .form-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    color: var(--ion-color-dark);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--ion-color-dark);
+    }
+  }
+  
+  .status-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    
+    .status-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      width: calc(33.33% - 7px);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      
+      &:hover {
+        background: #f0f0f0;
+      }
+      
+      &.selected {
+        background: rgba(var(--ion-color-primary-rgb), 0.1);
+        border-color: var(--ion-color-primary);
+        transform: scale(1.02);
+      }
+      
+      .status-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        margin-bottom: 8px;
+      }
+      
+      .status-label {
+        font-size: 12px;
+        text-align: center;
+        line-height: 1.2;
+      }
+    }
+  }
+  
+  .monitoring-textarea {
+    background: #f5f5f5;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    margin-top: 4px;
+  }
+  
+  .date-input {
+    background: #f5f5f5;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    margin-top: 4px;
+  }
+  
+  .form-actions {
+    margin-top: 24px;
+    
+    ion-button {
+      margin: 0;
+      height: 48px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
 }

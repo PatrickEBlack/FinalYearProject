@@ -11,7 +11,9 @@ import {
   menuOutline,
   closeOutline,
   chatboxEllipsesOutline,
-  personOutline
+  personOutline,
+  partlySunnyOutline,
+  medicalOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -33,7 +35,9 @@ export class SideMenuComponent {
       'menu-outline': menuOutline,
       'close-outline': closeOutline,
       'chatbox-ellipses-outline': chatboxEllipsesOutline,
-      'person-outline': personOutline
+      'person-outline': personOutline,
+      'partly-sunny-outline': partlySunnyOutline,
+      'medical-outline': medicalOutline
     });
   }
   

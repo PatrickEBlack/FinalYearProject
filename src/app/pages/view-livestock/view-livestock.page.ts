@@ -43,6 +43,7 @@ interface Livestock {
   age?: number;
   ageUnit?: string;
   birthDate?: string;
+  gender?: string; // Added gender field
   pasture?: string;
   dateAdded: Date;
   herdNumber?: string;
@@ -279,16 +280,7 @@ export class ViewLivestockPage implements OnInit {
     this.selectedLivestock = null;
   }
   
-  // Helper to get pasture display name
-  getPastureName(pastureCode: string | undefined): string {
-    if (!pastureCode) return 'Unknown';
-    
-    switch (pastureCode) {
-      case 'north': return 'North Pasture';
-      case 'south': return 'South Pasture';
-      default: return pastureCode;
-    }
-  }
+  // Pasture functionality removed
   
   // Format date for display
   formatDate(date: Date): string {

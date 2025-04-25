@@ -21,25 +21,22 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Initialize auth state early
+    // Initialise auth state early
     this.authService.getAuthState().subscribe(user => {
       console.log('App component detected auth state change:', user ? 'logged in' : 'logged out');
     });
     
-    // Initialize text size from saved preference
+    // Initialise text size from saved preference
     this.textSizeService.textSize$.subscribe(size => {
       // This will apply the text size when it changes
       document.documentElement.style.fontSize = `${size}%`;
     });
     
-    // Handle any attempts to navigate to the old news page
+    // Initialise routing monitoring
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
-      // Redirect from news to ai-helper
-      if (event.url === '/tabs/news') {
-        this.router.navigateByUrl('/tabs/ai-helper');
-      }
+      // For future route handling if needed
     });
   }
 }

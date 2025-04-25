@@ -1,0 +1,1358 @@
+{
+  "cattle_diseases": [
+    {
+      "disease_name": "Malignant Catarrhal Fever",
+      "disease_id": "MCF001",
+      "alternative_names": "Snotsiekte (South Africa)",
+      "category": "Viral disease",
+      "causative_agents": "Ovine herpesvirus-2, Alcelaphine herpesvirus-1",
+      "symptoms": [
+        "Very high fever (106-107°F/41-41.5°C)",
+        "Eye discharge/tearing",
+        "Nasal discharge",
+        "Corneal opacity (blue eye)",
+        "Erosions and ulcers in oral cavity",
+        "Enlarged lymph nodes",
+        "Neurological signs (tremors, incoordination/ataxia)",
+        "Skin lesions",
+        "Bloody/watery diarrhea"
+      ],
+      "transmission": "Contact with asymptomatic carrier sheep or wildebeest",
+      "diagnosis_methods": "PCR, histopathology",
+      "treatments": [
+        "No specific treatment available",
+        "Supportive care only"
+      ],
+      "healing_process": [
+        "Rarely recover - typically fatal",
+        "Disease course of 3-7 days in acute form"
+      ],
+      "prevention": [
+        "Separation of cattle from sheep and wildebeest"
+      ],
+      "prognosis": "Poor; usually fatal"
+    },
+    {
+      "disease_name": "Neosporosis",
+      "disease_id": "NEO001",
+      "alternative_names": "Neospora abortion",
+      "category": "Parasitic disease",
+      "causative_agents": "Neospora caninum (protozoan parasite)",
+      "symptoms": [
+        "Abortion (typically mid-gestation)",
+        "Stillbirths",
+        "Birth of weak calves",
+        "Neurological signs in calves (incoordination/ataxia, hindlimb paralysis/weakness)",
+        "Most adult cattle show no clinical signs"
+      ],
+      "transmission": "Transplacental, ingestion of oocysts from dog feces",
+      "diagnosis_methods": "Serology, immunohistochemistry, PCR",
+      "treatments": [
+        "No effective treatment available"
+      ],
+      "healing_process": [
+        "Not applicable - infected animals remain carriers"
+      ],
+      "prevention": [
+        "Control of dog access to cattle areas",
+        "Testing and culling of seropositive animals",
+        "Not breeding from infected cows"
+      ],
+      "prognosis": "Poor for preventing future abortions in infected cows"
+    },
+    {
+      "disease_name": "Abomasal Displacement",
+      "disease_id": "AD001",
+      "alternative_names": "Displaced abomasum, LDA (left), RDA (right)",
+      "category": "Metabolic/digestive disorder",
+      "causative_agents": "Multifactorial (diet, management, genetics)",
+      "symptoms": [
+        "Reduced appetite/feed intake",
+        "Reduced milk production",
+        "Abdominal pain/discomfort",
+        "Reduced fecal output",
+        "Characteristic \"ping\" sound on percussion of left flank (LDA) or right flank (RDA)",
+        "Mild dehydration",
+        "Ketosis often present concurrently",
+        "Weakness"
+      ],
+      "transmission": "Non-contagious condition",
+      "diagnosis_methods": "Auscultation and percussion (\"ping\"), ultrasound",
+      "treatments": [
+        "Surgical correction (right flank omentopexy, toggle pin, etc.)",
+        "Rolling technique (temporary solution)",
+        "Correction of fluid and electrolyte imbalances",
+        "Treatment of concurrent conditions (ketosis, metritis)"
+      ],
+      "healing_process": [
+        "Improvement within 24-48 hours post-surgery",
+        "Return to normal appetite in 3-5 days",
+        "Complete recovery in 7-14 days"
+      ],
+      "prevention": [
+        "Proper transition cow management",
+        "Adequate fiber in diet",
+        "Minimize stress around calving",
+        "Maintain good rumen fill"
+      ],
+      "prognosis": "Good with surgical correction; guarded without intervention"
+    },
+    {
+      "disease_name": "Bovine Viral Papillomatosis",
+      "disease_id": "BVP001",
+      "alternative_names": "Warts",
+      "category": "Viral skin disease",
+      "causative_agents": "Bovine papillomavirus (multiple types)",
+      "symptoms": [
+        "Benign epithelial tumors (warts)",
+        "Various forms: filamentous, flat, or nodular",
+        "Common locations: head, neck, shoulders, teats",
+        "Usually no systemic signs",
+        "Large warts may ulcerate and bleed",
+        "Can interfere with function (e.g., teat warts affecting milking)"
+      ],
+      "transmission": "Direct contact, contaminated equipment, trauma to skin",
+      "diagnosis_methods": "Clinical signs, histopathology if needed",
+      "treatments": [
+        "Often self-resolving within 6-12 months",
+        "Surgical removal for problematic warts",
+        "Autogenous vaccines",
+        "Various topical treatments"
+      ],
+      "healing_process": [
+        "Spontaneous regression in 6-12 months as immunity develops",
+        "Rapid healing after surgical removal"
+      ],
+      "prevention": [
+        "Isolation of affected animals",
+        "Sanitation of equipment",
+        "Vaccination in problem herds"
+      ],
+      "prognosis": "Excellent; rarely a significant health issue"
+    },
+    {
+      "disease_name": "White Line Disease",
+      "disease_id": "WLD001",
+      "alternative_names": "White line abscess, White line separation",
+      "category": "Hoof disorder",
+      "causative_agents": "Mechanical separation with secondary bacterial infection",
+      "symptoms": [
+        "Sudden onset lameness",
+        "Swelling above affected hoof",
+        "Pain on hoof testing",
+        "Separation of white line with impacted debris",
+        "Abscess formation",
+        "Discharge of pus at coronary band in severe cases",
+        "Weight loss due to pain",
+        "Reduced milk production"
+      ],
+      "transmission": "Non-contagious environmental condition",
+      "diagnosis_methods": "Clinical examination, hoof testing",
+      "treatments": [
+        "Therapeutic hoof trimming",
+        "Drainage of abscess",
+        "Tetracycline powder for local treatment",
+        "Hoof blocks to relieve pressure",
+        "Systemic antibiotics for severe cases",
+        "Pain management"
+      ],
+      "healing_process": [
+        "Initial improvement within 24-48 hours after drainage",
+        "Complete healing in 2-4 weeks",
+        "Regular follow-up trimming needed"
+      ],
+      "prevention": [
+        "Regular hoof trimming",
+        "Good quality walking surfaces",
+        "Proper nutrition (biotin, zinc)",
+        "Foot baths"
+      ],
+      "prognosis": "Good with early treatment; guarded if infection reaches deeper structures"
+    },
+    { "disease_name": "Liver Fluke Disease",
+      "disease_id": "LFD001",
+      "alternative_names": "Fascioliasis",
+      "category": "Parasitic liver disease",
+      "causative_agents": "Fasciola hepatica, Fasciola gigantica",
+      "symptoms": [
+        "Chronic: Weight loss, swelling under jaw ('bottle jaw'), reduced milk production, anemia, poor/rough hair coat",
+        "Acute: Sudden death, abdominal pain/discomfort, jaundice, hemorrhage"
+      ],
+      "transmission": "Ingestion of metacercariae on vegetation near water sources",
+      "diagnosis_methods": "Fecal egg counts, liver enzyme elevation, necropsy findings",
+      "treatments": [
+        "Flukicides (triclabendazole, closantel, albendazole)",
+        "Supportive care for debilitated animals"
+      ],
+      "healing_process": [
+        "Improvement in 1-2 weeks after treatment",
+        "Complete recovery dependent on extent of liver damage",
+        "Severe liver damage is permanent"
+      ],
+      "prevention": [
+        "Strategic deworming programs",
+        "Drainage of wet areas",
+        "Fencing off marshy areas"
+      ],
+      "prognosis": "Good for early/moderate infections; poor with extensive liver damage"
+    },
+    {
+      "disease_name": "Anthrax",
+      "disease_id": "ANT001",
+      "alternative_names": "Splenic fever",
+      "category": "Acute bacterial disease, zoonotic",
+      "causative_agents": "Bacillus anthracis",
+      "symptoms": [
+        "Sudden death often without prior signs",
+        "Bloody discharge from body orifices",
+        "Very high fever (106-108°F/41-42°C) if observed before death",
+        "Rapid breathing",
+        "Disorientation/confusion",
+        "Seizures/convulsions",
+        "Incomplete rigor mortis",
+        "Absence of blood clotting after death"
+      ],
+      "transmission": "Ingestion or inhalation of spores, biting flies",
+      "diagnosis_methods": "Blood smear, PCR, bacterial culture",
+      "treatments": [
+        "REPORTABLE DISEASE - follow regulatory protocols",
+        "Penicillin or tetracyclines if caught very early",
+        "Usually fatal before treatment can be effective"
+      ],
+      "healing_process": [
+        "Rarely survive to undergo healing process"
+      ],
+      "prevention": [
+        "Vaccination in endemic areas",
+        "Proper disposal of carcasses (no necropsy, burial with quicklime)"
+      ],
+      "prognosis": "Very poor; usually fatal"
+    },
+    {
+      "disease_name": "Bovine Spongiform Encephalopathy",
+      "disease_id": "BSE001",
+      "alternative_names": "Mad Cow Disease",
+      "category": "Progressive neurological disease, zoonotic",
+      "causative_agents": "Prion protein",
+      "symptoms": [
+        "Behavioral changes (nervousness, aggression)",
+        "Abnormal posture",
+        "Incoordination/ataxia",
+        "Hypersensitivity to touch and sound",
+        "Weight loss",
+        "Reduced milk production",
+        "Progressive neurological deterioration"
+      ],
+      "transmission": "Ingestion of contaminated feed containing ruminant proteins",
+      "diagnosis_methods": "Histopathology of brain tissue, immunohistochemistry",
+      "treatments": [
+        "REPORTABLE DISEASE - follow regulatory protocols",
+        "No treatment available"
+      ],
+      "healing_process": [
+        "No recovery - progressive, fatal disease"
+      ],
+      "prevention": [
+        "Feed bans (no ruminant proteins in cattle feed)",
+        "Regulatory controls on slaughter and processing"
+      ],
+      "prognosis": "Fatal"
+    },
+    {
+      "disease_name": "Bovine Ephemeral Fever",
+      "disease_id": "BEF001",
+      "alternative_names": "Three-day sickness, Dragon skin disease",
+      "category": "Viral disease",
+      "causative_agents": "Bovine ephemeral fever virus (BEFV)",
+      "symptoms": [
+        "High fever (104-106°F/40-41°C)",
+        "Stiffness",
+        "Lameness",
+        "Muscle tremors/twitching",
+        "Nasal discharge",
+        "Eye discharge/tearing",
+        "Reduced appetite/feed intake",
+        "Cessation of rumination",
+        "Excessive drooling/salivation",
+        "Inability to rise/stand (recumbency)",
+        "Temporary cessation of milk production"
+      ],
+      "transmission": "Biting insects (mosquitoes, Culicoides midges)",
+      "diagnosis_methods": "Virus isolation, serology, PCR",
+      "treatments": [
+        "Anti-inflammatory drugs (NSAIDs)",
+        "Supportive care (fluids, nursing care for recumbent animals)"
+      ],
+      "healing_process": [
+        "Typical course of 3 days (hence \"three-day sickness\")",
+        "Most animals recover completely within 1 week",
+        "Milk production typically returns to normal within 2 weeks"
+      ],
+      "prevention": [
+        "Vaccination in endemic areas",
+        "Vector control"
+      ],
+      "prognosis": "Generally good; mortality usually <1%"
+    },
+    {
+      "disease_name": "Wooden Tongue",
+      "disease_id": "WT001",
+      "alternative_names": "Actinobacillosis",
+      "category": "Bacterial infection",
+      "causative_agents": "Actinobacillus lignieresii",
+      "symptoms": [
+        "Hard, painful swelling of the tongue",
+        "Difficulty eating and drinking",
+        "Excessive drooling/salivation",
+        "Protrusion of tongue from mouth",
+        "Enlarged submandibular lymph nodes",
+        "Weight loss due to inability to eat",
+        "Foul breath odor"
+      ],
+      "transmission": "Penetrating oral injuries with contaminated material",
+      "diagnosis_methods": "Clinical signs, examination of exudate for \"sulfur granules\"",
+      "treatments": [
+        "Sodium iodide intravenously",
+        "Antibiotics (tetracyclines, penicillin)",
+        "Lancing of abscesses if present"
+      ],
+      "healing_process": [
+        "Initial improvement in 2-3 days",
+        "Complete resolution in 1-3 weeks"
+      ],
+      "prevention": [
+        "Avoid coarse feeds that may cause oral abrasions",
+        "Proper pasture management to reduce sharp plant materials"
+      ],
+      "prognosis": "Good with early treatment; poor if chronic and extensive"
+    },
+    {
+      "disease_name": "Hypomagnesemia",
+      "disease_id": "HYPOMG001",
+      "alternative_names": "Grass tetany, Grass staggers, Lactation tetany",
+      "category": "Metabolic disorder",
+      "causative_agents": "Magnesium deficiency",
+      "symptoms": [
+        "Nervousness and excitability",
+        "Muscle tremors/twitching",
+        "High-stepping gait",
+        "Grinding of teeth",
+        "Excessive drooling/salivation",
+        "Seizures/convulsions",
+        "Rapid progression to inability to rise/stand (recumbency)",
+        "Death often occurs within hours of first symptoms"
+      ],
+      "transmission": "Non-contagious nutritional disorder",
+      "diagnosis_methods": "Clinical signs, serum magnesium levels, response to treatment",
+      "treatments": [
+        "Emergency IV administration of magnesium solutions",
+        "Calcium-magnesium solutions subcutaneously",
+        "Sedation may be required during treatment",
+        "Magnesium supplementation for the herd"
+      ],
+      "healing_process": [
+        "Rapid response to treatment (minutes to hours)",
+        "Complete recovery if treated promptly",
+        "May require ongoing nutritional management"
+      ],
+      "prevention": [
+        "Magnesium supplementation (e.g., high-mag mineral blocks)",
+        "Careful management during risk periods (early spring grazing)",
+        "Balanced fertilization of pastures"
+      ],
+      "prognosis": "Good with early treatment; poor once recumbent"
+    },
+    {
+      "disease_name": "Hypocalcemia",
+      "disease_id": "HYPOC001",
+      "alternative_names": "Milk fever, Parturient paresis",
+      "category": "Metabolic disorder",
+      "causative_agents": "Calcium deficiency around calving",
+      "symptoms": [
+        "Stage 1: Excitability, hypersensitivity, muscle tremors/twitching",
+        "Stage 2: Sternal recumbency, S-shaped neck, cold extremities",
+        "Stage 3: Lateral recumbency, complete paralysis, unconsciousness",
+        "Dry muzzle",
+        "Decreased body temperature",
+        "Weak pulse",
+        "Constipation"
+      ],
+      "transmission": "Non-contagious metabolic disorder",
+      "diagnosis_methods": "Clinical signs, serum calcium levels, response to treatment",
+      "treatments": [
+        "IV calcium solutions (calcium borogluconate)",
+        "Oral calcium supplements",
+        "Supportive care"
+      ],
+      "healing_process": [
+        "Dramatic improvement within minutes of calcium administration",
+        "Standing within 1-2 hours in most cases",
+        "Complete recovery within 24 hours"
+      ],
+      "prevention": [
+        "Dietary cation-anion difference (DCAD) management",
+        "Calcium supplementation at calving",
+        "Vitamin D supplementation pre-calving",
+        "Proper dry cow nutrition"
+      ],
+      "prognosis": "Excellent with prompt treatment; guarded in stage 3"
+    },
+    {
+      "disease_name": "Infectious Bovine Rhinotracheitis",
+      "disease_id": "IBR001",
+      "alternative_names": "Red nose",
+      "category": "Viral respiratory disease",
+      "causative_agents": "Bovine herpesvirus-1 (BHV-1)",
+      "symptoms": [
+        "Very high fever (104-108°F/40-42°C)",
+        "Nasal discharge",
+        "Red, inflamed nasal mucosa",
+        "Coughing",
+        "Conjunctivitis",
+        "Reduced appetite/feed intake",
+        "Reduced milk production",
+        "Abortions in pregnant cows",
+        "Pustular vulvovaginitis in females",
+        "Balanoposthitis in males"
+      ],
+      "transmission": "Aerosol, direct contact, contaminated semen",
+      "diagnosis_methods": "PCR, virus isolation, serology",
+      "treatments": [
+        "No specific antiviral treatment",
+        "Antibiotics for secondary bacterial infections",
+        "Anti-inflammatory drugs",
+        "Supportive care"
+      ],
+      "healing_process": [
+        "Clinical recovery in 7-14 days",
+        "Animals become lifelong carriers with periodic reactivation"
+      ],
+      "prevention": [
+        "Vaccination",
+        "Biosecurity measures"
+      ],
+      "prognosis": "Good for uncomplicated cases; poor if secondary pneumonia develops"
+    },
+    {
+      "disease_name": "Bovine Babesiosis",
+      "disease_id": "BAB001",
+      "alternative_names": "Texas fever, Red water, Tick fever",
+      "category": "Tick-borne protozoal disease",
+      "causative_agents": "Babesia bovis, Babesia bigemina",
+      "symptoms": [
+        "Very high fever (106-108°F/41-42°C)",
+        "Hemoglobinuria (red to dark brown urine)",
+        "Anemia (pale mucous membranes)",
+        "Jaundice (yellow mucous membranes)",
+        "Weakness and depression",
+        "Rapid breathing",
+        "Reduced appetite/feed intake",
+        "Neurological signs with B. bovis (circling, aggression)",
+        "Death in severe cases"
+      ],
+      "transmission": "Tick vectors (primarily Rhipicephalus microplus)",
+      "diagnosis_methods": "Blood smears, PCR",
+      "treatments": [
+        "Antiprotozoal drugs (imidocarb dipropionate, diminazene)",
+        "Blood transfusions in severe cases",
+        "Supportive care (fluids, anti-inflammatories)"
+      ],
+      "healing_process": [
+        "Initial response to treatment within 24-48 hours",
+        "Complete recovery in 2-4 weeks",
+        "Animals remain carriers"
+      ],
+      "prevention": [
+        "Tick control",
+        "Vaccination in endemic areas"
+      ],
+      "prognosis": "Fair to good with early treatment; poor in advanced cases"
+    },
+    {
+      "disease_name": "Blackleg",
+      "disease_id": "BL001",
+      "alternative_names": "Clostridial myositis",
+      "category": "Acute, fatal bacterial disease",
+      "causative_agents": "Clostridium chauvoei",
+      "symptoms": [
+        "Sudden death often without prior signs",
+        "Severe lameness",
+        "Hot, painful swelling that becomes cold and gaseous",
+        "Crepitation (gas crackling) under the skin",
+        "High fever (104-106°F/40-41°C)",
+        "Depression and complete loss of appetite",
+        "Dark, discolored areas of skin over affected muscles"
+      ],
+      "transmission": "Ingestion of bacterial spores from soil",
+      "diagnosis_methods": "Clinical signs, bacterial culture, fluorescent antibody tests",
+      "treatments": [
+        "High doses of penicillin",
+        "Surgical debridement of affected tissue",
+        "Note: Treatment often ineffective due to rapid progression"
+      ],
+      "healing_process": [
+        "Extremely poor recovery rate even with treatment",
+        "Disease progression typically too rapid for effective intervention"
+      ],
+      "prevention": [
+        "Vaccination (7-way or 8-way clostridial vaccines)",
+        "Proper disposal of dead animals"
+      ],
+      "prognosis": "Very poor; usually fatal within 12-48 hours"
+    },
+    {
+      "disease_name": "Bovine Tuberculosis",
+      "disease_id": "TB001",
+      "alternative_names": "TB",
+      "category": "Chronic bacterial disease, zoonotic",
+      "causative_agents": "Mycobacterium bovis",
+      "symptoms": [
+        "Chronic cough",
+        "Weight loss despite normal appetite initially",
+        "Fluctuating fever",
+        "Enlarged lymph nodes",
+        "Progressive weakness",
+        "Reduced milk production",
+        "Labored/difficult breathing"
+      ],
+      "transmission": "Aerosol, ingestion of contaminated material",
+      "diagnosis_methods": "Intradermal tuberculin test, gamma interferon assay, PCR",
+      "treatments": [
+        "REPORTABLE DISEASE - follow regulatory protocols",
+        "No treatment approved for livestock",
+        "Infected animals are typically culled"
+      ],
+      "healing_process": [
+        "No recovery - progressive disease"
+      ],
+      "prevention": [
+        "Testing and removal of positive animals",
+        "Pasteurization of milk",
+        "Biosecurity measures"
+      ],
+      "prognosis": "Poor; regulatory culling usually required"
+    },
+    {
+      "disease_name": "Digital Dermatitis",
+      "disease_id": "DD001",
+      "alternative_names": "Hairy heel warts, Strawberry foot rot, Mortellaro disease",
+      "category": "Infectious hoof disease",
+      "causative_agents": "Treponema species (spirochetes)",
+      "symptoms": [
+        "Circular, raw, red, raised lesions typically at the heel bulb",
+        "Extreme pain and lameness",
+        "Characteristic raised \"strawberry-like\" appearance with hair-like projections",
+        "Foul odor",
+        "Affected animals walk on toe to avoid bearing weight on heel"
+      ],
+      "transmission": "Environmental contamination, wet conditions",
+      "diagnosis_methods": "Visual examination of characteristic lesions",
+      "treatments": [
+        "Topical antibiotics (tetracycline, lincomycin)",
+        "Footbaths (copper sulfate, zinc sulfate, formalin)",
+        "Bandaging in severe cases",
+        "Pain management"
+      ],
+      "healing_process": [
+        "Initial improvement in 1-2 days with proper treatment",
+        "Formation of scab within 7-10 days",
+        "Complete healing in 2-3 weeks",
+        "Tendency to recur if conditions favorable"
+      ],
+      "prevention": [
+        "Regular footbaths",
+        "Dry, clean environment",
+        "Proper nutrition (biotin, zinc)",
+        "Regular hoof trimming"
+      ],
+      "prognosis": "Good with treatment, but high recurrence rate"
+    },
+    {
+      "disease_name": "Coccidiosis",
+      "disease_id": "COCC001",
+      "alternative_names": "Coccidia infection",
+      "category": "Parasitic intestinal disease",
+      "causative_agents": "Eimeria species (protozoan parasites)",
+      "symptoms": [
+        "Bloody/watery diarrhea",
+        "Straining to defecate (tenesmus)",
+        "Dehydration",
+        "Weight loss",
+        "Weakness",
+        "Anemia in severe cases",
+        "Reduced growth rate",
+        "Death in severe untreated cases"
+      ],
+      "transmission": "Fecal-oral route",
+      "diagnosis_methods": "Fecal flotation, necropsy findings",
+      "treatments": [
+        "Anticoccidial drugs (amprolium, sulfonamides, toltrazuril)",
+        "Supportive care (fluids, electrolytes)",
+        "Treatment of entire group in outbreak situations"
+      ],
+      "healing_process": [
+        "Clinical improvement in 2-4 days with treatment",
+        "Complete recovery in 1-2 weeks",
+        "Intestinal damage may take 3-4 weeks to fully heal"
+      ],
+      "prevention": [
+        "Anticoccidial feed additives",
+        "Good sanitation",
+        "Avoid overcrowding",
+        "Proper manure management"
+      ],
+      "prognosis": "Good with early treatment; guarded in severe cases"
+    },
+    {
+      "disease_name": "Cryptosporidiosis",
+      "disease_id": "CRYPT001",
+      "alternative_names": "Crypto",
+      "category": "Parasitic intestinal disease",
+      "causative_agents": "Cryptosporidium parvum",
+      "symptoms": [
+        "Severe watery diarrhea",
+        "Lethargy",
+        "Dehydration",
+        "Abdominal pain/discomfort",
+        "Weight loss",
+        "Primarily affects calves 1-3 weeks of age",
+        "Reduced growth rate"
+      ],
+      "transmission": "Fecal-oral route, contaminated water",
+      "diagnosis_methods": "Fecal examination, acid-fast staining",
+      "treatments": [
+        "Limited specific treatment options",
+        "Halofuginone lactate",
+        "Supportive care (fluids, electrolytes)",
+        "Nutritional support"
+      ],
+      "healing_process": [
+        "Self-limiting disease in immunocompetent animals",
+        "Recovery in 10-14 days"
+      ],
+      "prevention": [
+        "Good sanitation",
+        "Proper colostrum management",
+        "Isolation of affected calves"
+      ],
+      "prognosis": "Good with supportive care; guarded in severely affected calves",
+      "zoonotic_potential": "Yes - can cause diarrheal illness in humans"
+    },
+    {
+      "disease_name": "Bovine Papular Stomatitis",
+      "disease_id": "BPS001",
+      "alternative_names": "Bovine viral pustular stomatitis",
+      "category": "Viral skin disease",
+      "causative_agents": "Parapoxvirus (bovine papular stomatitis virus)",
+      "symptoms": [
+        "Papules, pustules, and erosions on muzzle and oral mucosa",
+        "Lesions primarily around the mouth, nostrils, and lips",
+        "Occasional spread to teats and skin around hooves",
+        "Mild fever (up to 103°F/39.5°C)",
+        "Reduced appetite/feed intake",
+        "Excessive drooling/salivation",
+        "Secondary bacterial infections may occur"
+      ],
+      "transmission": "Direct contact, contaminated feed/equipment, milking equipment",
+      "diagnosis_methods": "Clinical signs, electron microscopy, PCR, virus isolation",
+      "treatments": [
+        "No specific antiviral treatment",
+        "Supportive care (soft feeds, oral rinses)",
+        "Topical antiseptics for lesions",
+        "Antibiotics only if secondary bacterial infection present"
+      ],
+      "healing_process": [
+        "Self-limiting disease in most cases",
+        "Recovery in 1-3 weeks",
+        "Lesions progress from papules to pustules to scabs which then heal"
+      ],
+      "prevention": [
+        "Isolation of affected animals",
+        "Proper sanitation of equipment",
+        "Good hygiene practices during handling"
+      ],
+      "prognosis": "Excellent; rarely fatal, primarily affects young cattle",
+      "zoonotic_potential": "Yes - can cause lesions in humans (milker's nodules)"
+    },
+    {
+      "disease_name": "Lumpy Skin Disease",
+      "disease_id": "LSD001",
+      "alternative_names": "Neethling virus infection, Knopvelsiekte",
+      "category": "Viral, systemic disease",
+      "causative_agents": "Lumpy skin disease virus (Capripoxvirus)",
+      "symptoms": [
+        "High fever (104-107°F/40-41.5°C)",
+        "Firm, circumscribed nodules (0.5-5 cm) in skin and subcutaneous tissue",
+        "Nodules may cover entire body but concentrate on head, neck, udder, and perineum",
+        "Eye discharge/tearing",
+        "Nasal discharge",
+        "Enlarged superficial lymph nodes",
+        "Limb swelling/edema",
+        "Lameness",
+        "Reduced milk production",
+        "Abortion in pregnant cows"
+      ],
+      "transmission": "Biting insects (primarily), direct contact (less common)",
+      "diagnosis_methods": "Clinical signs, PCR, virus isolation, histopathology",
+      "treatments": [
+        "REPORTABLE DISEASE - follow regulatory protocols",
+        "No specific antiviral treatment",
+        "Antibiotics for secondary infections",
+        "Anti-inflammatory drugs",
+        "Supportive care"
+      ],
+      "healing_process": [
+        "Acute phase lasts 4-14 days",
+        "Nodules may become necrotic and slough, leaving holes in hide",
+        "Recovery period of 4-6 weeks",
+        "Skin lesions may persist for several months"
+      ],
+      "prevention": [
+        "Vaccination in endemic areas",
+        "Vector control",
+        "Movement restrictions"
+      ],
+      "prognosis": "Most cattle recover but with permanent skin damage; fatality rate 1-3%"
+    },
+    {
+      "disease_name": "Bovine Trichomoniasis",
+      "disease_id": "TRICH001",
+      "alternative_names": "Bovine trich",
+      "category": "Reproductive protozoan infection",
+      "causative_agents": "Tritrichomonas foetus",
+      "symptoms": {
+        "bulls": ["Asymptomatic carriers"],
+        "cows_heifers": [
+          "Early embryonic death/loss",
+          "Abortion (typically first trimester)",
+          "Pyometra (pus-filled uterus)",
+          "Irregular estrous/heat cycles",
+          "Infertility",
+          "Vaginal discharge",
+          "Reproductive tract inflammation",
+          "Prolonged calving interval at herd level"
+        ]
+      },
+      "transmission": "Sexual contact, contaminated semen or equipment",
+      "diagnosis_methods": "Preputial scraping culture from bulls, PCR",
+      "treatments": [
+        "No approved treatment for cattle in most countries",
+        "Infected bulls are typically culled",
+        "Rest period for cows allows most to clear infection within 3-5 months"
+      ],
+      "healing_process": [
+        "Self-limiting in females with sexual rest (3-5 months)",
+        "Bulls remain permanently infected"
+      ],
+      "prevention": [
+        "Testing bulls before breeding season",
+        "Culling positive bulls",
+        "Artificial insemination with clean semen",
+        "Maintaining closed herds"
+      ],
+      "prognosis": "Poor for infected bulls; good for females after sexual rest"
+    },
+    {
+      "disease_name": "Bovine Campylobacteriosis",
+      "disease_id": "CAMP001",
+      "alternative_names": "Vibriosis, Bovine venereal campylobacteriosis",
+      "category": "Reproductive bacterial infection",
+      "causative_agents": "Campylobacter fetus subsp. venerealis",
+      "symptoms": {
+        "bulls": ["Asymptomatic carriers"],
+        "cows_heifers": [
+          "Infertility",
+          "Early embryonic death/loss",
+          "Irregular estrous/heat cycles",
+          "Extended calving season",
+          "Occasional late-term abortion",
+          "Decreased conception rates",
+          "Reduced calf crop by 15-20%"
+        ]
+      },
+      "transmission": "Sexual contact, contaminated semen",
+      "diagnosis_methods": "Vaginal mucus agglutination test, preputial washings, PCR",
+      "treatments": [
+        "Systemic antibiotics (tetracyclines)",
+        "Local treatment of bulls with antiseptic washes (limited efficacy)"
+      ],
+      "healing_process": [
+        "Cows typically develop immunity within 3-6 months",
+        "Bulls remain carriers unless treated"
+      ],
+      "prevention": [
+        "Vaccination",
+        "Artificial insemination with clean semen",
+        "Testing bulls before breeding season"
+      ],
+      "prognosis": "Good for individual animals; economic impact on herd productivity"
+    },
+    {
+      "disease_name": "Enzootic Bovine Leukosis",
+      "disease_id": "EBL001",
+      "alternative_names": "Bovine lymphosarcoma",
+      "category": "Viral, neoplastic disease",
+      "causative_agents": "Bovine leukemia virus (BLV)",
+      "symptoms": [
+        "Most infected cattle are asymptomatic",
+        "30-40% develop persistent lymphocytosis",
+        "1-5% develop lymphosarcoma (cancer) with:",
+        "Enlarged superficial lymph nodes",
+        "Weight loss",
+        "Reduced milk production",
+        "Hindlimb paralysis/weakness",
+        "Exophthalmos (bulging eye) with orbital tumors",
+        "Digestive disturbances with abdominal tumors",
+        "Heart failure with cardiac tumors"
+      ],
+      "transmission": "Blood transfer, colostrum/milk, contaminated needles/equipment",
+      "diagnosis_methods": "ELISA, AGID, PCR",
+      "treatments": [
+        "No specific treatment available",
+        "Supportive care only"
+      ],
+      "healing_process": [
+        "No recovery - persistent infection",
+        "Progressive disease in cattle that develop lymphosarcoma"
+      ],
+      "prevention": [
+        "Testing and culling or segregation",
+        "Using disposable needles",
+        "Proper disinfection of equipment",
+        "Feeding pasteurized colostrum/milk to calves"
+      ],
+      "prognosis": "Poor once lymphosarcoma develops; fatal within weeks to months"
+    },
+    {
+      "disease_name": "Dermatophilosis",
+      "disease_id": "DERM001",
+      "alternative_names": "Strawberry footrot, Rain scald, Streptothricosis",
+      "category": "Bacterial skin disease",
+      "causative_agents": "Dermatophilus congolensis",
+      "symptoms": [
+        "Matted/clumped hair",
+        "Crusted, scabby lesions",
+        "Lesions primarily on back, rump, neck, and face",
+        "Pain and pruritus (itching) in affected areas",
+        "Thickened skin with exudate",
+        "Hair loss",
+        "Reduced milk production"
+      ],
+      "transmission": "Direct contact, biting insects, prolonged wetting",
+      "diagnosis_methods": "Clinical signs, microscopic examination of crusts, bacterial culture",
+      "treatments": [
+        "Long-acting antibiotics (oxytetracycline, penicillin)",
+        "Topical antiseptics",
+        "Removal of scabs and cleaning of lesions",
+        "Shelter from rain"
+      ],
+      "healing_process": [
+        "Initial response to treatment in 3-7 days",
+        "Complete healing in 2-4 weeks",
+        "Hair regrowth may take several months"
+      ],
+      "prevention": [
+        "Protection from prolonged wetting",
+        "Ectoparasite control",
+        "Isolation of affected animals"
+      ],
+      "prognosis": "Good with treatment; poor if extensive lesions or chronic disease"
+    },
+    {
+      "disease_name": "Bovine Emphysematous Pneumonia",
+      "disease_id": "BEP001",
+      "alternative_names": "Fog fever, Acute bovine pulmonary emphysema and edema (ABPEE)",
+      "category": "Respiratory disease",
+      "causative_agents": "3-methylindole (3-MI) produced from L-tryptophan in rumen",
+      "symptoms": [
+        "Sudden onset of respiratory distress",
+        "Severe breathing difficulty",
+        "Extended head and neck",
+        "Grunting on expiration",
+        "Subcutaneous emphysema (air under the skin)",
+        "Frothy nasal discharge",
+        "High fever (104-106°F/40-41°C)",
+        "Complete loss of appetite",
+        "Coughing",
+        "Sudden death in severe cases"
+      ],
+      "transmission": "Not contagious - associated with dietary change (typically moving to lush pasture)",
+      "diagnosis_methods": "Clinical signs, necropsy findings, history",
+      "treatments": [
+        "Anti-inflammatory drugs (corticosteroids, NSAIDs)",
+        "Antibiotics to prevent secondary bacterial infection",
+        "Antihistamines",
+        "Diuretics",
+        "Minimizing stress and movement"
+      ],
+      "healing_process": [
+        "Acute phase lasts 2-4 days",
+        "Survivors typically recover in 7-10 days",
+        "Lung damage may be permanent in severe cases"
+      ],
+      "prevention": [
+        "Gradual introduction to lush pasture",
+        "Feeding hay before turning out to new pasture",
+        "Monensin supplementation may reduce risk"
+      ],
+      "prognosis": "Guarded to poor; mortality rate can be 30-50%"
+    },
+    {
+      "disease_name": "Bovine Epizootic Fever",
+      "disease_id": "BEF001",
+      "alternative_names": "Three-day sickness",
+      "category": "Viral disease",
+      "causative_agents": "Bovine ephemeral fever virus (BEFV)",
+      "symptoms": [
+        "Sudden onset of high fever (104-106°F/40-41°C)",
+        "Stiffness",
+        "Lameness",
+        "Muscle tremors/twitching",
+        "Nasal discharge",
+        "Eye discharge/tearing",
+        "Excessive drooling/salivation",
+        "Ruminal stasis",
+        "Inability to rise/stand (recumbency)",
+        "Temporary cessation of milk production",
+        "Swollen joints and muscle tenderness"
+      ],
+      "transmission": "Biting insects (mosquitoes, midges)",
+      "diagnosis_methods": "Clinical signs, virus isolation, serology, PCR",
+      "treatments": [
+        "Anti-inflammatory drugs (NSAIDs)",
+        "Calcium borogluconate for recumbent animals",
+        "Supportive care (fluids, nursing)"
+      ],
+      "healing_process": [
+        "Typical course of 3 days (hence \"three-day sickness\")",
+        "Recovery in 5-7 days in uncomplicated cases",
+        "Return to normal milk production within 2 weeks"
+      ],
+      "prevention": [
+        "Vaccination in endemic areas",
+        "Vector control"
+      ],
+      "prognosis": "Good; mortality usually low (<1%)"
+    },
+    {
+      "disease_name": "Winter Dysentery",
+      "disease_id": "WD001",
+      "alternative_names": "Winter scours",
+      "category": "Viral enteric disease",
+      "causative_agents": "Bovine coronavirus",
+      "symptoms": [
+        "Severe watery diarrhea",
+        "Reduced milk production",
+        "Mild to moderate depression",
+        "Mild to moderate anorexia",
+        "Occasional coughing and nasal discharge",
+        "Low-grade fever",
+        "Rapid spread through herd"
+      ],
+      "transmission": "Fecal-oral route, aerosol",
+      "diagnosis_methods": "Clinical signs, PCR, ELISA",
+      "treatments": [
+        "Supportive care (fluids, electrolytes)",
+        "Anti-inflammatory drugs if needed",
+        "Antibiotics only for secondary bacterial infections"
+      ],
+      "healing_process": [
+        "Self-limiting; clinical signs for 3-7 days",
+        "Return to normal milk production within 2 weeks"
+      ],
+      "prevention": [
+        "Biosecurity measures",
+        "Isolation of new animals",
+        "Sanitation"
+      ],
+      "prognosis": "Excellent; rarely fatal though economically significant"
+    },
+    {
+      "disease_name": "Bovine Ocular Squamous Cell Carcinoma",
+      "disease_id": "BOSCC001",
+      "alternative_names": "Cancer eye, Eye cancer",
+      "category": "Neoplastic disease",
+      "causative_agents": "Multifactorial - UV radiation, genetic predisposition, viral factors",
+      "symptoms": [
+        "Small white plaque or pink mass on cornea, third eyelid, or eyelid",
+        "Progressive growth of lesion",
+        "Inflammation with discharge",
+        "Ulceration and bleeding in advanced cases",
+        "Vision impairment",
+        "Secondary infection",
+        "Weight loss in late-stage disease"
+      ],
+      "transmission": "Not contagious - individual animal disease",
+      "diagnosis_methods": "Clinical signs, biopsy",
+      "treatments": [
+        "Early surgical removal",
+        "Cryotherapy",
+        "Hyperthermia",
+        "Radiation therapy (limited availability)",
+        "Advanced cases: eye enucleation (removal)"
+      ],
+      "healing_process": [
+        "Depends on treatment method",
+        "Surgical sites typically heal in 2-3 weeks",
+        "Recurrence rate of 20-30%"
+      ],
+      "prevention": [
+        "Selection for pigmented eyelids",
+        "Protection from excessive UV exposure",
+        "Early treatment of precancerous lesions"
+      ],
+      "prognosis": "Good with early intervention; poor for advanced metastatic disease"
+    },
+    {
+      "disease_name": "Bovine Respiratory Syncytial Virus",
+      "disease_id": "BRSV001",
+      "alternative_names": "Respiratory syncytial virus infection",
+      "category": "Viral respiratory disease",
+      "causative_agents": "Bovine respiratory syncytial virus",
+      "symptoms": [
+        "Moderate fever (103-105°F/39.5-40.5°C)",
+        "Rapid breathing",
+        "Coughing",
+        "Nasal discharge",
+        "Eye discharge/tearing",
+        "Labored/difficult breathing",
+        "Subcutaneous emphysema in severe cases",
+        "Enlarged bronchial lymph nodes",
+        "Reduced milk production",
+        "Predominantly affects calves and yearlings"
+      ],
+      "transmission": "Aerosol, direct contact",
+      "diagnosis_methods": "PCR, virus isolation, serology, immunohistochemistry",
+      "treatments": [
+        "Anti-inflammatory drugs",
+        "Bronchodilators",
+        "Antibiotics for secondary bacterial infections",
+        "Supportive care (fluids, oxygen in severe cases)"
+      ],
+      "healing_process": [
+        "Uncomplicated cases resolve in 7-10 days",
+        "Pulmonary function may take 30-40 days to fully recover"
+      ],
+      "prevention": [
+        "Vaccination",
+        "Good ventilation",
+        "Reduce stocking density"
+      ],
+      "prognosis": "Good for mild cases; guarded for severe cases"
+    },
+    {
+      "disease_name": "Bovine Parainfluenza-3",
+      "disease_id": "PI3001",
+      "alternative_names": "Shipping fever (component)",
+      "category": "Viral respiratory disease",
+      "causative_agents": "Bovine parainfluenza virus type 3",
+      "symptoms": [
+        "Moderate fever (103-105°F/39.5-40.5°C)",
+        "Nasal discharge",
+        "Coughing",
+        "Rapid breathing",
+        "Mild depression",
+        "Reduced appetite/feed intake",
+        "Usually mild disease unless complicated by other pathogens"
+      ],
+      "transmission": "Aerosol, direct contact",
+      "diagnosis_methods": "Virus isolation, serology, PCR",
+      "treatments": [
+        "Supportive care",
+        "Antibiotics only for secondary bacterial infections",
+        "Anti-inflammatory drugs if needed"
+      ],
+      "healing_process": [
+        "Recovery in 5-7 days for uncomplicated cases",
+        "May predispose to bacterial pneumonia"
+      ],
+      "prevention": [
+        "Vaccination",
+        "Good ventilation",
+        "Stress reduction",
+        "Proper nutrition"
+      ],
+      "prognosis": "Excellent for uncomplicated cases; variable if secondary bacterial infection occurs"
+    },
+    {
+      "disease_name": "Infectious Bovine Keratoconjunctivitis",
+      "disease_id": "IBK001",
+      "alternative_names": "Pinkeye",
+      "category": "Ocular infection",
+      "causative_agents": "Moraxella bovis, Moraxella bovoculi",
+      "symptoms": [
+        "Eye discharge/tearing",
+        "Photophobia (light sensitivity)",
+        "Conjunctival inflammation and redness",
+        "Corneal opacity (bluish-white appearance)",
+        "Corneal ulceration",
+        "Eye closure",
+        "Reduced milk production"
+      ],
+      "transmission": "Flies, direct contact, fomites",
+      "diagnosis_methods": "Clinical signs, bacterial culture",
+      "treatments": [
+        "Topical antibiotics (oxytetracycline ophthalmic ointment)",
+        "Subconjunctival or systemic antibiotics",
+        "Eye patches to reduce light exposure",
+        "Isolation of affected animals"
+      ],
+      "healing_process": [
+        "Improvement within 3-5 days with treatment",
+        "Complete healing in 2-4 weeks",
+        "Severe cases may result in permanent scarring or blindness"
+      ],
+      "prevention": [
+        "Fly control",
+        "Vaccination",
+        "Avoid dusty conditions",
+        "Clip pastures with seed heads"
+      ],
+      "prognosis": "Good with early treatment; guarded when ulceration is severe"
+    },
+    {
+      "disease_name": "Bovine Respiratory Disease",
+      "disease_id": "BRD001",
+      "alternative_names": "Shipping Fever, Pneumonia",
+      "category": "Respiratory",
+      "causative_agents": "Mannheimia haemolytica, Pasteurella multocida, Histophilus somni, Bovine respiratory syncytial virus (BRSV), Parainfluenza-3 virus (PI3)",
+      "symptoms": [
+        "Fever (>103°F/39.5°C)",
+        "Nasal discharge (clear to thick and mucopurulent)",
+        "Labored/difficult breathing",
+        "Rapid breathing",
+        "Coughing",
+        "Depression and lethargy",
+        "Reduced appetite/feed intake",
+        "Drooping ears",
+        "Isolation from the herd"
+      ],
+      "transmission": "Airborne, direct contact",
+      "diagnosis_methods": "Clinical signs, lung auscultation, PCR testing, bacterial culture",
+      "treatments": [
+        "Antibiotic therapy (tulathromycin, florfenicol, or ceftiofur)",
+        "Anti-inflammatory drugs (NSAIDs like flunixin meglumine)",
+        "Supportive care (fluids if dehydrated)",
+        "Bronchodilators in severe cases"
+      ],
+      "healing_process": [
+        "Initial improvement in 24-48 hours with appropriate treatment",
+        "Full recovery within 7-14 days depending on severity",
+        "Lung scarring may occur in severe cases, reducing future performance"
+      ],
+      "prevention": [
+        "Vaccination programs",
+        "Stress reduction during transportation and handling",
+        "Adequate ventilation in barns",
+        "Isolation of new animals before introduction to herd"
+      ],
+      "prognosis": "Good with early treatment; guarded to poor in advanced cases"
+    },
+    {
+      "disease_name": "Bovine Viral Diarrhea",
+      "disease_id": "BVD001",
+      "alternative_names": "Mucosal Disease",
+      "category": "Viral, Multiple Systems",
+      "causative_agents": "Bovine viral diarrhea virus (BVDV) Types 1 and 2",
+      "symptoms": [
+        "High fever (103-107°F/39.5-41.5°C)",
+        "Diarrhea (may contain mucus or blood)",
+        "Oral and nasal discharge",
+        "Oral erosions and ulcers",
+        "Reduced milk production",
+        "Reproductive failures (abortions, stillbirths)",
+        "Birth defects",
+        "Persistently infected (PI) calves may appear stunted or normal"
+      ],
+      "transmission": "Direct contact, transplacental, contaminated equipment",
+      "diagnosis_methods": "PCR, ELISA, virus isolation, immunohistochemistry",
+      "treatments": [
+        "No specific antiviral treatment available",
+        "Supportive care (fluids, electrolytes)",
+        "Antibiotics for secondary bacterial infections",
+        "Anti-inflammatory drugs for fever and pain"
+      ],
+      "healing_process": [
+        "Acute cases: recovery in 2-3 weeks",
+        "Severe cases: may take 4-6 weeks for recovery",
+        "Persistently infected animals do not recover"
+      ],
+      "prevention": [
+        "Vaccination",
+        "Testing and removal of persistently infected animals",
+        "Biosecurity measures"
+      ],
+      "prognosis": "Variable; good for mild cases, poor for mucosal disease form"
+    },
+    {
+      "disease_name": "Foot and Mouth Disease",
+      "disease_id": "FMD001",
+      "alternative_names": "Hoof and Mouth Disease",
+      "category": "Highly contagious viral disease",
+      "causative_agents": "Foot-and-mouth disease virus (FMDV)",
+      "symptoms": [
+        "Moderate fever (103-105°F/39.5-40.5°C)",
+        "Excessive drooling/salivation",
+        "Vesicles (blisters) in mouth, on tongue, lips, teats, and between hooves",
+        "Lameness",
+        "Reluctance to move",
+        "Reduced appetite/feed intake",
+        "Severe drop in milk production",
+        "Weight loss"
+      ],
+      "transmission": "Direct contact, aerosol, fomites, vehicles, contaminated feed",
+      "diagnosis_methods": "Clinical signs, ELISA, PCR, virus isolation",
+      "treatments": [
+        "REPORTABLE DISEASE - follow regulatory protocols",
+        "No specific treatment available",
+        "Supportive care only"
+      ],
+      "healing_process": [
+        "Natural recovery in 2-3 weeks if no complications",
+        "Secondary infections may prolong recovery"
+      ],
+      "prevention": [
+        "Strict biosecurity",
+        "Vaccination in endemic areas",
+        "Quarantine and/or culling of affected animals"
+      ],
+      "prognosis": "Generally not fatal in adults but causes severe production losses"
+    },
+    {
+      "disease_name": "Bovine Mastitis",
+      "disease_id": "MAST001",
+      "alternative_names": "Udder Infection",
+      "category": "Mammary gland infection",
+      "causative_agents": "Staphylococcus aureus, Streptococcus agalactiae, E. coli, Klebsiella, Mycoplasma, and others",
+      "symptoms": [
+        "Swollen, hot, and painful udder quarter(s)",
+        "Abnormal milk (watery, clots, flakes, pus, blood-tinged)",
+        "Reduced milk production",
+        "Fever (in cases of systemic infection)",
+        "Lethargy and inappetence (severe cases)",
+        "Hardening of affected quarters (chronic cases)"
+      ],
+      "transmission": "Environmental contamination, milking equipment, between cows during milking",
+      "diagnosis_methods": "California Mastitis Test (CMT), somatic cell count, bacterial culture",
+      "treatments": [
+        "Intramammary antibiotic infusions",
+        "Systemic antibiotics for severe cases",
+        "Frequent milking or stripping of affected quarters",
+        "Anti-inflammatory drugs",
+        "Supportive care (fluids, electrolytes) for severe cases"
+      ],
+      "healing_process": [
+        "Clinical improvement within 2-3 days with appropriate treatment",
+        "Complete elimination of infection may take 7-21 days depending on pathogen",
+        "Chronic cases may never fully recover, resulting in fibrosis and reduced production"
+      ],
+      "prevention": [
+        "Proper milking hygiene and technique",
+        "Teat dipping post-milking",
+        "Clean, dry environment",
+        "Proper nutrition",
+        "Culling of chronically infected animals"
+      ],
+      "prognosis": "Good for acute cases with early treatment; guarded for chronic infections"
+    },
+    {
+      "disease_name": "Johne's Disease",
+      "disease_id": "JD001",
+      "alternative_names": "Paratuberculosis",
+      "category": "Chronic wasting disease",
+      "causative_agents": "Mycobacterium avium subspecies paratuberculosis (MAP)",
+      "symptoms": [
+        "Chronic, progressive weight loss despite normal appetite",
+        "Persistent or intermittent diarrhea",
+        "Reduced milk production",
+        "Swelling under jaw ('bottle jaw')",
+        "Normal temperature",
+        "Progressive weakness"
+      ],
+      "transmission": "Fecal-oral route, in utero, milk/colostrum",
+      "diagnosis_methods": "ELISA, PCR, fecal culture",
+      "treatments": [
+        "No effective treatment available",
+        "Supportive care only"
+      ],
+      "healing_process": [
+        "No recovery - progressive, fatal disease",
+        "May take years from infection to clinical signs"
+      ],
+      "prevention": [
+        "Testing and culling infected animals",
+        "Calving area hygiene",
+        "Colostrum management",
+        "Separate calves from adult manure"
+      ],
+      "prognosis": "Poor - eventually fatal once clinical signs appear"
+    },
+    {
+      "disease_name": "Bovine Anaplasmosis",
+      "disease_id": "ANAP001",
+      "alternative_names": "Yellow bag, Yellow fever",
+      "category": "Tick-borne disease",
+      "causative_agents": "Anaplasma marginale",
+      "symptoms": [
+        "Severe anemia",
+        "Yellow mucous membranes (jaundice)",
+        "High fever (up to 106°F/41°C)",
+        "Weakness and lethargy",
+        "Reduced milk production",
+        "Weight loss",
+        "Abortion in pregnant cows",
+        "Behavioral changes (aggression)",
+        "Death in severe cases"
+      ],
+      "transmission": "Ticks, biting flies, contaminated needles/equipment",
+      "diagnosis_methods": "Blood smears, PCR, ELISA",
+      "treatments": [
+        "Tetracycline antibiotics (oxytetracycline)",
+        "Blood transfusions in valuable animals",
+        "Supportive care (fluids, anti-inflammatory drugs)"
+      ],
+      "healing_process": [
+        "Initial improvement in 1-3 days after treatment",
+        "Complete recovery in 2-3 weeks",
+        "Animals remain carriers for life"
+      ],
+      "prevention": [
+        "Vector control (tick prevention)",
+        "Clean needle practices",
+        "Vaccination in endemic areas"
+      ],
+      "prognosis": "Fair to good with early treatment; poor in advanced cases"
+    },
+    {
+      "disease_name": "Bovine Leptospirosis",
+      "disease_id": "LEPTO001",
+      "alternative_names": "Lepto",
+      "category": "Bacterial zoonosis",
+      "causative_agents": "Leptospira interrogans serovars",
+      "symptoms": [
+        "Moderate fever (103-105°F/39.5-40.5°C)",
+        "Reduced milk production with thick, yellow colostrum-like secretions",
+        "Abortion in late pregnancy",
+        "Stillbirths or weak calves",
+        "Hemoglobinuria (red urine) in acute cases",
+        "Jaundice in some cases"
+      ],
+      "transmission": "Contact with urine from infected animals, contaminated water",
+      "diagnosis_methods": "Serological tests (MAT), PCR, bacterial culture",
+      "treatments": [
+        "Antibiotics (penicillin, streptomycin, tetracyclines)",
+        "Supportive care"
+      ],
+      "healing_process": [
+        "Recovery from acute disease in 1-2 weeks with treatment",
+        "Some animals become chronic carriers"
+      ],
+      "prevention": [
+        "Vaccination",
+        "Rodent control",
+        "Avoid stagnant water sources"
+      ],
+      "prognosis": "Good with treatment for acute disease; abortion may still occur"
+    }
+  ]
+}

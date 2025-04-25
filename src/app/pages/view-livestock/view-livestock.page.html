@@ -45,13 +45,12 @@
           <ion-label>
             <h3>{{ item.quantity }} {{ item.type }}</h3>
             <p *ngIf="item.breed">{{ item.breed }}</p>
+            <p *ngIf="item.gender"><strong>Gender:</strong> {{ item.gender | titlecase }}</p>
             <p *ngIf="item.tagNumber"><strong>Tag:</strong> {{ item.tagNumber }}</p>
             <p *ngIf="item.age">Age: {{ item.age }} {{ item.ageUnit }}</p>
             <p *ngIf="item.birthDate">Born: {{ formatBirthDate(item.birthDate) }}</p>
           </ion-label>
-          <div slot="end" class="pasture-tag" *ngIf="item.pasture && item.pasture !== 'none'">
-            {{ getPastureName(item.pasture) }}
-          </div>
+          <!-- Pasture tag removed -->
           <ion-icon name="chevron-forward-outline" slot="end" color="medium"></ion-icon>
         </ion-item>
       </ion-list>
@@ -65,7 +64,7 @@
         <ion-toolbar>
           <ion-title>Livestock Details</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="closeDetails()">Close</ion-button>
+            <ion-button (click)="closeDetails()" style="cursor: pointer;">Close</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -101,6 +100,13 @@
               </ion-label>
             </ion-item>
             
+            <ion-item *ngIf="selectedLivestock.gender">
+              <ion-label>
+                <h3>Gender</h3>
+                <p>{{ selectedLivestock.gender | titlecase }}</p>
+              </ion-label>
+            </ion-item>
+            
             <ion-item *ngIf="selectedLivestock.herdNumber">
               <ion-label>
                 <h3>Herd Number</h3>
@@ -115,12 +121,7 @@
               </ion-label>
             </ion-item>
             
-            <ion-item>
-              <ion-label>
-                <h3>Pasture</h3>
-                <p>{{ selectedLivestock.pasture === 'none' ? 'Not assigned' : getPastureName(selectedLivestock.pasture) }}</p>
-              </ion-label>
-            </ion-item>
+            <!-- Pasture item removed -->
           </ion-list>
           
           <!-- Vaccination Records Section -->

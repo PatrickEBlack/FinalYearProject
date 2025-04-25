@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   IonContent,
   IonHeader,
@@ -21,9 +22,11 @@ import {
   IonTextarea,
   IonDatetime,
   AlertController,
+  AlertOptions,
   IonRadioGroup,
   IonRadio,
-  LoadingController
+  LoadingController,
+  IonSpinner
 } from '@ionic/angular/standalone';
 import { LivestockService, Livestock } from '../../services/livestock.service';
 import { AuthService } from '../../services/auth.service';
@@ -39,7 +42,7 @@ import {
   timeOutline,
   closeOutline,
   saveOutline,
-  clipboardOutline
+  createOutline
 } from 'ionicons/icons';
 
 // Define interfaces for the data structures
@@ -100,7 +103,8 @@ interface LivestockItem {
     IonTextarea,
     IonDatetime,
     IonRadioGroup,
-    IonRadio
+    IonRadio,
+    IonSpinner
   ]
 })
 export class MonitorPage implements OnInit {
@@ -109,6 +113,18 @@ export class MonitorPage implements OnInit {
 
   // Will be populated from localStorage or database in the future
   monitoredLivestock: MonitoredAnimal[] = [];
+  
+  // Properties for the animal selector UI
+  showingAnimalSelector = false;
+  availableLivestock: any[] = [];
+  loadingLivestock = false;
+  
+  // Properties for the monitoring details UI
+  showingMonitoringDetails = false;
+  selectedAnimal: any = null;
+  currentDate = new Date().toISOString().split('T')[0];
+  editMode = false;
+  editingMonitorId: string | number | null = null;
   
   // Monitoring statuses
   monitoringStatuses: {id: string, name: string, icon: string, color: string}[] = [
@@ -138,7 +154,8 @@ export class MonitorPage implements OnInit {
     private alertCtrl: AlertController,
     private livestockService: LivestockService,
     private authService: AuthService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private sanitizer: DomSanitizer
   ) {
     // Register the Ionicons
     addIcons({
@@ -152,7 +169,7 @@ export class MonitorPage implements OnInit {
       'time-outline': timeOutline,
       'close-outline': closeOutline,
       'save-outline': saveOutline,
-      'clipboard-outline': clipboardOutline
+      'create-outline': createOutline
     });
   }
 
@@ -180,42 +197,91 @@ export class MonitorPage implements OnInit {
     const user = this.authService.fetchActiveUser();
     if (!user) {
       console.error('No user logged in');
+      // Show an alert to the user
+      const alert = await this.alertCtrl.create({
+        header: 'Authentication Error',
+        message: 'You need to be logged in to access livestock data. Please log in and try again.',
+        buttons: ['OK']
+      });
+      await alert.present();
       return;
     }
     
     const loading = await this.loadingController.create({
-      message: 'Loading livestock data...'
+      message: 'Loading livestock data...',
+      spinner: 'circular'
     });
     await loading.present();
     
     try {
-      this.livestockService.getLivestock(user.uid).subscribe(livestock => {
-        // Convert livestock data to the format needed for the monitor page
-        this.allLivestock = livestock.map(item => ({
-          id: item._id || '',  // Ensure it's always a string
-          name: `${item.type} #${item.tagNumber || 'Unknown'}`,
-          type: item.type,
-          tag: item.tagNumber || 'Unknown',
-          herdNumber: item.herdNumber || 'Unknown'
-        }));
-        
-        loading.dismiss();
-      }, error => {
-        console.error('Error loading livestock:', error);
-        loading.dismiss();
-        // No placeholder data, just empty array
-        this.allLivestock = [];
+      // Use promise to make this awaitable
+      return new Promise<void>((resolve) => {
+        this.livestockService.getLivestock(user.uid).subscribe(
+          livestock => {
+            console.log(`Received ${livestock.length} livestock records from MongoDB`);
+            
+            // Convert livestock data to the format needed for the monitor page
+            this.allLivestock = livestock.map(item => ({
+              id: item._id || '',  // Ensure it's always a string
+              name: `${item.type} #${item.tagNumber || 'Unknown'}`,
+              type: item.type,
+              tag: item.tagNumber || 'Unknown',
+              herdNumber: item.herdNumber || 'Unknown'
+            }));
+            
+            // Log the converted livestock for debugging
+            console.log('Processed livestock for monitoring:', this.allLivestock);
+            
+            loading.dismiss();
+            resolve();
+          }, 
+          error => {
+            console.error('Error loading livestock from service:', error);
+            loading.dismiss();
+            // No placeholder data, just empty array
+            this.allLivestock = [];
+            
+            // Show error to user
+            this.showErrorAlert('Failed to load livestock data from the server. Please try again later.');
+            resolve();
+          }
+        );
       });
     } catch (error) {
       console.error('Error in loadLivestockData:', error);
       loading.dismiss();
       this.allLivestock = [];
+      
+      // Show error to user
+      this.showErrorAlert('An unexpected error occurred while loading your livestock data.');
+      return;
     }
   }
   
+  // Helper method to show error alerts
+  async showErrorAlert(message: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Error',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  
   loadMonitoredLivestock() {
-    // Try to load from localStorage
-    const saved = localStorage.getItem('monitoredLivestock');
+    // Get the current user
+    const user = this.authService.fetchActiveUser();
+    if (!user) {
+      console.error('No user logged in');
+      this.monitoredLivestock = [];
+      return;
+    }
+    
+    // Use user-specific key for localStorage
+    const userKey = `monitoredLivestock_${user.uid}`;
+    
+    // Try to load from localStorage with user-specific key
+    const saved = localStorage.getItem(userKey);
     if (saved) {
       try {
         this.monitoredLivestock = JSON.parse(saved);
@@ -223,12 +289,24 @@ export class MonitorPage implements OnInit {
         console.error('Error parsing monitored livestock data:', e);
         this.monitoredLivestock = [];
       }
+    } else {
+      this.monitoredLivestock = [];
     }
   }
   
   saveMonitoredLivestock() {
-    // Save to localStorage
-    localStorage.setItem('monitoredLivestock', JSON.stringify(this.monitoredLivestock));
+    // Get the current user
+    const user = this.authService.fetchActiveUser();
+    if (!user) {
+      console.error('No user logged in, cannot save monitored livestock');
+      return;
+    }
+    
+    // Use user-specific key for localStorage
+    const userKey = `monitoredLivestock_${user.uid}`;
+    
+    // Save to localStorage with user-specific key
+    localStorage.setItem(userKey, JSON.stringify(this.monitoredLivestock));
   }
   
   // Sort animals by priority
@@ -262,8 +340,8 @@ export class MonitorPage implements OnInit {
     }
   }
   
-  // Show the add animal dialog
-  async showAddAnimalDialog() {
+  // Show the animal selector overlay
+  async showAnimalSelector() {
     // Reset form
     this.newMonitor = {
       animalId: null,
@@ -274,55 +352,360 @@ export class MonitorPage implements OnInit {
       monitoringChecks: ''
     };
     
-    // Get available livestock (those not already being monitored)
-    const availableLivestock = this.allLivestock.filter((animal: LivestockItem) => 
-      !this.monitoredLivestock.find((monitored: MonitoredAnimal) => monitored.id === animal.id)
+    // Show loading state
+    this.loadingLivestock = true;
+    this.showingAnimalSelector = true;
+    
+    try {
+      // Get the current user
+      const user = this.authService.fetchActiveUser();
+      if (!user) {
+        this.loadingLivestock = false;
+        this.showErrorAlert('Authentication error. Please log in and try again.');
+        return;
+      }
+      
+      // Directly fetch detailed livestock data from the service
+      this.livestockService.getLivestock(user.uid).subscribe(
+        (livestock) => {
+          console.log(`Received ${livestock.length} livestock records from MongoDB`);
+          
+          if (livestock.length === 0) {
+            this.loadingLivestock = false;
+            this.availableLivestock = [];
+            return;
+          }
+          
+          // Get available livestock (those not already being monitored)
+          // Use strict string comparison to avoid type conversion issues
+          this.availableLivestock = livestock.filter((animal) => 
+            !this.monitoredLivestock.find((monitored) => 
+              monitored.id.toString() === animal._id?.toString()
+            )
+          );
+          
+          this.loadingLivestock = false;
+        },
+        error => {
+          console.error('Error loading livestock data:', error);
+          this.loadingLivestock = false;
+          this.availableLivestock = [];
+          this.showErrorAlert('Failed to load livestock data. Please try again.');
+        }
+      );
+    } catch (error) {
+      console.error('Error in showAnimalSelector:', error);
+      this.loadingLivestock = false;
+      this.availableLivestock = [];
+      this.showErrorAlert('An unexpected error occurred. Please try again.');
+    }
+  }
+  
+  // Hide the animal selector overlay
+  hideAnimalSelector() {
+    this.showingAnimalSelector = false;
+  }
+  
+  // Handle animal selection
+  selectAnimal(animal: any) {
+    // Hide the selector
+    this.hideAnimalSelector();
+    
+    // Save selected animal and show monitoring details
+    this.selectedAnimal = animal;
+    this.showMonitoringDetails();
+  }
+  
+  // Show monitoring details overlay
+  showMonitoringDetails() {
+    // If not in edit mode, reset the form with defaults
+    if (!this.editMode) {
+      this.newMonitor = {
+        animalId: this.selectedAnimal?._id || null,
+        status: 'warning',
+        notes: '',
+        monitorUntil: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split('T')[0],
+        reasonForMonitoring: '',
+        monitoringChecks: ''
+      };
+    }
+    
+    // Show the overlay
+    this.showingMonitoringDetails = true;
+  }
+  
+  // Hide monitoring details overlay
+  hideMonitoringDetails() {
+    this.showingMonitoringDetails = false;
+    this.selectedAnimal = null;
+    this.editMode = false;
+    this.editingMonitorId = null;
+  }
+  
+  // Add animal to monitoring
+  addAnimalToMonitoring() {
+    if (!this.selectedAnimal || !this.newMonitor.reasonForMonitoring) {
+      return;
+    }
+    
+    // Parse monitoring checks into individual tasks
+    const monitoringTasks: MonitoringTask[] = this.newMonitor.monitoringChecks
+      ? this.newMonitor.monitoringChecks.split(/\n|,/).filter(Boolean).map((task: string) => ({
+          task: task.trim(),
+          checked: false
+        }))
+      : [];
+      
+    // Create new monitoring entry
+    const newMonitorEntry = {
+      id: this.selectedAnimal._id || '',
+      name: `${this.selectedAnimal.quantity || 1} ${this.selectedAnimal.type || 'Unknown'}`,
+      tag: this.selectedAnimal.tagNumber || 'N/A',
+      herdNumber: `${this.selectedAnimal.type?.substring(0,2).toUpperCase() || 'AN'}-${this.selectedAnimal.tagNumber || '000'}-${Math.floor(1000 + Math.random() * 9000)}`,
+      type: this.selectedAnimal.type || 'Animal',
+      breed: this.selectedAnimal.breed || 'Unknown',
+      status: this.newMonitor.status,
+      notes: this.getStatusNoteFromId(this.newMonitor.status),
+      lastChecked: 'Just now',
+      monitorUntil: this.newMonitor.monitorUntil,
+      temperature: '38.5°C',
+      weight: '0kg',
+      reasonForMonitoring: this.newMonitor.reasonForMonitoring,
+      monitoringTasks: monitoringTasks.length > 0 ? monitoringTasks : [
+        { task: 'General health check', checked: false },
+        { task: 'Standing', checked: false },
+        { task: 'Eating', checked: false },
+        { task: 'Drinking', checked: false },
+        { task: 'Passing Stool', checked: false }
+      ]
+    };
+    
+    // Add to monitored list
+    this.monitoredLivestock.push(newMonitorEntry);
+    
+    // Sort the list by priority
+    this.sortAnimalsByPriority();
+    
+    // Save to localStorage
+    this.saveMonitoredLivestock();
+    
+    // Hide overlay
+    this.hideMonitoringDetails();
+    
+    // Show success message
+    this.showSuccessAlert(`${newMonitorEntry.name} added to monitoring`);
+  }
+  
+  // Edit an existing monitoring entry
+  editMonitoring(animalId: string | number) {
+    // Find the animal in the monitored list
+    const monitoredAnimal = this.monitoredLivestock.find(animal => 
+      animal.id.toString() === animalId.toString()
     );
     
-    if (availableLivestock.length === 0) {
-      // No available animals to monitor
+    if (!monitoredAnimal) {
+      console.error('Animal not found in monitoring list with ID:', animalId);
+      this.showErrorAlert('Animal not found in monitoring list');
+      return;
+    }
+    
+    // Set edit mode
+    this.editMode = true;
+    this.editingMonitorId = animalId;
+    
+    // Convert the monitoring tasks back to string for editing
+    const monitoringChecks = monitoredAnimal.monitoringTasks
+      .map(task => task.task)
+      .join('\n');
+    
+    // Populate the form with existing data
+    this.newMonitor = {
+      animalId: monitoredAnimal.id,
+      status: monitoredAnimal.status,
+      notes: monitoredAnimal.notes,
+      monitorUntil: monitoredAnimal.monitorUntil,
+      reasonForMonitoring: monitoredAnimal.reasonForMonitoring,
+      monitoringChecks: monitoringChecks
+    };
+    
+    // Fetch the animal data
+    const user = this.authService.fetchActiveUser();
+    if (user) {
+      this.livestockService.getLivestockById(animalId.toString(), user.uid).subscribe(
+        (livestock) => {
+          if (livestock) {
+            this.selectedAnimal = livestock;
+            this.showMonitoringDetails();
+          } else {
+            // If livestock data is not available, use the monitored animal data
+            this.selectedAnimal = {
+              _id: monitoredAnimal.id,
+              type: monitoredAnimal.type,
+              tagNumber: monitoredAnimal.tag,
+              breed: monitoredAnimal.breed,
+              quantity: 1
+            };
+            this.showMonitoringDetails();
+          }
+        },
+        (error) => {
+          console.error('Error fetching livestock details:', error);
+          // If there's an error, use the monitored animal data
+          this.selectedAnimal = {
+            _id: monitoredAnimal.id,
+            type: monitoredAnimal.type,
+            tagNumber: monitoredAnimal.tag,
+            breed: monitoredAnimal.breed,
+            quantity: 1
+          };
+          this.showMonitoringDetails();
+        }
+      );
+    } else {
+      // If no user is logged in, use the monitored animal data
+      this.selectedAnimal = {
+        _id: monitoredAnimal.id,
+        type: monitoredAnimal.type,
+        tagNumber: monitoredAnimal.tag,
+        breed: monitoredAnimal.breed,
+        quantity: 1
+      };
+      this.showMonitoringDetails();
+    }
+  }
+  
+  // Update an existing monitoring entry
+  updateMonitoring() {
+    if (!this.editingMonitorId || !this.newMonitor.reasonForMonitoring) {
+      return;
+    }
+    
+    // Find the animal in the monitored list
+    const index = this.monitoredLivestock.findIndex(animal => {
+      if (!animal.id || !this.editingMonitorId) return false;
+      return animal.id.toString() === this.editingMonitorId.toString();
+    });
+    
+    if (index === -1) {
+      console.error('Animal not found in monitoring list for update with ID:', this.editingMonitorId);
+      this.showErrorAlert('Animal not found in monitoring list');
+      return;
+    }
+    
+    // Parse monitoring checks into individual tasks
+    const monitoringTasks: MonitoringTask[] = this.newMonitor.monitoringChecks
+      ? this.newMonitor.monitoringChecks.split(/\n|,/).filter(Boolean).map((task: string) => ({
+          task: task.trim(),
+          checked: false
+        }))
+      : [];
+    
+    // Preserve existing task checked status if possible
+    if (this.monitoredLivestock[index].monitoringTasks.length > 0) {
+      // Create a map of existing tasks and their checked status
+      const existingTaskMap = new Map(
+        this.monitoredLivestock[index].monitoringTasks.map(task => [task.task, task.checked])
+      );
+      
+      // Update the checked status if the task already exists
+      monitoringTasks.forEach(task => {
+        if (existingTaskMap.has(task.task)) {
+          task.checked = existingTaskMap.get(task.task) || false;
+        }
+      });
+    }
+    
+    // Update the monitoring entry
+    this.monitoredLivestock[index] = {
+      ...this.monitoredLivestock[index],
+      status: this.newMonitor.status,
+      notes: this.getStatusNoteFromId(this.newMonitor.status),
+      monitorUntil: this.newMonitor.monitorUntil,
+      reasonForMonitoring: this.newMonitor.reasonForMonitoring,
+      monitoringTasks: monitoringTasks.length > 0 ? monitoringTasks : this.monitoredLivestock[index].monitoringTasks
+    };
+    
+    // Sort the list by priority
+    this.sortAnimalsByPriority();
+    
+    // Save to localStorage
+    this.saveMonitoredLivestock();
+    
+    // Hide overlay
+    this.hideMonitoringDetails();
+    
+    // Show success message
+    this.showSuccessAlert(`${this.monitoredLivestock[index].name} monitoring updated`);
+  }
+  
+  // Helper to show success alerts
+  async showSuccessAlert(message: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Success',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  
+  // Format the birthdate to a readable format
+  formatBirthDate(dateString?: string): string {
+    if (!dateString) return 'Unknown';
+    
+    try {
+      const date = new Date(dateString);
+      
+      // Check if date is valid
+      if (isNaN(date.getTime())) {
+        return dateString; // Return the original string if it's not a valid date
+      }
+      
+      // Format as DD/MM/YYYY
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      
+      return `${day}/${month}/${year}`;
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return dateString || 'Unknown';
+    }
+  }
+  
+  // Show monitoring details after animal is selected
+  async showMonitoringDetailsAlert(animalId: number | string, livestockData?: any) {
+    // If we have the full livestock data passed directly, use it
+    // Otherwise, try to find it in the allLivestock array
+    let selectedAnimal: any;
+    
+    if (livestockData) {
+      // Use the detailed livestock data directly
+      selectedAnimal = {
+        id: livestockData._id,
+        name: `${livestockData.quantity || 1} ${livestockData.type || 'Unknown'}`,
+        type: livestockData.type,
+        tag: livestockData.tagNumber || 'Unknown',
+        herdNumber: livestockData.herdNumber || 'Unknown',
+        breed: livestockData.breed || 'Unknown',
+        birthDate: livestockData.birthDate
+      };
+    } else {
+      // Fall back to using the allLivestock array
+      selectedAnimal = this.allLivestock.find(animal => 
+        animal.id.toString() === animalId.toString()
+      );
+    }
+    
+    if (!selectedAnimal) {
+      console.error('Selected animal not found with ID:', animalId);
       const alert = await this.alertCtrl.create({
-        header: 'No Animals Available',
-        message: 'All animals are already being monitored.',
+        header: 'Error',
+        message: 'Selected animal not found. Please try again.',
         buttons: ['OK']
       });
       await alert.present();
       return;
     }
-    
-    // First, let user select an animal with a radio group
-    const selectAnimalAlert = await this.alertCtrl.create({
-      header: 'Select Animal',
-      cssClass: 'select-animal-alert',
-      inputs: availableLivestock.map(animal => ({
-        name: 'animalId',
-        type: 'radio',
-        label: animal.name,
-        value: animal.id.toString(),
-        checked: animal.id === availableLivestock[0].id
-      })),
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Next',
-          handler: (data) => {
-            this.showMonitoringDetailsAlert(parseInt(data));
-            return true;
-          }
-        }
-      ]
-    });
-    
-    await selectAnimalAlert.present();
-  }
-  
-  // Show monitoring details after animal is selected
-  async showMonitoringDetailsAlert(animalId: number | string) {
-    const selectedAnimal = this.allLivestock.find(animal => animal.id === animalId);
-    if (!selectedAnimal) return;
     
     const alert = await this.alertCtrl.create({
       header: `Monitor: ${selectedAnimal.name}`,
@@ -474,146 +857,5 @@ export class MonitorPage implements OnInit {
     }
   }
   
-  // Mark animal as checked with a simple alert popup
-  async checkAnimal(animalId: number | string) {
-    const animal = this.monitoredLivestock.find(a => a.id === animalId);
-    if (!animal) return;
-    
-    // Create the checklist HTML with task items
-    const checklistHTML = animal.monitoringTasks.map((task: MonitoringTask, index: number) => 
-      `<ion-item lines="none" style="--padding-start: 0; margin-bottom: 5px;">
-         <ion-checkbox disabled slot="start" ${task.checked ? 'checked' : ''}></ion-checkbox>
-         <ion-label>${task.task}</ion-label>
-       </ion-item>`
-    ).join('');
-    
-    // Build animal info header with key details
-    const animalInfoHTML = `
-      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; background: rgba(var(--ion-color-light-rgb), 0.5); padding: 12px; border-radius: 8px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-weight: 600; font-size: 15px;">${animal.type}: ${animal.name}</span>
-          <span style="background-color: rgba(var(--ion-color-${this.getStatusColorClass(animal.status)}-rgb), 0.2); 
-                       color: var(--ion-color-${this.getStatusColorClass(animal.status)}); 
-                       padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">
-            ${this.getStatusName(animal.status)}
-          </span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 14px;">
-          <div><strong>Tag/ID:</strong> ${animal.tag}</div>
-          <div><strong>Herd #:</strong> ${animal.herdNumber}</div>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 14px;">
-          <div><strong>Temp:</strong> ${animal.temperature}</div>
-          <div><strong>Weight:</strong> ${animal.weight}</div>
-        </div>
-      </div>
-      <div style="margin-bottom: 16px; padding: 10px; border-left: 3px solid var(--ion-color-warning); background-color: rgba(var(--ion-color-warning-rgb), 0.1);">
-        <p style="margin: 0; font-style: italic; font-size: 14px;">${animal.reasonForMonitoring}</p>
-      </div>
-    `;
-    
-    // Create alert with the complete content
-    const alert = await this.alertCtrl.create({
-      header: `Check: ${animal.name}`,
-      cssClass: 'check-animal-alert',
-      message: `
-        ${animalInfoHTML}
-        <h5 style="margin-top: 16px; margin-bottom: 10px; font-size: 16px; display: flex; align-items: center;">
-          <span style="display: inline-block; width: 4px; height: 16px; background-color: var(--ion-color-primary); 
-                       margin-right: 8px; border-radius: 4px;"></span>
-          Health Checklist
-        </h5>
-        <div style="margin-bottom: 16px;">
-          ${checklistHTML}
-        </div>
-      `,
-      inputs: [
-        {
-          name: 'observations',
-          type: 'textarea',
-          placeholder: 'Observations (symptoms, behavior, etc.)',
-          value: animal.notes,
-          attributes: {
-            maxlength: 200,
-            rows: 3
-          }
-        },
-        {
-          name: 'updateStatus',
-          type: 'radio',
-          label: 'Change Status:',
-          value: 'nochange',
-          checked: true
-        },
-        {
-          name: 'updateStatus',
-          type: 'radio',
-          label: 'Needs Vet Attention',
-          value: 'critical',
-          checked: false
-        },
-        {
-          name: 'updateStatus',
-          type: 'radio',
-          label: 'Monitoring Required',
-          value: 'warning',
-          checked: false
-        },
-        {
-          name: 'updateStatus',
-          type: 'radio',
-          label: 'Recovering',
-          value: 'stable',
-          checked: false
-        },
-        {
-          name: 'updateStatus',
-          type: 'radio',
-          label: 'Remove from Monitoring',
-          value: 'remove',
-          checked: false
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Save',
-          handler: (data) => {
-            // Update the last checked time
-            animal.lastChecked = 'Just now';
-            
-            // Update status if changed
-            if (data.updateStatus && data.updateStatus !== 'nochange') {
-              // Check if status is 'remove' to remove from monitoring
-              if (data.updateStatus === 'remove') {
-                this.monitoredLivestock = this.monitoredLivestock.filter(a => a.id !== animal.id);
-                return true;
-              }
-              
-              // Update the status
-              animal.status = data.updateStatus;
-              
-              // Re-sort animals by priority
-              this.sortAnimalsByPriority();
-            }
-            
-            // Update notes if observations provided
-            if (data.observations) {
-              animal.notes = data.observations;
-            }
-            
-            // Save changes to localStorage
-            this.saveMonitoredLivestock();
-            
-            return true;
-          }
-        }
-      ]
-    });
-    
-    await alert.present();
-  }
+  // Removed checkAnimal method as it's no longer needed
 }

@@ -2,8 +2,8 @@
   position: fixed;
   top: 10px; /* Aligned with menu button */
   left: 8px;
-  width: 36px;
-  height: 36px;
+  width: 54px; /* Match menu button size */
+  height: 54px; /* Match menu button size */
   border-radius: 50%;
   background-color: var(--ion-background-color);
   display: flex;
@@ -20,6 +20,6 @@
 }
 
 .back-icon {
-  font-size: 20px;
+  font-size: 30px; /* Match menu icon size */
   color: var(--ion-color-primary);
 }

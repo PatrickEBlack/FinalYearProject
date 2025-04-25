@@ -27,13 +27,21 @@
   </ion-card>
 
   <ion-list>
-    <ion-item button (click)="goToSettings()" class="settings-item">
-      <ion-icon name="settings-outline" slot="start"></ion-icon>
+    <ion-item class="accessibility-item">
+      <ion-icon name="accessibility-outline" slot="start"></ion-icon>
       <ion-label>
-        <h2>App Settings</h2>
-        <p>Configure app preferences</p>
+        <h2>Text Size</h2>
+        <p>Adjust the text size for better readability</p>
+        <ion-range 
+          [min]="minTextSize" 
+          [max]="maxTextSize" 
+          [value]="textSize" 
+          (ionChange)="onTextSizeChange($event)"
+          class="text-size-range">
+          <ion-icon name="text-outline" size="small" slot="start"></ion-icon>
+          <ion-icon name="text-outline" slot="end"></ion-icon>
+        </ion-range>
       </ion-label>
-      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
     </ion-item>
     
     <ion-item button (click)="openChangePasswordModal()" class="security-item">

@@ -7,7 +7,6 @@ require('dotenv').config();
 // Routes
 const livestockRoutes = require('./routes/livestock.routes');
 const vaccinationRoutes = require('./routes/vaccination.routes');
-const settingsRoutes = require('./routes/settings.routes');
 
 // Create Express app
 const app = express();
@@ -169,7 +168,6 @@ mongoose.connect(MONGODB_URI, {
 // Routes
 app.use('/api/livestock', livestockRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
-app.use('/api/settings', settingsRoutes);
 
 // Health check routes
 app.get('/', (req, res) => {

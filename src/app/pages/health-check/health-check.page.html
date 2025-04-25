@@ -1,0 +1,319 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Disease Diagnostic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-container">
+    <!-- Header Section -->
+    <div class="section-header">
+      <h2>Disease Diagnostic Tool</h2>
+    </div>
+    
+    <!-- Diagnostic Tool Introduction -->
+    <div class="diagnostic-tool-card">
+      <div class="card-header">
+        <h3>Cattle Disease Diagnostic Tool</h3>
+        <p class="subtitle">Identify potential health issues based on symptoms</p>
+      </div>
+      
+      <div class="card-content">
+        <p>This diagnostic tool helps identify potential cattle diseases by matching observed symptoms with a database of known conditions.</p>
+        <ul>
+          <li>Select symptoms from the common list or add custom ones</li>
+          <li>Add optional animal information to improve accuracy</li>
+          <li>View detailed information about potential matches</li>
+          <li>Access treatment and prevention recommendations</li>
+        </ul>
+      </div>
+      
+      <div class="card-actions">
+        <ion-button expand="block" color="tertiary" (click)="toggleDiagnosticTool()">
+          <ion-icon [name]="showDiagnosticTool ? 'close-outline' : 'search-outline'" slot="start"></ion-icon>
+          {{ showDiagnosticTool ? 'Hide Diagnostic Tool' : 'Start New Diagnosis' }}
+        </ion-button>
+      </div>
+    </div>
+    
+    <!-- Diagnostic Form -->
+    <div class="diagnostic-form-section" *ngIf="showDiagnosticTool">
+      <form [formGroup]="diagnosticForm">
+        <!-- Symptoms Section -->
+        <div class="symptoms-section">
+          <h3>Enter Observed Symptoms</h3>
+          
+          <!-- Selected Symptoms -->
+          <div class="selected-symptoms" *ngIf="symptoms.length > 0">
+            <h4>Selected Symptoms:</h4>
+            <div class="symptom-chips">
+              <ion-chip *ngFor="let symptom of symptoms.controls; let i = index" color="warning">
+                {{ symptom.value }}
+                <ion-icon name="close-outline" (click)="removeSymptom(i)"></ion-icon>
+              </ion-chip>
+            </div>
+          </div>
+          
+          <!-- Common Symptoms List -->
+          <div class="common-symptoms">
+            <h4>Common Symptoms (A-Z):</h4>
+            <div class="search-box">
+              <ion-input placeholder="Filter symptoms..." [(ngModel)]="symptomFilter" [ngModelOptions]="{standalone: true}"></ion-input>
+            </div>
+            <div class="symptom-buttons">
+              <ion-button 
+                *ngFor="let symptom of getFilteredSymptoms()" 
+                size="small" 
+                class="symptom-button"
+                [fill]="isSymptomSelected(symptom) ? 'solid' : 'outline'" 
+                [color]="isSymptomSelected(symptom) ? 'warning' : 'medium'"
+                (click)="addSymptom(symptom)">
+                {{ symptom }}
+              </ion-button>
+            </div>
+          </div>
+          
+          <!-- Custom Symptom Input -->
+          <div class="custom-symptom">
+            <h4>Add Custom Symptom:</h4>
+            <div class="input-row">
+              <ion-input
+                [(ngModel)]="customSymptom"
+                [ngModelOptions]="{standalone: true}"
+                placeholder="Enter symptom"
+                class="custom-symptom-input">
+              </ion-input>
+              <ion-button 
+                size="small" 
+                color="warning"
+                (click)="addCustomSymptom()" 
+                [disabled]="!customSymptom.trim()">
+                Add
+              </ion-button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Animal Information Section -->
+        <div class="animal-info-section" formGroupName="animalInfo">
+          <h3>Animal Information (Optional)</h3>
+          <div class="form-row">
+            <ion-item class="custom-field">
+              <ion-label position="stacked">Age (years)</ion-label>
+              <ion-input type="number" formControlName="age"></ion-input>
+            </ion-item>
+            
+            <ion-item class="custom-field">
+              <ion-label position="stacked">Weight (kg)</ion-label>
+              <ion-input type="number" formControlName="weight"></ion-input>
+            </ion-item>
+          </div>
+          
+          <div class="form-row">
+            <ion-item class="custom-field">
+              <ion-label position="stacked">Breed</ion-label>
+              <ion-input type="text" formControlName="breed"></ion-input>
+            </ion-item>
+            
+            <ion-item class="custom-field">
+              <ion-label position="stacked">Gender</ion-label>
+              <ion-select formControlName="gender" interface="popover" placeholder="Select gender">
+                <ion-select-option value="male">Male</ion-select-option>
+                <ion-select-option value="female">Female</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          
+          <div class="form-row" *ngIf="diagnosticForm.get('animalInfo.gender')?.value === 'female'">
+            <ion-item lines="none">
+              <ion-label>Lactating</ion-label>
+              <ion-checkbox formControlName="lactating"></ion-checkbox>
+            </ion-item>
+            
+            <ion-item lines="none">
+              <ion-label>Pregnant</ion-label>
+              <ion-checkbox formControlName="pregnant"></ion-checkbox>
+            </ion-item>
+          </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <ion-button color="medium" (click)="resetDiagnosticForm()">
+            Clear Form
+          </ion-button>
+          <ion-button 
+            color="warning" 
+            (click)="runDiagnostic()" 
+            [disabled]="symptoms.length === 0 || isLoading">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+            Run Diagnostic
+          </ion-button>
+        </div>
+        
+        <!-- Loading Indicator -->
+        <div class="loading-indicator" *ngIf="isLoading">
+          <ion-progress-bar type="indeterminate"></ion-progress-bar>
+          <p class="centered-text">Analysing symptoms...</p>
+        </div>
+      </form>
+      
+      <!-- Results Section -->
+      <div class="diagnostic-results" *ngIf="diagnosticResults.length > 0 && !selectedDiseaseDetails">
+        <h3>Diagnostic Results</h3>
+        <p class="results-note">Based on the symptoms provided, here are the most likely conditions:</p>
+        
+        <ion-list>
+          <ion-item 
+            *ngFor="let result of diagnosticResults"
+            button
+            (click)="viewDiseaseDetails(result)">
+            <ion-label>
+              <h2>{{ result.disease.disease_name }}</h2>
+              <p *ngIf="result.disease.alternative_names">
+                Also known as: {{ result.disease.alternative_names }}
+              </p>
+              <p>Matched {{ result.matchedSymptoms.length }} symptoms</p>
+              <p *ngIf="result.differentialSymptoms && result.differentialSymptoms.length > 0" class="differential-hint">
+                <ion-icon name="search-circle" color="tertiary"></ion-icon>
+                Check for {{ result.differentialSymptoms.length }} more specific symptoms
+              </p>
+            </ion-label>
+            <ion-badge 
+              slot="end" 
+              [color]="getConfidenceClass(result.confidence)" 
+              class="confidence-badge">
+              {{ result.confidence.toFixed(0) }}% match
+            </ion-badge>
+          </ion-item>
+        </ion-list>
+        
+      </div>
+      
+      <!-- Disease Details View -->
+      <div class="disease-details" *ngIf="selectedDiseaseDetails">
+        <div class="details-header">
+          <ion-button fill="clear" (click)="closeDetails()">
+            <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+          </ion-button>
+          <h3>{{ selectedDiseaseDetails.disease.disease_name }}</h3>
+          <ion-badge [color]="getConfidenceClass(selectedDiseaseDetails.confidence)" class="confidence-badge">
+            {{ selectedDiseaseDetails.confidence.toFixed(0) }}% match
+          </ion-badge>
+        </div>
+        
+        <div class="details-content">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Overview</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p *ngIf="selectedDiseaseDetails.disease.alternative_names">
+                <strong>Also known as:</strong> {{ selectedDiseaseDetails.disease.alternative_names }}
+              </p>
+              <p><strong>Category:</strong> {{ selectedDiseaseDetails.disease.category }}</p>
+              <p><strong>Cause:</strong> {{ selectedDiseaseDetails.disease.causative_agents }}</p>
+              <p><strong>Transmission:</strong> {{ selectedDiseaseDetails.disease.transmission }}</p>
+              <p><strong>Prognosis:</strong> {{ selectedDiseaseDetails.disease.prognosis }}</p>
+              <p *ngIf="selectedDiseaseDetails.disease.zoonotic_potential">
+                <strong>Zoonotic Potential:</strong> {{ selectedDiseaseDetails.disease.zoonotic_potential }}
+              </p>
+            </ion-card-content>
+          </ion-card>
+          
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Symptoms Analysis</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <div *ngIf="selectedDiseaseDetails.matchedSymptoms.length > 0">
+                <h4 style="color: var(--ion-color-success);">Matched Symptoms</h4>
+                <ul class="matched-symptoms-list">
+                  <li *ngFor="let symptom of selectedDiseaseDetails.matchedSymptoms">
+                    <ion-icon name="checkmark-circle" color="success"></ion-icon> {{ symptom }}
+                  </li>
+                </ul>
+              </div>
+              
+              <div *ngIf="selectedDiseaseDetails.unmatchedSymptoms.length > 0">
+                <h4 style="color: var(--ion-color-danger); margin-top: 16px;">Unmatched Symptoms</h4>
+                <ul class="unmatched-symptoms-list">
+                  <li *ngFor="let symptom of selectedDiseaseDetails.unmatchedSymptoms">
+                    <ion-icon name="alert-circle" color="danger"></ion-icon> {{ symptom }}
+                  </li>
+                </ul>
+              </div>
+              
+              <div *ngIf="selectedDiseaseDetails.differentialSymptoms && selectedDiseaseDetails.differentialSymptoms.length > 0">
+                <h4 style="color: var(--ion-color-tertiary); margin-top: 16px;">Check For These Symptoms</h4>
+                <p class="differential-note">These symptoms are specific to this disease and can help confirm the diagnosis:</p>
+                <ul class="differential-symptoms-list">
+                  <li *ngFor="let symptom of selectedDiseaseDetails.differentialSymptoms">
+                    <ion-icon name="search-circle" color="tertiary"></ion-icon> {{ symptom }}
+                  </li>
+                </ul>
+              </div>
+            </ion-card-content>
+          </ion-card>
+          
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>All Known Symptoms</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ng-container *ngIf="selectedDiseaseDetails.disease.symptoms">
+                <!-- Check if symptoms is an array -->
+                <ng-container *ngIf="isSymptomArray(selectedDiseaseDetails.disease.symptoms)">
+                  <ul>
+                    <li *ngFor="let symptom of getSymptomArray(selectedDiseaseDetails.disease.symptoms)">
+                      {{ symptom }}
+                    </li>
+                  </ul>
+                </ng-container>
+                
+                <!-- If symptoms is an object with categories -->
+                <ng-container *ngIf="!isSymptomArray(selectedDiseaseDetails.disease.symptoms)">
+                  <div *ngFor="let key of getObjectKeys(selectedDiseaseDetails.disease.symptoms)">
+                    <h4>{{ key | titlecase }}</h4>
+                    <ul>
+                      <li *ngFor="let symptom of getSymptomsByKey(selectedDiseaseDetails.disease.symptoms, key)">
+                        {{ symptom }}
+                      </li>
+                    </ul>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ion-card-content>
+          </ion-card>
+          
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Treatment</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ul>
+                <li *ngFor="let treatment of selectedDiseaseDetails.disease.treatments">
+                  {{ treatment }}
+                </li>
+              </ul>
+            </ion-card-content>
+          </ion-card>
+          
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Prevention</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ul>
+                <li *ngFor="let prevention of selectedDiseaseDetails.disease.prevention">
+                  {{ prevention }}
+                </li>
+              </ul>
+            </ion-card-content>
+          </ion-card>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

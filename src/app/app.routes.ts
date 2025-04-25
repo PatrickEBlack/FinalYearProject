@@ -41,51 +41,22 @@ export const routes: Routes = [
         path: 'remove-livestock',
         loadComponent: () => import('./pages/remove-livestock/remove-livestock.page').then(m => m.RemoveLivestockPage)
       },
-      {
-        path: 'view-pasture',
-        loadComponent: () => import('./pages/view-pasture/view-pasture.page').then(m => m.ViewPasturePage)
-      },
-      {
-        path: 'add-to-pasture',
-        loadComponent: () => import('./pages/add-to-pasture/add-to-pasture.page').then(m => m.AddToPasturePage)
-      },
-      {
-        path: 'modify-pasture',
-        loadComponent: () => import('./pages/modify-pasture/modify-pasture.page').then(m => m.ModifyPasturePage)
-      },
+      // Pasture routes removed
       {
         path: 'weather',
         loadComponent: () => import('./pages/weather/weather.page').then(m => m.WeatherPage)
-      },
-      {
-        path: 'settings',
-        loadComponent: () => import('./pages/settings/settings.page').then(m => m.SettingsPage)
       },
       {
         path: 'profile',
         loadComponent: () => import('./pages/profile/profile.page').then(m => m.ProfilePage)
       },
       {
-        path: 'quick-log',
-        loadComponent: () => import('./pages/quick-log/quick-log.page').then(m => m.QuickLogPage)
-      },
-      {
         path: 'monitor',
         loadComponent: () => import('./pages/monitor/monitor.page').then(m => m.MonitorPage)
       },
       {
-        path: 'tasks',
-        loadComponent: () => import('./pages/tasks/tasks.page').then(m => m.TasksPage)
-      },
-      {
-        path: 'ai-helper',
-        loadComponent: () => import('./pages/ai-helper/ai-helper.page').then(m => m.AiHelperPage)
-      },
-      {
-        // Redirect old news route to new ai-helper
-        path: 'news',
-        redirectTo: 'ai-helper',
-        pathMatch: 'full'
+        path: 'health-check',
+        loadComponent: () => import('./pages/health-check/health-check.page').then(m => m.HealthCheckPage)
       },
       {
         //if the path is empty, redirect to home

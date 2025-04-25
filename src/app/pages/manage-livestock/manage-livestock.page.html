@@ -12,6 +12,10 @@
         <span class="count-number">{{livestockCount}}</span>
         <span class="count-label">Animals</span>
       </div>
+      <div class="monitored-count" *ngIf="monitoredCount > 0" routerLink="/tabs/monitor">
+        <span class="count-number">{{monitoredCount}}</span>
+        <span class="count-label">Monitored</span>
+      </div>
     </div>
     
     <!-- Type distribution -->
@@ -42,32 +46,26 @@
       <ion-icon name="list"></ion-icon>
       <span>View All</span>
     </div>
+
+    <div class="primary-action" routerLink="/tabs/monitor">
+      <ion-icon name="warning"></ion-icon>
+      <span>Monitor</span>
+    </div>
+    
+    <div class="primary-action" routerLink="/tabs/add-livestock">
+      <ion-icon name="medical"></ion-icon>
+      <span>Vaccinations</span>
+    </div>
   </div>
   
-  <!-- Quick Actions -->
-  <div class="quick-actions-container">
+  <!-- Quick Actions Container kept but empty for now -->
+  <div class="quick-actions-container" style="display: none;">
     <h3 class="actions-title">Quick Actions</h3>
     
     <div class="quick-actions">
-      <div class="quick-action-button" routerLink="/tabs/view-livestock">
-        <ion-icon name="search"></ion-icon>
-        <span>Search</span>
-      </div>
+      <!-- Search button removed -->
       
-      <div class="quick-action-button" routerLink="/tabs/quick-log">
-        <ion-icon name="document-text"></ion-icon>
-        <span>Quick Log</span>
-      </div>
-      
-      <div class="quick-action-button" routerLink="/tabs/monitor">
-        <ion-icon name="warning"></ion-icon>
-        <span>Monitor</span>
-      </div>
-      
-      <div class="quick-action-button" routerLink="/tabs/add-livestock">
-        <ion-icon name="medical"></ion-icon>
-        <span>Vaccinations</span>
-      </div>
+      <!-- Monitor and Vaccinations moved to primary actions -->
     </div>
   </div>
 </ion-content>

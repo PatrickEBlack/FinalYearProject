@@ -45,13 +45,7 @@ interface LivestockSummary {
   count: number;
 }
 
-interface PastureSummary {
-  name: string;
-  size: number;
-  animals: number;
-  condition: 'good' | 'warning' | 'danger';
-  statusText: string;
-}
+// Pasture interface removed
 
 @Component({
   selector: 'app-manage-livestock',
@@ -76,13 +70,9 @@ interface PastureSummary {
 })
 export class ManageLivestockPage implements OnInit {
   livestockCount: number = 0;
-  pastureNumber: number = 0;
-  pastureSize: number = 0;
+  monitoredCount: number = 0;
   
   livestockTypes: LivestockSummary[] = [];
-  
-  // Will be populated from database in the future
-  pastures: PastureSummary[] = [];
 
   userId: string | null = null;
   isLoading: boolean = false;
@@ -127,10 +117,44 @@ export class ManageLivestockPage implements OnInit {
     if (user) {
       this.userId = user.uid;
       this.fetchLivestockData();
-      this.fetchPastureData();
+      this.getMonitoredCount();
     } else {
       this.error = 'User not authenticated';
       console.error('User not authenticated');
+    }
+  }
+  
+  // Refresh data when page becomes active
+  ionViewWillEnter() {
+    // This will refresh the monitored count each time the page becomes visible
+    this.getMonitoredCount();
+  }
+  
+  // Get the count of animals currently being monitored
+  getMonitoredCount() {
+    // Get the current user
+    const user = this.authService.fetchActiveUser();
+    if (!user) {
+      console.error('No user logged in');
+      this.monitoredCount = 0;
+      return;
+    }
+    
+    // Use user-specific key for localStorage
+    const userKey = `monitoredLivestock_${user.uid}`;
+    
+    // Get monitored animals from localStorage using user-specific key
+    const monitored = localStorage.getItem(userKey);
+    if (monitored) {
+      try {
+        const monitoredAnimals = JSON.parse(monitored);
+        this.monitoredCount = monitoredAnimals.length;
+      } catch (e) {
+        console.error('Error parsing monitored livestock data:', e);
+        this.monitoredCount = 0;
+      }
+    } else {
+      this.monitoredCount = 0;
     }
   }
 
@@ -234,11 +258,5 @@ export class ManageLivestockPage implements OnInit {
     }
   }
   
-  fetchPastureData() {
-    // This would be replaced with actual API calls to your backend
-    console.log('Fetching pasture data...');
-    
-    // In the future, implement MongoDB integration for pastures
-    // For now, use the mock data defined in the component
-  }
+  // Pasture functionality removed
 }
