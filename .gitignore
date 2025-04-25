@@ -34,23 +34,6 @@ environment.*.ts
 /src/app/forClaude.txt
 CLAUDE.md
 
-# Documentation files (not for repository)
-*-guide.md
-*-reference-material.md
-*-documentation.md
-*-documentation-simplified.md
-*explanation.md
-*survey-form.md
-ai-*.md
-diagnostic_tool_documentation*.md
-american_to_british_changes.md
-dissertation-reference-material.md
-git-update-guide.md
-heroku-deployment-guide.md
-project-documentation.md
-farmer-survey-form.md
-github-preparation-guide.md
-
 # Generated directories not for repository
 /backup/
 /help/
