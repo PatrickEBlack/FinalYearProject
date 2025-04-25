@@ -5,16 +5,18 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server/server.js",
+    "start:client": "ng serve",
     "start:server": "node server/server.js",
-    "start:dev": "concurrently \"npm run start\" \"npm run start:server\"",
-    "build": "ng build",
+    "start:dev": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "server:install": "cd server && npm install",
-    "postinstall": "npm run server:install",
-    "setup": "node setup.js"
+    "postinstall": "npm run server:install && npm run build",
+    "setup": "node setup.js",
+    "heroku-postbuild": "ng build --configuration production"
   },
   "private": true,
   "dependencies": {
@@ -71,6 +73,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
   },
   "description": "An Ionic project"
 }
