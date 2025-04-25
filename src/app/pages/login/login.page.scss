@@ -3,9 +3,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh; /* Reduced from 100vh to avoid overflow */
   width: 100%;
   padding: 20px;
+  margin-bottom: 40px; /* Added margin at the bottom */
 
   h1 {
     font-size: 40px;
@@ -16,7 +17,7 @@
   form {
     width: 100%;
     max-width: 400px;
-    padding-bottom: 15%;
+    padding-bottom: 60px; /* Increased padding to make space for the buttons */
   }
 }
 
@@ -24,7 +25,14 @@
   --color: rgb(255, 255, 255);
   --background: transparent;
   background-color: rgb(3, 193, 53);
-  margin-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: 50px;
+  font-size: 16px;
+  --border-radius: 8px;
+  display: block;
+  width: 100%;
+  color: white; /* Explicitly set text color */
 }
 
 .error-message {
@@ -61,4 +69,18 @@ ion-item {
 ion-button[fill="outline"] {
   --border-color: rgb(3, 193, 53);
   --color: rgb(3, 193, 53);
+  color: rgb(3, 193, 53) !important; /* Force text color */
+}
+
+/* Ensure content is scrollable */
+ion-content {
+  --overflow: auto;
+  --padding-bottom: 80px;
+}
+
+/* Make forgot password button more visible */
+ion-button[fill="clear"] {
+  margin-top: 10px;
+  --color: rgb(3, 193, 53);
+  font-weight: 500;
 }
