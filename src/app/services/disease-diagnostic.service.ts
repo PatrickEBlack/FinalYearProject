@@ -17,6 +17,7 @@ export interface DiseaseData {
   prevention: string[];
   prognosis: string;
   zoonotic_potential?: string;
+  vaccinations?: string[]; // Available vaccines that prevent this disease
 }
 
 export interface DiagnosticResult {
@@ -33,7 +34,7 @@ export interface DiagnosticParams {
   animalInfo?: {
     age?: number;
     weight?: number;
-    breed?: string;
+    vaccinations?: string[]; // Added vaccinations array
     gender?: 'male' | 'female';
     lactating?: boolean;
     pregnant?: boolean;
@@ -191,6 +192,28 @@ export class DiseaseDiagnosticService {
       'Neosporosis', 'Bovine Trichomoniasis', 'Bovine Campylobacteriosis', 
       'Leptospirosis', 'Bovine Viral Diarrhea', 'Infectious Bovine Rhinotracheitis'
     ];
+    
+    // Vaccination status adjustment
+    if (animalInfo.vaccinations && animalInfo.vaccinations.length > 0 && disease.vaccinations) {
+      // For each vaccination the animal has received
+      animalInfo.vaccinations.forEach(vaccination => {
+        // Normalize the vaccination name for better matching
+        const normalizedVaccination = this.normaliseSymptom(vaccination);
+        
+        // Check if this vaccination covers the current disease
+        const vaccinationMatch = disease.vaccinations.some(diseaseVaccine => {
+          const normalizedDiseaseVaccine = this.normaliseSymptom(diseaseVaccine);
+          // Check for direct matches or if the vaccine is mentioned in the disease vaccine
+          return normalizedDiseaseVaccine.includes(normalizedVaccination) || 
+                 normalizedVaccination.includes(normalizedDiseaseVaccine);
+        });
+        
+        // If the animal is vaccinated against this disease, significantly reduce the score
+        if (vaccinationMatch) {
+          adjustedScore *= 0.25; // 75% reduction for diseases the animal is vaccinated against
+        }
+      });
+    }
     
     // Age-based adjustments
     if (animalInfo.age !== undefined) {

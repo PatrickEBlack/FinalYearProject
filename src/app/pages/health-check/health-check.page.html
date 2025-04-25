@@ -111,17 +111,43 @@
           
           <div class="form-row">
             <ion-item class="custom-field">
-              <ion-label position="stacked">Breed</ion-label>
-              <ion-input type="text" formControlName="breed"></ion-input>
-            </ion-item>
-            
-            <ion-item class="custom-field">
               <ion-label position="stacked">Gender</ion-label>
               <ion-select formControlName="gender" interface="popover" placeholder="Select gender">
                 <ion-select-option value="male">Male</ion-select-option>
                 <ion-select-option value="female">Female</ion-select-option>
               </ion-select>
             </ion-item>
+          </div>
+          
+          <!-- Vaccinations Section -->
+          <div class="vaccinations-section">
+            <h4>Vaccinations</h4>
+            <p class="section-hint">Select any vaccinations the animal has received</p>
+            
+            <!-- Selected Vaccinations -->
+            <div class="selected-vaccinations" *ngIf="vaccinations.length > 0">
+              <div class="vaccination-chips">
+                <ion-chip *ngFor="let vaccination of vaccinations.controls; let i = index" color="success">
+                  {{ vaccination.value }}
+                  <ion-icon name="close-outline" (click)="removeVaccination(i)"></ion-icon>
+                </ion-chip>
+              </div>
+            </div>
+            
+            <!-- Common Vaccinations List -->
+            <div class="common-vaccinations">
+              <div class="vaccination-buttons">
+                <ion-button 
+                  *ngFor="let vaccination of commonVaccinations" 
+                  size="small" 
+                  class="vaccination-button"
+                  [fill]="isVaccinationSelected(vaccination) ? 'solid' : 'outline'" 
+                  [color]="isVaccinationSelected(vaccination) ? 'success' : 'medium'"
+                  (click)="addVaccination(vaccination)">
+                  {{ vaccination }}
+                </ion-button>
+              </div>
+            </div>
           </div>
           
           <div class="form-row" *ngIf="diagnosticForm.get('animalInfo.gender')?.value === 'female'">
@@ -309,6 +335,32 @@
                   {{ prevention }}
                 </li>
               </ul>
+            </ion-card-content>
+          </ion-card>
+          
+          <!-- Vaccinations -->
+          <ion-card *ngIf="selectedDiseaseDetails.disease.vaccinations && selectedDiseaseDetails.disease.vaccinations.length > 0">
+            <ion-card-header>
+              <ion-card-title>Vaccinations</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ul>
+                <li *ngFor="let vaccination of selectedDiseaseDetails.disease.vaccinations">
+                  {{ vaccination }}
+                </li>
+              </ul>
+              
+              <!-- Vaccination status alert -->
+              <div *ngIf="vaccinations && vaccinations.length > 0" class="vaccination-status">
+                <div *ngIf="isAnimalVaccinatedAgainstDisease(selectedDiseaseDetails.disease)" class="vaccinated">
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                  <p>This animal is vaccinated against this disease.</p>
+                </div>
+                <div *ngIf="!isAnimalVaccinatedAgainstDisease(selectedDiseaseDetails.disease)" class="not-vaccinated">
+                  <ion-icon name="warning"></ion-icon>
+                  <p>This animal is not vaccinated against this disease.</p>
+                </div>
+              </div>
             </ion-card-content>
           </ion-card>
           

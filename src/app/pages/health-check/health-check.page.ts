@@ -208,6 +208,25 @@ export class HealthCheckPage implements OnInit {
     });
   }
 
+  // List of common cattle vaccinations
+  commonVaccinations: string[] = [
+    'Blackleg (Clostridial disease)',
+    'Bovine Viral Diarrhea (BVD)',
+    'Infectious Bovine Rhinotracheitis (IBR)',
+    'Leptospirosis',
+    'Parainfluenza-3 (PI3)',
+    'Bovine Respiratory Syncytial Virus (BRSV)',
+    'Bovine Pasteurellosis (Mannheimia)',
+    'Anthrax',
+    'Brucellosis',
+    'Rabies',
+    'Foot and Mouth Disease',
+    'Rotavirus/Coronavirus',
+    'E. coli (Scours)',
+    'Botulism',
+    'Campylobacteriosis (Vibriosis)'
+  ];
+
   ngOnInit() {
     // Initialize the diagnostic form
     this.diagnosticForm = this.fb.group({
@@ -215,7 +234,7 @@ export class HealthCheckPage implements OnInit {
       animalInfo: this.fb.group({
         age: [null],
         weight: [null],
-        breed: [''],
+        vaccinations: this.fb.array([]), // Added vaccinations FormArray
         gender: [''],
         lactating: [false],
         pregnant: [false]
@@ -239,6 +258,11 @@ export class HealthCheckPage implements OnInit {
     return this.diagnosticForm.get('symptoms') as FormArray;
   }
   
+  // Get the vaccinations form array
+  get vaccinations(): FormArray {
+    return this.diagnosticForm.get('animalInfo.vaccinations') as FormArray;
+  }
+  
   // Add a symptom to the form
   addSymptom(symptom: string) {
     // Don't add if already in the list
@@ -259,6 +283,29 @@ export class HealthCheckPage implements OnInit {
     this.symptoms.removeAt(index);
   }
   
+  // Add a vaccination to the form
+  addVaccination(vaccination: string) {
+    // Don't add if already in the list
+    const existing = this.vaccinations.value.find((v: string) => v.toLowerCase() === vaccination.toLowerCase());
+    if (existing) return;
+    
+    // Add to form array
+    this.vaccinations.push(this.fb.control(vaccination));
+  }
+  
+  // Remove a vaccination from the form
+  removeVaccination(index: number) {
+    this.vaccinations.removeAt(index);
+  }
+  
+  // Check if a vaccination is already selected
+  isVaccinationSelected(vaccination: string): boolean {
+    if (!this.vaccinations) return false;
+    return this.vaccinations.value.some((v: string) => 
+      v.toLowerCase() === vaccination.toLowerCase()
+    );
+  }
+  
   // Add custom symptom
   addCustomSymptom() {
     if (this.customSymptom.trim()) {
@@ -277,8 +324,13 @@ export class HealthCheckPage implements OnInit {
   // Clear all form data
   resetDiagnosticForm() {
     this.diagnosticForm.reset();
+    // Clear symptoms array
     while (this.symptoms.length > 0) {
       this.symptoms.removeAt(0);
+    }
+    // Clear vaccinations array
+    while (this.vaccinations.length > 0) {
+      this.vaccinations.removeAt(0);
     }
     this.diagnosticResults = [];
     this.selectedDiseaseDetails = null;
@@ -327,5 +379,32 @@ export class HealthCheckPage implements OnInit {
     if (confidence >= 75) return 'high-confidence';
     if (confidence >= 50) return 'medium-confidence';
     return 'low-confidence';
+  }
+  
+  // Check if the animal is vaccinated against a specific disease
+  isAnimalVaccinatedAgainstDisease(disease: DiseaseData): boolean {
+    if (!disease.vaccinations || disease.vaccinations.length === 0 || 
+        !this.vaccinations || this.vaccinations.length === 0) {
+      return false;
+    }
+    
+    // Check each vaccination the animal has
+    for (const animalVaccination of this.vaccinations.value) {
+      // Compare with disease vaccinations
+      for (const diseaseVaccination of disease.vaccinations) {
+        // Normalize both for comparison
+        const normalizedAnimalVaccine = animalVaccination.toLowerCase().trim();
+        const normalizedDiseaseVaccine = diseaseVaccination.toLowerCase().trim();
+        
+        // Check for exact match or partial match in either direction
+        if (normalizedAnimalVaccine === normalizedDiseaseVaccine ||
+            normalizedAnimalVaccine.includes(normalizedDiseaseVaccine) ||
+            normalizedDiseaseVaccine.includes(normalizedAnimalVaccine)) {
+          return true;
+        }
+      }
+    }
+    
+    return false;
   }
 }

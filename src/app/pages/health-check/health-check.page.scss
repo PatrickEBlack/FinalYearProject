@@ -348,6 +348,117 @@ ion-content {
   }
 }
 
+/* Vaccinations Section */
+.vaccinations-section {
+  margin: 12px 0 24px;
+  
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+  
+  .section-hint {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  
+  .selected-vaccinations {
+    margin-bottom: 16px;
+    
+    .vaccination-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      
+      ion-chip {
+        --background: rgba(var(--ion-color-success-rgb), 0.15);
+        --color: var(--ion-color-success-shade);
+        font-weight: 500;
+        
+        ion-icon {
+          color: var(--ion-color-success);
+        }
+      }
+    }
+  }
+  
+  .common-vaccinations {
+    .vaccination-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 8px;
+      
+      /* Custom scrollbar styling */
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(var(--ion-color-success-rgb), 0.1);
+        border-radius: 10px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: var(--ion-color-success);
+        border-radius: 10px;
+      }
+      
+      &::-webkit-scrollbar-thumb:hover {
+        background: var(--ion-color-success-shade);
+      }
+      
+      /* Firefox scrollbar styling */
+      scrollbar-width: thin;
+      scrollbar-color: var(--ion-color-success) rgba(var(--ion-color-success-rgb), 0.1);
+      
+      .vaccination-button {
+        min-width: calc(50% - 8px);
+        max-width: 100%;
+        height: auto;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 12px;
+        --padding-end: 12px;
+        margin: 2px 0;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        
+        @media (min-width: 768px) {
+          min-width: calc(33.333% - 8px);
+        }
+      }
+      
+      ion-button {
+        margin: 2px;
+        --border-radius: 16px;
+        transition: all 0.2s ease;
+        
+        &[color="success"] {
+          --box-shadow: 0 2px 4px rgba(var(--ion-color-success-rgb), 0.3);
+          font-weight: 500;
+          transform: scale(1.05);
+          animation: vaccinePulse 0.3s ease-in-out;
+        }
+        
+        @keyframes vaccinePulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+          100% { transform: scale(1.05); }
+        }
+      }
+    }
+  }
+}
+
 /* Form Actions */
 .form-actions {
   display: flex;
@@ -495,6 +606,47 @@ ion-content {
     ion-icon {
       margin-right: 8px;
       font-size: 18px;
+    }
+  }
+}
+
+/* Vaccination status */
+.vaccination-status {
+  margin-top: 16px;
+  border-radius: 8px;
+  
+  .vaccinated, .not-vaccinated {
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    
+    ion-icon {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+    
+    p {
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+  
+  .vaccinated {
+    background-color: rgba(var(--ion-color-success-rgb), 0.1);
+    color: var(--ion-color-success-shade);
+    
+    ion-icon {
+      color: var(--ion-color-success);
+    }
+  }
+  
+  .not-vaccinated {
+    background-color: rgba(var(--ion-color-warning-rgb), 0.15);
+    color: var(--ion-color-warning-shade);
+    
+    ion-icon {
+      color: var(--ion-color-warning);
     }
   }
 }
