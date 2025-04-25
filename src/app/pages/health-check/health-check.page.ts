@@ -223,6 +223,7 @@ export class HealthCheckPage implements OnInit {
     'Bovine Pasteurellosis (Mannheimia)',
     'Anthrax',
     'Brucellosis',
+    'Bovine Tuberculosis (BCG)',
     'Rabies',
     'Foot and Mouth Disease',
     'Rotavirus/Coronavirus',

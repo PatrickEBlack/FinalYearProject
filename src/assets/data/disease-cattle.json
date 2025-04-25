@@ -557,7 +557,10 @@
         "Biosecurity measures"
       ],
       "prognosis": "Poor; regulatory culling usually required",
-      "vaccinations": []
+      "vaccinations": [
+        "Bovine Tuberculosis vaccine (BCG)",
+        "Bacillus Calmette-Guérin (BCG) vaccine"
+      ]
     },
     {
       "disease_name": "Digital Dermatitis",

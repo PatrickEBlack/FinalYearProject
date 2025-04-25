@@ -16,6 +16,7 @@ const vaccinationMap = {
   "Parainfluenza-3": ["PI3 vaccine", "BRD vaccine (5-way)", "3-way vaccine (IBR, BVD, PI3)"],
   "Leptospirosis": ["Leptospirosis vaccine", "5-way Lepto vaccine"],
   "Brucellosis": ["Brucellosis vaccine (RB51)", "Brucellosis vaccine (Strain 19)"],
+  "Bovine Tuberculosis": ["Bovine Tuberculosis vaccine (BCG)", "Bacillus Calmette-Guérin (BCG) vaccine"],
   "Rotaviral Diarrhea": ["Rotavirus/Coronavirus vaccine", "Scours vaccine"],
   "Coronaviral Diarrhea": ["Rotavirus/Coronavirus vaccine", "Scours vaccine"],
   "Escherichia coli Diarrhea": ["E. coli vaccine", "Scours vaccine"],
