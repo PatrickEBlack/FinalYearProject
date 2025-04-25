@@ -11,4 +11,17 @@ router.get('/env', (req, res) => {
   });
 });
 
+// GET /api/settings/firebase-config
+// This endpoint provides Firebase configuration to the client
+router.get('/firebase-config', (req, res) => {
+  res.json({
+    projectId: config.FIREBASE_PROJECT_ID,
+    appId: config.FIREBASE_APP_ID,
+    storageBucket: config.FIREBASE_STORAGE_BUCKET,
+    apiKey: config.FIREBASE_API_KEY,
+    authDomain: config.FIREBASE_AUTH_DOMAIN,
+    messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID
+  });
+});
+
 module.exports = router;
