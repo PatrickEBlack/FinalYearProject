@@ -54,23 +54,31 @@
             </div>
           </div>
           
-          <!-- Common Symptoms List -->
+          <!-- Common Symptoms Dropdown -->
           <div class="common-symptoms">
-            <h4>Common Symptoms (A-Z):</h4>
-            <div class="search-box">
-              <ion-input placeholder="Filter symptoms..." [(ngModel)]="symptomFilter" [ngModelOptions]="{standalone: true}"></ion-input>
-            </div>
-            <div class="symptom-buttons">
-              <ion-button 
-                *ngFor="let symptom of getFilteredSymptoms()" 
-                size="small" 
-                class="symptom-button"
-                [fill]="isSymptomSelected(symptom) ? 'solid' : 'outline'" 
-                [color]="isSymptomSelected(symptom) ? 'warning' : 'medium'"
-                (click)="addSymptom(symptom)">
-                {{ symptom }}
-              </ion-button>
-            </div>
+            <ion-accordion-group>
+              <ion-accordion value="symptoms">
+                <ion-item slot="header" color="light">
+                  <ion-label>Common Symptoms (A-Z)</ion-label>
+                </ion-item>
+                <div slot="content" class="accordion-content">
+                  <div class="search-box">
+                    <ion-input placeholder="Filter symptoms..." [(ngModel)]="symptomFilter" [ngModelOptions]="{standalone: true}"></ion-input>
+                  </div>
+                  <div class="symptom-buttons">
+                    <ion-button 
+                      *ngFor="let symptom of getFilteredSymptoms()" 
+                      size="small" 
+                      class="symptom-button"
+                      [fill]="isSymptomSelected(symptom) ? 'solid' : 'outline'" 
+                      [color]="isSymptomSelected(symptom) ? 'warning' : 'medium'"
+                      (click)="addSymptom(symptom)">
+                      {{ symptom }}
+                    </ion-button>
+                  </div>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
           </div>
           
           <!-- Custom Symptom Input -->
@@ -134,19 +142,28 @@
               </div>
             </div>
             
-            <!-- Common Vaccinations List -->
+            <!-- Common Vaccinations Dropdown -->
             <div class="common-vaccinations">
-              <div class="vaccination-buttons">
-                <ion-button 
-                  *ngFor="let vaccination of commonVaccinations" 
-                  size="small" 
-                  class="vaccination-button"
-                  [fill]="isVaccinationSelected(vaccination) ? 'solid' : 'outline'" 
-                  [color]="isVaccinationSelected(vaccination) ? 'success' : 'medium'"
-                  (click)="addVaccination(vaccination)">
-                  {{ vaccination }}
-                </ion-button>
-              </div>
+              <ion-accordion-group>
+                <ion-accordion value="vaccinations">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Common Vaccinations</ion-label>
+                  </ion-item>
+                  <div slot="content" class="accordion-content">
+                    <div class="vaccination-buttons">
+                      <ion-button 
+                        *ngFor="let vaccination of commonVaccinations" 
+                        size="small" 
+                        class="vaccination-button"
+                        [fill]="isVaccinationSelected(vaccination) ? 'solid' : 'outline'" 
+                        [color]="isVaccinationSelected(vaccination) ? 'success' : 'medium'"
+                        (click)="addVaccination(vaccination)">
+                        {{ vaccination }}
+                      </ion-button>
+                    </div>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group>
             </div>
           </div>
           

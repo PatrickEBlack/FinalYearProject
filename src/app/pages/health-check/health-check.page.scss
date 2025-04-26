@@ -209,6 +209,16 @@ ion-content {
   }
   
   .common-symptoms {
+    margin-bottom: 16px;
+    
+    ion-accordion-group {
+      margin-bottom: 12px;
+    }
+    
+    .accordion-content {
+      padding: 12px;
+    }
+    
     .search-box {
       margin-bottom: 12px;
       
@@ -387,6 +397,14 @@ ion-content {
   }
   
   .common-vaccinations {
+    ion-accordion-group {
+      margin-bottom: 12px;
+    }
+    
+    .accordion-content {
+      padding: 12px;
+    }
+    
     .vaccination-buttons {
       display: flex;
       flex-wrap: wrap;
