@@ -39,9 +39,7 @@ import {
   IonModal,
   IonFab,
   IonFabButton,
-  IonAlert,
-  IonAccordionGroup,
-  IonAccordion
+  IonAlert
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
