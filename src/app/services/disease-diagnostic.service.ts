@@ -199,7 +199,7 @@ export class DiseaseDiagnosticService {
       const diseaseVaccinations = disease.vaccinations ?? [];
       
       // Only proceed if there are disease vaccinations to check against
-      if (diseaseVaccinations.length > 0) {
+      if (Array.isArray(diseaseVaccinations) && diseaseVaccinations.length > 0) {
         // For each vaccination the animal has received
         animalInfo.vaccinations.forEach(vaccination => {
           // Normalize the vaccination name for better matching
