@@ -196,7 +196,7 @@ export class DiseaseDiagnosticService {
     // Vaccination status adjustment
     if (animalInfo.vaccinations && animalInfo.vaccinations.length > 0) {
       // Check if the disease has vaccinations defined
-      const diseaseVaccinations = disease.vaccinations || [];
+      const diseaseVaccinations = disease.vaccinations ?? [];
       
       // Only proceed if there are disease vaccinations to check against
       if (diseaseVaccinations.length > 0) {
