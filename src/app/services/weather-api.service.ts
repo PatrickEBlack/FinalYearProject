@@ -54,7 +54,7 @@ export interface WeatherResponse {
   providedIn: 'root'
 })
 export class WeatherApiService {
-  private readonly API_URL = 'http://api.weatherapi.com/v1';
+  private readonly API_URL = 'https://api.weatherapi.com/v1';
   
   private currentLocation = new BehaviorSubject<string>('Kells, Meath, Ireland');
   currentLocation$ = this.currentLocation.asObservable();
@@ -112,7 +112,7 @@ export class WeatherApiService {
             is_day: 1,
             condition: {
               text: 'Unknown',
-              icon: '//cdn.weatherapi.com/weather/64x64/day/116.png',
+              icon: 'https://cdn.weatherapi.com/weather/64x64/day/116.png',
               code: 1000
             },
             wind_mph: 5,
@@ -141,7 +141,7 @@ export class WeatherApiService {
   // Gets weather icon URL from code
   getWeatherIconUrl(code: number, isDay: boolean = true): string {
     const dayOrNight = isDay ? 'day' : 'night';
-    return `//cdn.weatherapi.com/weather/64x64/${dayOrNight}/${code}.png`;
+    return `https://cdn.weatherapi.com/weather/64x64/${dayOrNight}/${code}.png`;
   }
   
   // Gets a description for the weather conditions based on the API response

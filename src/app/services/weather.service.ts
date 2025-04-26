@@ -119,7 +119,7 @@ export class WeatherService {
     }
     
     console.log('Fetching real weather data for location:', location);
-    return this.http.get(`https://api.openweathermap.org/data/2.5/weather`, {
+    return this.http.get(`${this.API_URL}weather`, {
       params: {
         q: location,
         units: 'imperial',
@@ -141,7 +141,7 @@ export class WeatherService {
     }
     
     console.log('Fetching real forecast data for location:', location);
-    return this.http.get(`https://api.openweathermap.org/data/2.5/forecast`, {
+    return this.http.get(`${this.API_URL}forecast`, {
       params: {
         q: location,
         units: 'imperial',
