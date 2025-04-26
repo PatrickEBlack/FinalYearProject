@@ -206,7 +206,7 @@ export class DiseaseDiagnosticService {
           const normalizedVaccination = this.normaliseSymptom(vaccination);
           
           // Check if this vaccination covers the current disease
-          const vaccinationMatch = diseaseVaccinations.some(diseaseVaccine => {
+          const vaccinationMatch = Array.isArray(diseaseVaccinations) && diseaseVaccinations.some(diseaseVaccine => {
             const normalizedDiseaseVaccine = this.normaliseSymptom(diseaseVaccine);
             // Check for direct matches or if the vaccine is mentioned in the disease vaccine
             return normalizedDiseaseVaccine.includes(normalizedVaccination) || 
