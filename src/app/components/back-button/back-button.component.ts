@@ -19,6 +19,16 @@ export class BackButtonComponent {
   private previousUrl: string = '';
   private currentUrl: string = '';
   
+  // Map of pages to their default back URLs
+  private pageBackRoutes: { [key: string]: string } = {
+    '/tabs/profile': '/tabs/home',
+    '/tabs/view-livestock': '/tabs/manage-livestock',
+    '/tabs/add-livestock': '/tabs/manage-livestock',
+    '/tabs/monitor': '/tabs/manage-livestock',
+    '/tabs/health-check': '/tabs/home',
+    '/tabs/weather': '/tabs/home'
+  };
+  
   constructor(private location: Location, private router: Router) {
     addIcons({
       'arrow-back-outline': arrowBackOutline
@@ -39,12 +49,18 @@ export class BackButtonComponent {
   }
   
   isRootPage(url: string): boolean {
-    // Don't show back button on these pages
-    const rootPages = ['/tabs/home', '/login', '/', '/tabs/view-livestock'];
+    // Only hide back button on root pages
+    const rootPages = ['/tabs/home', '/login', '/'];
     return rootPages.some(path => url === path);
   }
   
   goBack(): void {
-    this.location.back();
+    // Check if we have a specific route defined for this page
+    if (this.currentUrl && this.pageBackRoutes[this.currentUrl]) {
+      this.router.navigateByUrl(this.pageBackRoutes[this.currentUrl]);
+    } else {
+      // Default to browser history
+      this.location.back();
+    }
   }
 }
