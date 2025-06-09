@@ -51,12 +51,13 @@ npm install
 # Install backend dependencies
 cd server
 npm install
+# Take a step back
 cd ..
 ```
 
 ### Environment setup
 
-#### Option 1: Automated Setup (Recommended)
+#### Option 1: Automated Setup (Easy)
 
 Run the setup script which will guide you through the process:
 
