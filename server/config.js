@@ -25,7 +25,7 @@ module.exports = {
   MONGODB_URI,
   
   // App
-  PORT: process.env.PORT || 3000,
+  PORT: process.env.PORT || 3001,
   
   // API
   API_URL: process.env.API_URL || '/api',
