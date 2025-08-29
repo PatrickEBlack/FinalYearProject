@@ -1,9 +1,8 @@
 # Bovaid - Farm Management Application
 
-A comprehensive farm management application built with Angular and Ionic for the frontend and Express.js with MongoDB for the backend. The application helps farmers manage livestock, monitor health, track weather conditions, and streamline farm operations.
+A comprehensive farm management application built with Angular and Ionic for the frontend and Express.js with MongoDB for the backend. The application helps farmers recognise health problems within their herd early, manage livestock, monitor health, track weather conditions, and streamline farm operations.
 
 ## Features
-
 - User authentication and account management
 - Livestock inventory management
 - Animal health monitoring and vaccination tracking
