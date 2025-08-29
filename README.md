@@ -159,17 +159,6 @@ farm-management/
 └── ...                         # Configuration files
 ```
 
-## API Documentation
-
-The backend API provides endpoints for managing livestock, vaccinations, and farm settings. For detailed documentation, see the server/README.md file.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
